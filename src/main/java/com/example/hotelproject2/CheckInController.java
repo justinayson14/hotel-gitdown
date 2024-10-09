@@ -9,10 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -41,6 +38,15 @@ public class CheckInController implements Initializable {
     @FXML
     private ChoiceBox<String> RoomTypeChoice;
     private String[] roomTypes = {"Standard", "Deluxe", "Presidential"};
+    String roomChoice;
+
+    //# of Day Spinner Variables
+    @FXML
+    private Spinner<Integer> numDaysSpinner;
+    @FXML
+    private Label totalRateLabel;
+    int currentDaysValue;
+
 
 
     @Override
@@ -69,6 +75,33 @@ public class CheckInController implements Initializable {
 
 
         //Code for New Spinner
+        //Code for setting up both Guest Number Label and Guest Spinner
+        SpinnerValueFactory<Integer> numDaysFactory =
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10);
+
+        //Sets initial value of Spinner
+        numDaysFactory.setValue(1);
+        //Connect SpinnerValueFactory to Spinner
+        numDaysSpinner.setValueFactory(numDaysFactory);
+
+        currentDaysValue = numDaysSpinner.getValue();
+
+        //Total Rate
+        roomChoice = RoomTypeChoice.getValue();
+
+        numDaysSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
+            @Override
+            public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
+                roomChoice = RoomTypeChoice.getValue();
+                currentDaysValue = numDaysSpinner.getValue();
+                if(roomChoice.equals("Standard")){
+                    int totalRateAmt = currentDaysValue * 150;
+                    totalRateLabel.setText(Integer.toString(currentDaysValue));
+                }
+            }
+        });
+
+
 
 
 
@@ -77,12 +110,17 @@ public class CheckInController implements Initializable {
         RoomTypeChoice.setOnAction(this::getRoomType);
     }
 
+
     //Sets texts for room type
     public void getRoomType(ActionEvent event){
         String myRoomTypes = RoomTypeChoice.getValue();
         RoomTypeLabel.setText(myRoomTypes);
 
     }
+
+
+
+
 
 
     //Cancel Button Method - Switches back to Homepage (Scene 1)

@@ -40,7 +40,7 @@
             <Font size="16.0" />
          </font></Label>
       <Label fx:id="numGuestsLabel" layoutX="331.0" layoutY="105.0" text="#" />
-      <Spinner fx:id="daysSpinner" editable="true" layoutX="174.0" layoutY="234.0" />
+      <Spinner editable="true" layoutX="174.0" layoutY="234.0" />
       <Text layoutX="34.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="# of Days" wrappingWidth="82.6953125">
          <font>
             <Font name="Arial" size="16.0" />

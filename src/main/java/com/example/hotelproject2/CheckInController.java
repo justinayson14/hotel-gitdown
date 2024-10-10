@@ -25,6 +25,8 @@ public class CheckInController implements Initializable {
     private Scene scene;
     private Parent root;
 
+    private int customerID;
+
     //Guests Number Spinner variables
     @FXML
     private Spinner<Integer> guestAmtSpinner;
@@ -95,8 +97,14 @@ public class CheckInController implements Initializable {
                 roomChoice = RoomTypeChoice.getValue();
                 currentDaysValue = numDaysSpinner.getValue();
                 if(roomChoice.equals("Standard")){
-                    int totalRateAmt = currentDaysValue * 150;
-                    totalRateLabel.setText(Integer.toString(currentDaysValue));
+                    int totalRateAmt = currentDaysValue * 150000;
+                    totalRateLabel.setText(Integer.toString(totalRateAmt));
+                } else if(roomChoice.equals("Deluxe")){
+                    int totalRateAmt = currentDaysValue * 300000;
+                    totalRateLabel.setText(Integer.toString(totalRateAmt));
+                } else if(roomChoice.equals("Presidential")){
+                    int totalRateAmt = currentDaysValue * 1000000;
+                    totalRateLabel.setText(Integer.toString(totalRateAmt));
                 }
             }
         });
@@ -132,9 +140,7 @@ public class CheckInController implements Initializable {
         stage.show();
     }
 
-    /*
-    public void submitBooking(){
 
-    }
-     */
+
+
 }

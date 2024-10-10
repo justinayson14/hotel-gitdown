@@ -25,6 +25,7 @@ public class CheckInController implements Initializable {
     private Scene scene;
     private Parent root;
 
+    //Customer ID Variable
     private int customerID;
 
     //Guests Number Spinner variables

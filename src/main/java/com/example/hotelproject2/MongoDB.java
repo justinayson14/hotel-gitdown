@@ -10,7 +10,7 @@ public class MongoDB {
     public static void main( String[] args ) {
 
         // Replace the placeholder with your MongoDB deployment's connection string
-        String uri = "mongodb+srv://hotelgitdown:vRCrVn40HHp65FzL@gitdown.cas4u.mongodb.net/?retryWrites=true&w=majority&appName=gitdown";
+        String uri = "mongodb+srv://hotelgitdown:{password}@gitdown.cas4u.mongodb.net/?retryWrites=true&w=majority&appName=gitdown";
 
         try (MongoClient mongoClient = MongoClients.create(uri)) {
             MongoDatabase database = mongoClient.getDatabase("sample_mflix");

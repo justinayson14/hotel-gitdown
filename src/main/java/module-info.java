@@ -10,4 +10,6 @@ module com.example.hotelproject2 {
 
     opens com.example.hotelproject2 to javafx.fxml;
     exports com.example.hotelproject2;
+    exports com.example.hotelproject2.models;
+    opens com.example.hotelproject2.models to javafx.fxml;
 }

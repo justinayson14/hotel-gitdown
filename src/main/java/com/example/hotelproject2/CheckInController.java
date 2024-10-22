@@ -28,6 +28,9 @@ public class CheckInController implements Initializable {
     //Customer ID Variable
     private int customerID;
 
+    //Customer Name
+    @FXML TextField name;
+
     //Guests Number Spinner variables
     @FXML
     private Spinner<Integer> guestAmtSpinner;
@@ -80,8 +83,7 @@ public class CheckInController implements Initializable {
         //Code for New Spinner
         //Code for setting up both Guest Number Label and Guest Spinner
         SpinnerValueFactory<Integer> numDaysFactory =
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10);
-
+            new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10);
         //Sets initial value of Spinner
         numDaysFactory.setValue(1);
         //Connect SpinnerValueFactory to Spinner
@@ -95,18 +97,7 @@ public class CheckInController implements Initializable {
         numDaysSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
             @Override
             public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
-                roomChoice = RoomTypeChoice.getValue();
-                currentDaysValue = numDaysSpinner.getValue();
-                if(roomChoice.equals("Standard")){
-                    int totalRateAmt = currentDaysValue * 150000;
-                    totalRateLabel.setText(Integer.toString(totalRateAmt));
-                } else if(roomChoice.equals("Deluxe")){
-                    int totalRateAmt = currentDaysValue * 300000;
-                    totalRateLabel.setText(Integer.toString(totalRateAmt));
-                } else if(roomChoice.equals("Presidential")){
-                    int totalRateAmt = currentDaysValue * 1000000;
-                    totalRateLabel.setText(Integer.toString(totalRateAmt));
-                }
+                updateTotalRateLabel();
             }
         });
 
@@ -120,11 +111,41 @@ public class CheckInController implements Initializable {
     }
 
 
+    // Gets the cost for each room type
+    public int getRoomCost(String roomType) {
+        switch(roomType) {
+            case "Standard":
+                return 150000;
+            case "Deluxe":
+                return 300000;
+            case "Presidential":
+                return 1000000;
+            case null:
+                return 0;
+            default:
+                return 0;
+        }
+    }
+
+    // Gets the total rate amount
+    public int getTotalRate() {
+        roomChoice = RoomTypeChoice.getValue();
+        currentDaysValue = numDaysSpinner.getValue();
+        return currentDaysValue * getRoomCost(roomChoice);
+    }
+
+    // Update the totalRateLabel if all required fields are filled
+    public void updateTotalRateLabel() {
+        if (RoomTypeChoice.getValue() != null)
+        totalRateLabel.setText(Integer.toString(getTotalRate()));
+    }
+
+
     //Sets texts for room type
     public void getRoomType(ActionEvent event){
         String myRoomTypes = RoomTypeChoice.getValue();
         RoomTypeLabel.setText(myRoomTypes);
-
+        updateTotalRateLabel();
     }
 
 
@@ -139,6 +160,11 @@ public class CheckInController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    //Book Room
+    public void bookRoom(ActionEvent event) throws IOException {
+        System.out.printf("\n\nName: " + name.getText() + "\nNumber of Guests: " + numGuestsLabel.getText() + "\nRoom Type: " + RoomTypeChoice.getValue() + "\n# of Days: " + numDaysSpinner.getValue() + "\nTotal Rate: " + getTotalRate());
     }
 
 

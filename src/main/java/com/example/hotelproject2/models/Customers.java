@@ -1,6 +1,9 @@
-package com.example.hotelproject2;
+package com.example.hotelproject2.models;
+
+import org.bson.codecs.pojo.annotations.BsonProperty;
 
 public class Customers {
+    @BsonProperty(value = "_id")
     private String id;
     private String name;
     private int partyCount;

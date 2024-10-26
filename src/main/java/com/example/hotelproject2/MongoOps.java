@@ -23,10 +23,15 @@ public class MongoOps {
             .codecRegistry(codecRegistry)
             .build();
     private static final MongoClient mongoClient = MongoClients.create(clientSettings);
+    private static final MongoDatabase db = mongoClient.getDatabase("hotel-clients");
 
     public static <T> void insertMultiple(ArrayList<T> list) {
-        MongoDatabase db = mongoClient.getDatabase("hotel-clients");
-        MongoCollection<T> inputList = (MongoCollection<T>) db.getCollection(list.get(0).getClass().getSimpleName(), list.get(0).getClass());
-        inputList.insertMany(list);
+        MongoCollection<T> collection = (MongoCollection<T>) db.getCollection(list.get(0).getClass().getSimpleName(), list.get(0).getClass());
+        collection.insertMany(list);
+    }
+
+    public static <T> void insertOne(T item) {
+        MongoCollection<T> collection = (MongoCollection<T>) db.getCollection(item.getClass().getSimpleName(), item.getClass());
+        collection.insertOne(item);
     }
 }

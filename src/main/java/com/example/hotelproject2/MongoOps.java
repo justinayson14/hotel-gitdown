@@ -13,8 +13,6 @@ import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
@@ -55,17 +53,36 @@ public class MongoOps {
             default:
                 System.out.println("INVALID Room Type!!!");
                 System.exit(1);
+                return null;
         }
-        return null;
     }
 
     // create
-    public static void updateRoomOccupancy (Room room) {
-        MongoCollection collection = db.getCollection(room.getClass().getSimpleName(), room.getClass());
-        collection.updateOne(
-                Filters.eq("_id", room.getId()),
+    public static void checkInRoom (Class roomType, String roomId) {
+        MongoCollection rooms = db.getCollection(roomType.getSimpleName(), roomType);
+        rooms.updateOne(
+                Filters.eq("_id", roomId),
+                Updates.set("occupied", true)
+        );
+    }
+
+    public static String queryCustomerIdByName (String value) {
+        MongoCollection<Customers> collection = db.getCollection("Customers", Customers.class);
+        return collection.find(eq("name", value)).first().getId();
+    }
+
+    public static void checkOutRoom (String customerId) {
+        MongoCollection<Booking> bookings = db.getCollection("Booking", Booking.class);
+        Booking selBooking = bookings.find(eq("customerId", customerId)).first();
+        String roomId = selBooking.getRoomId();
+        Class roomType = selBooking.getRoomClass();
+
+        MongoCollection rooms = db.getCollection(roomType.getSimpleName());
+        rooms.updateOne(
+                Filters.eq("_id", roomId),
                 Updates.set("occupied", false)
         );
+
     }
 
   /*  public static Room queryRoomsByType(String roomType) {
@@ -73,7 +90,7 @@ public class MongoOps {
         List<Room> availRooms =
     }*/
 
-    public static void main (String[] args) {
+/*    public static void main (String[] args) {
         List<Customers> allCustomers = new ArrayList<>();
         MongoCollection<Customers>  customer = db.getCollection("Customers", Customers.class);
         for (Customers cust : customer.find()) {
@@ -83,5 +100,5 @@ public class MongoOps {
         for (Customers cust : allCustomers) {
             System.out.println(cust.toString());
         }
-    }
+    }*/
 }

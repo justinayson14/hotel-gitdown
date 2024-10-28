@@ -1,16 +1,22 @@
 package com.example.hotelproject2;
 
+import com.example.hotelproject2.models.*;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
+import static com.mongodb.client.model.Filters.eq;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
@@ -33,5 +39,49 @@ public class MongoOps {
     public static <T> void insertSingle(T item) {
         MongoCollection<T> collection = (MongoCollection<T>) db.getCollection(item.getClass().getSimpleName(), item.getClass());
         collection.insertOne(item);
+    }
+
+    public static Room queryAvailRoomByType(String roomType) {
+        switch (roomType) {
+            case "Deluxe":
+                MongoCollection<DeluxeRoom> deluxe = db.getCollection("DeluxeRoom", DeluxeRoom.class);
+                return deluxe.find(eq("occupied", false)).first();
+            case "Presidential":
+                MongoCollection<PresRoom> pres = db.getCollection("PresRoom", PresRoom.class);
+                return pres.find(eq("occupied", false)).first();
+            case "Standard":
+                MongoCollection<StandardRoom> standard = db.getCollection("StandardRoom", StandardRoom.class);
+                return standard.find(eq("occupied", false)).first();
+            default:
+                System.out.println("INVALID Room Type!!!");
+                System.exit(1);
+        }
+        return null;
+    }
+
+    // create
+    public static void updateRoomOccupancy (Room room) {
+        MongoCollection collection = db.getCollection(room.getClass().getSimpleName(), room.getClass());
+        collection.updateOne(
+                Filters.eq("_id", room.getId()),
+                Updates.set("occupied", false)
+        );
+    }
+
+  /*  public static Room queryRoomsByType(String roomType) {
+        MongoCollection<Room> rooms = db.getCollection("Rooms", Room.class);
+        List<Room> availRooms =
+    }*/
+
+    public static void main (String[] args) {
+        List<Customers> allCustomers = new ArrayList<>();
+        MongoCollection<Customers>  customer = db.getCollection("Customers", Customers.class);
+        for (Customers cust : customer.find()) {
+            allCustomers.add(cust);
+        }
+
+        for (Customers cust : allCustomers) {
+            System.out.println(cust.toString());
+        }
     }
 }

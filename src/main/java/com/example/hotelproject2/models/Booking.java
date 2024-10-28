@@ -2,6 +2,7 @@ package com.example.hotelproject2.models;
 
 import org.bson.codecs.pojo.annotations.BsonProperty;
 
+import java.util.Date;
 import java.util.UUID;
 
 public class Booking {
@@ -10,16 +11,18 @@ public class Booking {
     private String customerId;
     private Payment payment;
     private String roomId;
-    private int lengthBooked;
+    private String checkInDate;
+    private String checkOutDate;
     private double totalCost;
 
     public Booking () {}
-    public Booking (String customerId, Payment payment, String roomId, int lengthBooked, double totalCost) {
+    public Booking (String customerId, Payment payment, String roomId, String checkInDate, String checkOutDate, double totalCost) {
         this.id = UUID.randomUUID().toString();
         this.customerId = customerId;
         this.payment = payment;
         this.roomId = roomId;
-        this.lengthBooked = lengthBooked;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
         this.totalCost = totalCost;
     }
 
@@ -51,11 +54,18 @@ public class Booking {
         return roomId;
     }
 
-    public void setLengthBooked(int lengthBooked) {
-        this.lengthBooked = lengthBooked;
+    public void setCheckInDate(String checkInDate) {
+        this.checkInDate = checkInDate;
     }
-    public int getLengthBooked() {
-        return lengthBooked;
+    public String getCheckInDate() {
+        return checkInDate;
+    }
+
+    public void setCheckOutDate(String checkOutDate) {
+        this.checkOutDate = checkOutDate;
+    }
+    public String getCheckOutDate() {
+        return checkOutDate;
     }
 
     public void setTotalCost(double totalCost) {
@@ -70,9 +80,10 @@ public class Booking {
         return "Booking{" +
                 "id='" + id + '\'' +
                 ", customerId='" + customerId + '\'' +
-                ", payment=" + payment.toString() +
+                ", payment=" + payment +
                 ", roomId='" + roomId + '\'' +
-                ", lengthBooked=" + lengthBooked +
+                ", checkInDate=" + checkInDate +
+                ", checkOutDate=" + checkOutDate +
                 ", totalCost=" + totalCost +
                 '}';
     }

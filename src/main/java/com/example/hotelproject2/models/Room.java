@@ -43,4 +43,16 @@ public class Room {
 
     public void setOccupied (boolean isOccupied) { this.isOccupied = isOccupied; }
     public boolean getOccupied () { return this.isOccupied; }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id='" + id + '\'' +
+                ", roomType='" + roomType + '\'' +
+                ", roomNum=" + roomNum +
+                ", desc='" + desc + '\'' +
+                ", price=" + price +
+                ", isOccupied=" + isOccupied +
+                '}';
+    }
 }

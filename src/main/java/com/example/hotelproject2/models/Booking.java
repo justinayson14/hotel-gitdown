@@ -64,4 +64,16 @@ public class Booking {
     public double getTotalCost() {
         return totalCost;
     }
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "id='" + id + '\'' +
+                ", customerId='" + customerId + '\'' +
+                ", payment=" + payment.toString() +
+                ", roomId='" + roomId + '\'' +
+                ", lengthBooked=" + lengthBooked +
+                ", totalCost=" + totalCost +
+                '}';
+    }
 }

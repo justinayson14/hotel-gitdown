@@ -50,4 +50,15 @@ public class Payment {
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
     }
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "name='" + name + '\'' +
+                ", cardNum='" + cardNum + '\'' +
+                ", cardCVC='" + cardCVC + '\'' +
+                ", phoneNum='" + phoneNum + '\'' +
+                ", cardExp='" + cardExp + '\'' +
+                '}';
+    }
 }

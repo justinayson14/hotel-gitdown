@@ -15,10 +15,10 @@ public class DeluxeRoom implements Room{
     private int numBaths;
     private boolean isOccupied;
 
-    public DeluxeRoom () {};
+    public DeluxeRoom () { this.id = UUID.randomUUID().toString(); };
     public DeluxeRoom (int roomNum) {
         this.id = UUID.randomUUID().toString();
-        this.roomType = "Deluxe";
+        this.roomType = "DeluxeRoom";
         this.desc = "Designed for those seeking extra space and comfort, the Deluxe Room offers two beds and a private bathroom, ideal for couples, friends, or small families.";
         this.price = 3500.00;
         this.numBeds = 2;

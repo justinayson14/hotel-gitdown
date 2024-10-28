@@ -15,10 +15,10 @@ public class PresRoom implements Room{
     private int numBaths;
     private boolean isOccupied;
 
-    public PresRoom () {};
+    public PresRoom () { this.id = UUID.randomUUID().toString(); };
     public PresRoom (int roomNum) {
         this.id = UUID.randomUUID().toString();
-        this.roomType = "Presidential";
+        this.roomType = "PresRoom";
         this.desc = "The epitome of luxury, this spacious suite boasts two separate rooms, each with its own bed and bathroom, providing the ultimate indulgence for families or groups.";
         this.price = 5000.00;
         this.numBeds = 2;

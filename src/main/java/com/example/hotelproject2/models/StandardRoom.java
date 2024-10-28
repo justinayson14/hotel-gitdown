@@ -15,10 +15,10 @@ public class StandardRoom implements Room{
     private int numBaths;
     private boolean isOccupied;
 
-    public StandardRoom () {};
+    public StandardRoom () { this.id =  UUID.randomUUID().toString(); };
     public StandardRoom (int roomNum) {
         this.id = UUID.randomUUID().toString();
-        this.roomType = "Standard";
+        this.roomType = "StandardRoom";
         this.desc = "A cozy and comfortable room perfect for solo travelers or couples, featuring a single bed and a private bathroom.";
         this.price = 1500.00;
         this.numBeds = 1;

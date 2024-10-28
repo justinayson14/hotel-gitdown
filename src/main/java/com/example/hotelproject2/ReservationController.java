@@ -32,13 +32,17 @@ public class ReservationController {
         Room room = MongoOps.queryAvailRoomByType(roomType);
         reservation.setCustomerId(customer.getId());
         reservation.setRoomId(room.getId());
+        reservation.setRoomClass(room.getClass());
         reservation.setTotalCost(calculateTotalCost(checkIn, checkOut, room.getPrice()));
         reservation.setPayment(createPayment(name, cardNum, cardCVC, cardExp, phoneNum));
         room.setOccupied(true);
 
         MongoOps.insertSingle(reservation);
-        MongoOps.updateRoomOccupancy(room);
+        MongoOps.checkInRoom(room.getClass(), room.getId());
     }
 
-    public void deleteReservation(Customers customer) {}
+    public void endReservation(String customerName) {
+        String customerId = MongoOps.queryCustomerIdByName(customerName);
+        MongoOps.checkOutRoom(customerId);
+    }
 }

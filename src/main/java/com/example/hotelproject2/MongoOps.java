@@ -27,7 +27,7 @@ public class MongoOps {
             .codecRegistry(codecRegistry)
             .build();
     private static final MongoClient mongoClient = MongoClients.create(clientSettings);
-    private static final MongoDatabase db = mongoClient.getDatabase("hotel-clients");
+    private static final MongoDatabase db = mongoClient.getDatabase("hotel-gitdown");
 
     public static <T> void insertMultiple(ArrayList<T> list) {
         MongoCollection<T> collection = (MongoCollection<T>) db.getCollection(list.get(0).getClass().getSimpleName(), list.get(0).getClass());
@@ -58,8 +58,8 @@ public class MongoOps {
     }
 
     // create
-    public static void checkInRoom (Class roomType, String roomId) {
-        MongoCollection rooms = db.getCollection(roomType.getSimpleName(), roomType);
+    public static void checkInRoom (String roomType, String roomId) {
+        MongoCollection rooms = db.getCollection(roomType);
         rooms.updateOne(
                 Filters.eq("_id", roomId),
                 Updates.set("occupied", true)
@@ -75,9 +75,9 @@ public class MongoOps {
         MongoCollection<Booking> bookings = db.getCollection("Booking", Booking.class);
         Booking selBooking = bookings.find(eq("customerId", customerId)).first();
         String roomId = selBooking.getRoomId();
-        Class roomType = selBooking.getRoomClass();
+        String roomType = selBooking.getRoomType();
 
-        MongoCollection rooms = db.getCollection(roomType.getSimpleName());
+        MongoCollection rooms = db.getCollection(roomType);
         rooms.updateOne(
                 Filters.eq("_id", roomId),
                 Updates.set("occupied", false)

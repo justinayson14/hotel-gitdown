@@ -2,6 +2,8 @@ package com.example.hotelproject2.models;
 
 import org.bson.codecs.pojo.annotations.BsonProperty;
 
+import java.util.UUID;
+
 public class Customers {
     @BsonProperty(value = "_id")
     private String id;
@@ -10,17 +12,14 @@ public class Customers {
 
     // public  empty constructor needed for retrieving POJO
     public Customers() {}
-    public Customers(String id, String name, int partyCount) {
-        this.id = id;
+    public Customers(String name, int partyCount) {
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.partyCount = partyCount;
     }
 
     public String getId() {
         return id;
-    }
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {

@@ -30,7 +30,7 @@ public class MongoOps {
         collection.insertMany(list);
     }
 
-    public static <T> void insertOne(T item) {
+    public static <T> void insertSingle(T item) {
         MongoCollection<T> collection = (MongoCollection<T>) db.getCollection(item.getClass().getSimpleName(), item.getClass());
         collection.insertOne(item);
     }

@@ -1,5 +1,6 @@
 package com.example.hotelproject2.models;
 
+import javafx.scene.shape.VLineTo;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 
 import java.util.Date;
@@ -11,16 +12,18 @@ public class Booking {
     private String customerId;
     private Payment payment;
     private String roomId;
+    private Class roomClass;
     private String checkInDate;
     private String checkOutDate;
     private double totalCost;
 
     public Booking () {}
-    public Booking (String customerId, Payment payment, String roomId, String checkInDate, String checkOutDate, double totalCost) {
+    public Booking (String customerId, Payment payment, String roomId, Class roomClass, String checkInDate, String checkOutDate, double totalCost) {
         this.id = UUID.randomUUID().toString();
         this.customerId = customerId;
         this.payment = payment;
         this.roomId = roomId;
+        this.roomClass = roomClass;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.totalCost = totalCost;
@@ -40,9 +43,7 @@ public class Booking {
         this.customerId = customerId;
     }
 
-    public Payment getPayment() {
-        return payment;
-    }
+    public Payment getPayment() { return payment; }
     public void setPayment(Payment payment) {
         this.payment = payment;
     }
@@ -50,9 +51,10 @@ public class Booking {
     public void setRoomId(String roomId) {
         this.roomId = roomId;
     }
-    public String getRoomId() {
-        return roomId;
-    }
+    public String getRoomId() { return roomId; }
+
+    public void setRoomClass(Class roomClass) { this.roomClass = roomClass; }
+    public Class getRoomClass() { return roomClass; }
 
     public void setCheckInDate(String checkInDate) {
         this.checkInDate = checkInDate;

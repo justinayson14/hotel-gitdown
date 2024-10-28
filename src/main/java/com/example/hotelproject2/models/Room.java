@@ -4,55 +4,28 @@ import org.bson.codecs.pojo.annotations.BsonProperty;
 
 import java.util.UUID;
 
-public class Room {
-    @BsonProperty(value = "_id")
-    private String id;
-    private String roomType;
-    private int roomNum;
-    private String desc;
-    private double price;
-    private boolean isOccupied;
+public interface Room {
+     String getId();
+     void setId(String id);
 
-    public Room() {}
+     String getRoomType();
+     void setRoomType(String roomType);
 
-    public Room (String roomType, int roomNum, String desc, double price, boolean isOccupied) {
-        this.id = UUID.randomUUID().toString();
-        this.roomType = roomType;
-        this.roomNum = roomNum;
-        this.desc = desc;
-        this.price = price;
-        this.isOccupied = isOccupied;
-    }
+     int getRoomNum();
+     void setRoomNum(int roomNum);
 
-    public String getId () { return id; }
-    public void setId(String id) {
-        this.id = id;
-    }
+     String getDesc();
+     void setDesc(String desc);
 
-    public void setRoomType (String roomType) { this.roomType = roomType; }
-    public String getRoomType () {return roomType; }
+     int getNumBeds();
+     void setNumBeds(int numBeds);
 
-    public void setRoomNum (int roomNum) { this.roomNum = roomNum; }
-    public int getRoomNum () { return roomNum; }
+     int getNumBaths();
+     void setNumBaths(int numBaths);
 
-    public void setDesc (String desc) { this.desc = desc; }
-    public String getDesc () { return desc; }
+     double getPrice();
+     void setPrice(double price);
 
-    public void setPrice (double price) { this.price = price; }
-    public double getPrice () { return price; }
-
-    public void setOccupied (boolean isOccupied) { this.isOccupied = isOccupied; }
-    public boolean getOccupied () { return this.isOccupied; }
-
-    @Override
-    public String toString() {
-        return "Room{" +
-                "id='" + id + '\'' +
-                ", roomType='" + roomType + '\'' +
-                ", roomNum=" + roomNum +
-                ", desc='" + desc + '\'' +
-                ", price=" + price +
-                ", isOccupied=" + isOccupied +
-                '}';
-    }
+     boolean getOccupied();
+     void setOccupied(boolean occupied);
 }

@@ -1,9 +1,7 @@
 package com.example.hotelproject2.models;
 
-import javafx.scene.shape.VLineTo;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 
-import java.util.Date;
 import java.util.UUID;
 
 public class Booking {
@@ -12,18 +10,18 @@ public class Booking {
     private String customerId;
     private Payment payment;
     private String roomId;
-    private Class roomClass;
+    private String roomType;
     private String checkInDate;
     private String checkOutDate;
     private double totalCost;
 
-    public Booking () {}
-    public Booking (String customerId, Payment payment, String roomId, Class roomClass, String checkInDate, String checkOutDate, double totalCost) {
+    public Booking () { this.id = UUID.randomUUID().toString(); }
+    public Booking (String customerId, Payment payment, String roomId, String roomType, String checkInDate, String checkOutDate, double totalCost) {
         this.id = UUID.randomUUID().toString();
         this.customerId = customerId;
         this.payment = payment;
         this.roomId = roomId;
-        this.roomClass = roomClass;
+        this.roomType = roomType;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.totalCost = totalCost;
@@ -53,29 +51,17 @@ public class Booking {
     }
     public String getRoomId() { return roomId; }
 
-    public void setRoomClass(Class roomClass) { this.roomClass = roomClass; }
-    public Class getRoomClass() { return roomClass; }
+    public void setRoomType(String roomType) { this.roomType = roomType; }
+    public String getRoomType() { return roomType; }
 
-    public void setCheckInDate(String checkInDate) {
-        this.checkInDate = checkInDate;
-    }
-    public String getCheckInDate() {
-        return checkInDate;
-    }
+    public void setCheckInDate(String checkInDate) { this.checkInDate = checkInDate; }
+    public String getCheckInDate() { return checkInDate; }
 
-    public void setCheckOutDate(String checkOutDate) {
-        this.checkOutDate = checkOutDate;
-    }
-    public String getCheckOutDate() {
-        return checkOutDate;
-    }
+    public void setCheckOutDate(String checkOutDate) { this.checkOutDate = checkOutDate; }
+    public String getCheckOutDate() { return checkOutDate; }
 
-    public void setTotalCost(double totalCost) {
-        this.totalCost = totalCost;
-    }
-    public double getTotalCost() {
-        return totalCost;
-    }
+    public void setTotalCost(double totalCost) { this.totalCost = totalCost; }
+    public double getTotalCost() { return totalCost; }
 
     @Override
     public String toString() {

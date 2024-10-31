@@ -1,6 +1,6 @@
 module com.example.hotelproject2 {
-    requires  javafx.graphics;
-    requires  javafx.base;
+    requires transitive javafx.graphics;
+    requires transitive javafx.base;
     requires javafx.controls;
     requires javafx.fxml;
     requires org.mongodb.driver.sync.client;

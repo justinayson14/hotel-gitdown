@@ -173,13 +173,5 @@ public class CheckInController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
-    //Book Room
-    public void bookRoom(ActionEvent event) throws IOException {
-        System.out.printf("\n\nName: " + name.getText() + "\nNumber of Guests: " + currentGuestValue + "\nRoom Type: " + RoomTypeChoice.getValue() + "\n# of Days: " + numDaysSpinner.getValue() + "\nTotal Rate: " + getTotalRate());
-        System.out.print("\napiKey: " + System.getenv("apiKey"));
-        Customers customer = new Customers(name.getText(), currentGuestValue);
-        MongoOps.insertSingle(customer);
-    }
 
 }

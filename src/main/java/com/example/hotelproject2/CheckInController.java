@@ -120,8 +120,6 @@ public class CheckInController implements Initializable {
                 return 300000;
             case "Presidential":
                 return 1000000;
-            case null:
-                return 0;
             default:
                 return 0;
         }
@@ -137,7 +135,7 @@ public class CheckInController implements Initializable {
     // Update the totalRateLabel if all required fields are filled
     public void updateTotalRateLabel() {
         if (RoomTypeChoice.getValue() != null)
-        totalRateLabel.setText(Integer.toString(getTotalRate()));
+            totalRateLabel.setText(Integer.toString(getTotalRate()));
     }
 
 

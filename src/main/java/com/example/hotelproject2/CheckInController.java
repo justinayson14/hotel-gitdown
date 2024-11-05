@@ -160,20 +160,19 @@ public class CheckInController implements Initializable {
     
     //Book Room
     public void bookRoom(ActionEvent event) throws IOException {
+        //switches scene to UserCheckInDetailsScene
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserCheckInDetailsScene.fxml"));
+        root = loader.load();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+        //prints info on console
         System.out.printf("\n\nName: " + name.getText() + "\nNumber of Guests: " + currentGuestValue + "\nRoom Type: " + RoomTypeChoice.getValue() + "\n# of Days: " + numDaysSpinner.getValue() + "\nTotal Rate: " + getTotalRate());
         System.out.print("\napiKey: " + System.getenv("apiKey"));
         Customers customer = new Customers(name.getText(), currentGuestValue);
         MongoOps.insertSingle(customer);
         System.out.printf("\n\nName: " + name.getText() + "\nNumber of Guests: " + numGuestsLabel.getText() + "\nRoom Type: " + RoomTypeChoice.getValue() + "\n# of Days: " + numDaysSpinner.getValue() + "\nTotal Rate: " + getTotalRate());
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserCheckInDetailsScene.fxml"));
-        root = loader.load();
-
-        //switches scene to UserCheckInDetailsScene
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
-
 }

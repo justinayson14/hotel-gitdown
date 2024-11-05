@@ -7,15 +7,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
 public class RoomDetailsController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    private ChoiceBox<String> roomTypeChoice;
+    private String[] roomTypes = {"Standard", "Deluxe", "Presidential"};
+
+
 
     //Room Class Objects
 
@@ -24,6 +32,17 @@ public class RoomDetailsController {
     DeluxeRoom newDeluxe = new DeluxeRoom();
     PresRoom newPres = new PresRoom();
 
+
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        roomTypeChoice.getItems().addAll(roomTypes);
+        roomTypeChoice.setOnAction(this::getRoomType);
+
+
+
+    }
+    public void getRoomType(ActionEvent event) {
+        String myRoomTypes = roomTypeChoice.getValue();
+    }
 
 
 

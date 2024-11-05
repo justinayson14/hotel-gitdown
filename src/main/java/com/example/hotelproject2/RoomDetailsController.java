@@ -1,7 +1,7 @@
 package com.example.hotelproject2;
 import com.example.hotelproject2.models.DeluxeRoom;
+import com.example.hotelproject2.models.PresRoom;
 import com.example.hotelproject2.models.StandardRoom;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -19,8 +19,10 @@ public class RoomDetailsController {
 
     //Room Class Objects
 
+
     StandardRoom newStandard = new StandardRoom();
-    DeluxeRoom NewDeluxe = new DeluxeRoom();
+    DeluxeRoom newDeluxe = new DeluxeRoom();
+    PresRoom newPres = new PresRoom();
 
 
 

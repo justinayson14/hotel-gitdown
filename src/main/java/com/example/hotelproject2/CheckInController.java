@@ -115,9 +115,10 @@ public class CheckInController implements Initializable {
 
     // Gets the cost for each room type
     public int getRoomCost(String roomType) {
+        
         int i;
         for (i = 0; i < roomTypes.length; i++)
-            if (roomType == roomTypes[i] && i < roomCosts.length)
+            if (roomType.equals(roomTypes[i]) && i < roomCosts.length)
                 return roomCosts[i];
   
         if (i - 1 < roomCosts.length)
@@ -125,6 +126,7 @@ public class CheckInController implements Initializable {
         else
             System.out.print("\nError: roomType \"" + roomType + "\" has no cost.");
         return 0;
+
     }
 
     // Gets the total rate amount
@@ -137,7 +139,7 @@ public class CheckInController implements Initializable {
     // Update the totalRateLabel if all required fields are filled
     public void updateTotalRateLabel() {
         if (RoomTypeChoice.getValue() != null)
-        totalRateLabel.setText(Integer.toString(getTotalRate()));
+            totalRateLabel.setText(Integer.toString(getTotalRate()));
     }
 
     //Sets texts for room type
@@ -158,20 +160,19 @@ public class CheckInController implements Initializable {
     
     //Book Room
     public void bookRoom(ActionEvent event) throws IOException {
+        //switches scene to UserCheckInDetailsScene
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserCheckInDetailsScene.fxml"));
+        root = loader.load();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+        //prints info on console
         System.out.printf("\n\nName: " + name.getText() + "\nNumber of Guests: " + currentGuestValue + "\nRoom Type: " + RoomTypeChoice.getValue() + "\n# of Days: " + numDaysSpinner.getValue() + "\nTotal Rate: " + getTotalRate());
         System.out.print("\napiKey: " + System.getenv("apiKey"));
         Customers customer = new Customers(name.getText(), currentGuestValue);
         MongoOps.insertSingle(customer);
         System.out.printf("\n\nName: " + name.getText() + "\nNumber of Guests: " + numGuestsLabel.getText() + "\nRoom Type: " + RoomTypeChoice.getValue() + "\n# of Days: " + numDaysSpinner.getValue() + "\nTotal Rate: " + getTotalRate());
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserCheckInDetailsScene.fxml"));
-        root = loader.load();
-
-        //switches scene to UserCheckInDetailsScene
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
-
 }

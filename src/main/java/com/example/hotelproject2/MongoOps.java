@@ -9,10 +9,12 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
+import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.mongodb.client.model.Filters.eq;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
@@ -29,16 +31,18 @@ public class MongoOps {
     private static final MongoClient mongoClient = MongoClients.create(clientSettings);
     private static final MongoDatabase db = mongoClient.getDatabase("hotel-gitdown");
 
+    // make insertMultiple, insertSingle same name (insert)
+    // inserts given data into database in their collection by their class
     public static <T> void insertMultiple(ArrayList<T> list) {
         MongoCollection<T> collection = (MongoCollection<T>) db.getCollection(list.get(0).getClass().getSimpleName(), list.get(0).getClass());
         collection.insertMany(list);
     }
-
     public static <T> void insertSingle(T item) {
         MongoCollection<T> collection = (MongoCollection<T>) db.getCollection(item.getClass().getSimpleName(), item.getClass());
         collection.insertOne(item);
     }
 
+    // grabs available room (by occupancy status) based on room type inputted by user
     public static Room queryAvailRoomByType(String roomType) {
         switch (roomType) {
             case "Deluxe":
@@ -57,48 +61,34 @@ public class MongoOps {
         }
     }
 
-    // create
+    // finds room by roomId in collection by roomType and updates room occupancy to true
     public static void checkInRoom (String roomType, String roomId) {
-        MongoCollection rooms = db.getCollection(roomType);
+        MongoCollection<Document> rooms = db.getCollection(roomType);
         rooms.updateOne(
                 Filters.eq("_id", roomId),
                 Updates.set("occupied", true)
         );
     }
 
-    public static String queryCustomerIdByName (String value) {
+    // returns customerId by customer name
+    public static String queryCustomerIdByName (String name) {
         MongoCollection<Customers> collection = db.getCollection("Customers", Customers.class);
-        return collection.find(eq("name", value)).first().getId();
+        return Objects.requireNonNull(collection.find(eq("name", name)).first()).getId();
     }
 
+    // finds booking by customerId, then finds room by roomId in booking to update room occupancy to false
     public static void checkOutRoom (String customerId) {
         MongoCollection<Booking> bookings = db.getCollection("Booking", Booking.class);
         Booking selBooking = bookings.find(eq("customerId", customerId)).first();
+        assert selBooking != null;
         String roomId = selBooking.getRoomId();
         String roomType = selBooking.getRoomType();
 
-        MongoCollection rooms = db.getCollection(roomType);
+        MongoCollection<Document> rooms = db.getCollection(roomType);
         rooms.updateOne(
                 Filters.eq("_id", roomId),
                 Updates.set("occupied", false)
         );
 
     }
-
-  /*  public static Room queryRoomsByType(String roomType) {
-        MongoCollection<Room> rooms = db.getCollection("Rooms", Room.class);
-        List<Room> availRooms =
-    }*/
-
-/*    public static void main (String[] args) {
-        List<Customers> allCustomers = new ArrayList<>();
-        MongoCollection<Customers>  customer = db.getCollection("Customers", Customers.class);
-        for (Customers cust : customer.find()) {
-            allCustomers.add(cust);
-        }
-
-        for (Customers cust : allCustomers) {
-            System.out.println(cust.toString());
-        }
-    }*/
 }

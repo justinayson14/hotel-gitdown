@@ -115,6 +115,7 @@ public class CheckInController implements Initializable {
 
     // Gets the cost for each room type
     public int getRoomCost(String roomType) {
+        
         int i;
         for (i = 0; i < roomTypes.length; i++)
             if (roomType == roomTypes[i] && i < roomCosts.length)
@@ -125,6 +126,7 @@ public class CheckInController implements Initializable {
         else
             System.out.print("\nError: roomType \"" + roomType + "\" has no cost.");
         return 0;
+
     }
 
     // Gets the total rate amount
@@ -137,7 +139,7 @@ public class CheckInController implements Initializable {
     // Update the totalRateLabel if all required fields are filled
     public void updateTotalRateLabel() {
         if (RoomTypeChoice.getValue() != null)
-        totalRateLabel.setText(Integer.toString(getTotalRate()));
+            totalRateLabel.setText(Integer.toString(getTotalRate()));
     }
 
     //Sets texts for room type

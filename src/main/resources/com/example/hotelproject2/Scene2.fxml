@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="379.0" prefWidth="373.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelproject2.CheckInController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="379.0" prefWidth="373.0" style="-fx-background-color: #87CEEB;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelproject2.CheckInController">
    <children>
       <Button layoutX="14.0" layoutY="339.0" mnemonicParsing="false" onAction="#switchToScene1" prefHeight="25.0" prefWidth="91.0" text="Cancel" />
       <Text layoutX="123.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Check-In">
@@ -22,7 +22,7 @@
             <Font name="Arial" size="16.0" />
          </font>
       </Text>
-      <TextField layoutX="174.0" layoutY="61.0" promptText="First and Last Name" fx:id="name"/>
+      <TextField fx:id="name" layoutX="174.0" layoutY="61.0" promptText="First and Last Name" />
       <Text layoutX="25.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Guests" textAlignment="CENTER" wrappingWidth="133.3333740234375">
          <font>
             <Font name="Arial" size="16.0" />

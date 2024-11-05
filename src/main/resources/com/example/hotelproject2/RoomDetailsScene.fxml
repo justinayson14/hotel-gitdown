@@ -28,7 +28,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="153.0" prefHeight="29.0" prefWidth="98.0" text="# of Bathrooms">
+      <Label layoutX="14.0" layoutY="153.0" prefHeight="29.0" prefWidth="104.0" text="# of Bathrooms:">
          <font>
             <Font size="14.0" />
          </font>

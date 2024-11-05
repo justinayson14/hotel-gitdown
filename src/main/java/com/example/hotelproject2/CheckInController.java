@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.example.hotelproject2.models.Customers;
+
 
 //Controller Class for the Check In Scene (Scene2.fxml)
 public class CheckInController implements Initializable {
@@ -43,7 +45,8 @@ public class CheckInController implements Initializable {
     private Label RoomTypeLabel;
     @FXML
     private ChoiceBox<String> RoomTypeChoice;
-    private String[] roomTypes = {"Standard", "Deluxe", "Presidential"};
+    private String[] roomTypes = {"Standard", "Deluxe", "Presidential"}; // Set the names of each roomType
+    private int[] roomCosts = {150000, 300000, 1000000}; // Set the costs for each roomType
     String roomChoice;
 
     //# of Day Spinner Variables
@@ -110,21 +113,18 @@ public class CheckInController implements Initializable {
         RoomTypeChoice.setOnAction(this::getRoomType);
     }
 
-
     // Gets the cost for each room type
     public int getRoomCost(String roomType) {
-        switch(roomType) {
-            case "Standard":
-                return 150000;
-            case "Deluxe":
-                return 300000;
-            case "Presidential":
-                return 1000000;
-            case null:
-                return 0;
-            default:
-                return 0;
-        }
+        int i;
+        for (i = 0; i < roomTypes.length; i++)
+            if (roomType == roomTypes[i] && i < roomCosts.length)
+                return roomCosts[i];
+  
+        if (i - 1 < roomCosts.length)
+            System.out.print("\nError: roomType \"" + roomType + "\" is invalid.");
+        else
+            System.out.print("\nError: roomType \"" + roomType + "\" has no cost.");
+        return 0;
     }
 
     // Gets the total rate amount
@@ -140,18 +140,12 @@ public class CheckInController implements Initializable {
         totalRateLabel.setText(Integer.toString(getTotalRate()));
     }
 
-
     //Sets texts for room type
     public void getRoomType(ActionEvent event){
         String myRoomTypes = RoomTypeChoice.getValue();
         RoomTypeLabel.setText(myRoomTypes);
         updateTotalRateLabel();
     }
-
-
-
-
-
 
     //Cancel Button Method - Switches back to Homepage (Scene 1)
     public void switchToScene1(ActionEvent event) throws IOException {
@@ -161,9 +155,13 @@ public class CheckInController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
+    
     //Book Room
     public void bookRoom(ActionEvent event) throws IOException {
+        System.out.printf("\n\nName: " + name.getText() + "\nNumber of Guests: " + currentGuestValue + "\nRoom Type: " + RoomTypeChoice.getValue() + "\n# of Days: " + numDaysSpinner.getValue() + "\nTotal Rate: " + getTotalRate());
+        System.out.print("\napiKey: " + System.getenv("apiKey"));
+        Customers customer = new Customers(name.getText(), currentGuestValue);
+        MongoOps.insertSingle(customer);
         System.out.printf("\n\nName: " + name.getText() + "\nNumber of Guests: " + numGuestsLabel.getText() + "\nRoom Type: " + RoomTypeChoice.getValue() + "\n# of Days: " + numDaysSpinner.getValue() + "\nTotal Rate: " + getTotalRate());
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("UserCheckInDetailsScene.fxml"));
@@ -175,8 +173,5 @@ public class CheckInController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
-
-
 
 }

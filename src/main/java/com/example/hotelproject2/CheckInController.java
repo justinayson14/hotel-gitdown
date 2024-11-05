@@ -118,7 +118,7 @@ public class CheckInController implements Initializable {
         
         int i;
         for (i = 0; i < roomTypes.length; i++)
-            if (roomType == roomTypes[i] && i < roomCosts.length)
+            if (roomType.equals(roomTypes[i]) && i < roomCosts.length)
                 return roomCosts[i];
   
         if (i - 1 < roomCosts.length)

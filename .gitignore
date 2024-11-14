@@ -3,7 +3,11 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 application-dev.properties
+Test*.class
+Test.class
 Test.java
+Test2.class
+Test2.java
 
 ### IntelliJ IDEA ###
 .idea/workspace.xml

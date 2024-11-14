@@ -6,23 +6,18 @@ import java.util.UUID;
 
 public class DeluxeRoom implements Room{
     @BsonProperty(value = "_id")
-    private String id;
-    private String roomType;
+    private String id = UUID.randomUUID().toString();
+    private String roomType = "DeluxeRoom";
     private int roomNum;
-    private String desc;
-    private double price;
-    private int numBeds;
-    private int numBaths;
+    private String desc = "Designed for those seeking extra space and comfort, " +
+            "\nthe Deluxe Room offers two beds and a private bathroom, ideal for couples, friends, or small families.";
+    private double price = 3500.00;
+    private int numBeds = 2;
+    private int numBaths = 1;
     private boolean isOccupied;
 
     public DeluxeRoom () { this.id = UUID.randomUUID().toString(); };
     public DeluxeRoom (int roomNum) {
-        this.id = UUID.randomUUID().toString();
-        this.roomType = "DeluxeRoom";
-        this.desc = "Designed for those seeking extra space and comfort, the Deluxe Room offers two beds and a private bathroom, ideal for couples, friends, or small families.";
-        this.price = 3500.00;
-        this.numBeds = 2;
-        this.numBaths = 1;
         this.isOccupied = false;
         this.roomNum = roomNum;
     }

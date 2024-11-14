@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class Booking {
     @BsonProperty(value = "_id")
-    private String id;
+    private String id = UUID.randomUUID().toString();
     private String customerId;
     private Payment payment;
     private String roomId;
@@ -15,9 +15,8 @@ public class Booking {
     private String checkOutDate;
     private double totalCost;
 
-    public Booking () { this.id = UUID.randomUUID().toString(); }
+    public Booking () {}
     public Booking (String customerId, Payment payment, String roomId, String roomType, String checkInDate, String checkOutDate, double totalCost) {
-        this.id = UUID.randomUUID().toString();
         this.customerId = customerId;
         this.payment = payment;
         this.roomId = roomId;

@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import com.example.hotelproject2.CheckInController;
 
 
 import java.io.IOException;
@@ -43,11 +44,16 @@ public class SceneController {
     }
 
     public void switchToThankYou(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("ThankYouScene.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+      // add the customer data to customer database
+      CheckInController controller = new CheckInController();
+      MongoOps.insertSingle(controller.customer);
+
+      // switch to ThankYouScene
+      Parent root = FXMLLoader.load(getClass().getResource("ThankYouScene.fxml"));
+      stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+      scene = new Scene(root);
+      stage.setScene(scene);
+      stage.show();
     }
 
 

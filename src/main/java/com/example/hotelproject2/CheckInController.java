@@ -36,6 +36,8 @@ public class CheckInController implements Initializable {
     //Customer Name
     @FXML TextField name;
 
+    @FXML Button roomTypeButton;
+
     //Guests Number Spinner variables
     @FXML
     private Spinner<Integer> guestAmtSpinner;
@@ -161,15 +163,27 @@ public class CheckInController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
+
     //Book Room
     public void bookRoom(ActionEvent event) throws IOException {
         //sets the customer name
         customer.setName(name.getText());
 
+        String customerName = name.getText();
+        int price = getTotalRate();
+
         //switches scene to UserCheckInDetailsScene
         FXMLLoader loader = new FXMLLoader(getClass().getResource("UserCheckInDetailsScene.fxml"));
         root = loader.load();
+
+        //displays input from Scene2 to UserCheckInDetailsScene
+        UserCheckInDetailsSceneController userCheckInDetailsSceneController = loader.getController();
+        userCheckInDetailsSceneController.displayName(customerName);
+        userCheckInDetailsSceneController.displayNumGuests(Integer.toString(currentGuestValue));
+        userCheckInDetailsSceneController.displayRoomType(RoomTypeChoice.getValue());
+        userCheckInDetailsSceneController.displayNumDays(Integer.toString(currentDaysValue));
+        userCheckInDetailsSceneController.displayPrice(Integer.toString(price));
+
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

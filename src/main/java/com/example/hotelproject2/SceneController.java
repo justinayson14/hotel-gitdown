@@ -44,16 +44,16 @@ public class SceneController {
     }
 
     public void switchToThankYou(ActionEvent event) throws IOException {
-      // add the customer data to customer database
-      CheckInController controller = new CheckInController();
-      MongoOps.insertSingle(controller.customer);
+        // add the customer data to customer database - DOES NOT WORK AT THE MOMENT
+        //CheckInController controller = new CheckInController();
+        //MongoOps.insertSingle(controller.customer);
 
-      // switch to ThankYouScene
-      Parent root = FXMLLoader.load(getClass().getResource("ThankYouScene.fxml"));
-      stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-      scene = new Scene(root);
-      stage.setScene(scene);
-      stage.show();
+        // switch to ThankYouScene
+        Parent root = FXMLLoader.load(getClass().getResource("ThankYouScene.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 

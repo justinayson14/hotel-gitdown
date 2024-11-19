@@ -16,19 +16,13 @@ public class UserCheckInDetailsSceneController {
     private Scene scene;
     private Parent root;
 
-    @FXML
-    Label nameLabel;
-    @FXML
-    Label insertNameLabel;
-    @FXML
-    Label insertNumGuestsLabel;
-    @FXML
-    Label insertRoomTypeLabel;
-    @FXML
-    Label insertNumDaysLabel;
-    @FXML
-    Label insertPriceLabel;
+    @FXML private Label insertNameLabel;
+    @FXML private Label insertNumGuestsLabel;
+    @FXML private Label insertRoomTypeLabel;
+    @FXML private Label insertNumDaysLabel;
+    @FXML private Label insertPriceLabel;
 
+    //displays given String to corresponding Label
     public void displayName(String name){
         insertNameLabel.setText(name);
     }

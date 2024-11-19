@@ -34,9 +34,8 @@ public class CheckInController implements Initializable {
     private int customerID;
 
     //Customer Name
-    @FXML TextField name;
-
-    @FXML Button roomTypeButton;
+    @FXML TextField firstName;
+    @FXML TextField lastName;
 
     //Guests Number Spinner variables
     @FXML
@@ -46,19 +45,20 @@ public class CheckInController implements Initializable {
     int currentGuestValue;
 
     //Room Type Choice box variables
-    @FXML
+
+   /* @FXML
     private Label RoomTypeLabel;
     @FXML
     private ChoiceBox<String> RoomTypeChoice;
     private String[] roomTypes = {"Standard", "Deluxe", "Presidential"}; // Set the names of each roomType
     private int[] roomCosts = {150000, 300000, 1000000}; // Set the costs for each roomType
     String roomChoice;
-
+*/
     //# of Day Spinner Variables
     @FXML
     private Spinner<Integer> numDaysSpinner;
     @FXML
-    private Label totalRateLabel;
+    //private Label totalRateLabel;
     int currentDaysValue;
 
 
@@ -90,7 +90,7 @@ public class CheckInController implements Initializable {
 
         //Code for New Spinner
         //Code for setting up both Guest Number Label and Guest Spinner
-        SpinnerValueFactory<Integer> numDaysFactory =
+    /*    SpinnerValueFactory<Integer> numDaysFactory =
             new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10);
         //Sets initial value of Spinner
         numDaysFactory.setValue(1);
@@ -100,23 +100,23 @@ public class CheckInController implements Initializable {
         currentDaysValue = numDaysSpinner.getValue();
 
         //Total Rate
-        roomChoice = RoomTypeChoice.getValue();
+        //roomChoice = RoomTypeChoice.getValue();
 
         numDaysSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
             @Override
-            public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
-                updateTotalRateLabel();
+          public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
+               updateTotalRateLabel();
             }
         });
-        
+
 
 
 
 
 
         //Choice Box for Roomtype Commands
-        RoomTypeChoice.getItems().addAll(roomTypes);
-        RoomTypeChoice.setOnAction(this::getRoomType);
+       // RoomTypeChoice.getItems().addAll(roomTypes);
+        //RoomTypeChoice.setOnAction(this::getRoomType);
     }
 
     // Gets the cost for each room type
@@ -134,7 +134,7 @@ public class CheckInController implements Initializable {
         return 0;
 
     }
-
+*
     // Gets the total rate amount
     public int getTotalRate() {
         roomChoice = RoomTypeChoice.getValue();
@@ -153,6 +153,8 @@ public class CheckInController implements Initializable {
         String myRoomTypes = RoomTypeChoice.getValue();
         RoomTypeLabel.setText(myRoomTypes);
         updateTotalRateLabel();
+
+     */
     }
 
     //Cancel Button Method - Switches back to Homepage (Scene 1)
@@ -166,11 +168,14 @@ public class CheckInController implements Initializable {
 
     //Book Room
     public void bookRoom(ActionEvent event) throws IOException {
-        //sets the customer name
-        customer.setName(name.getText());
 
-        String customerName = name.getText();
-        int price = getTotalRate();
+        //sets the customer name
+        String customerFirstName = firstName.getText();
+        String customerLastName = lastName.getText();
+        String customerFullName = customerFirstName + " " + customerLastName;
+        customer.setName(customerFullName);
+
+        //int price = getTotalRate();
 
         //switches scene to UserCheckInDetailsScene
         FXMLLoader loader = new FXMLLoader(getClass().getResource("UserCheckInDetailsScene.fxml"));
@@ -178,11 +183,11 @@ public class CheckInController implements Initializable {
 
         //displays input from Scene2 to UserCheckInDetailsScene
         UserCheckInDetailsSceneController userCheckInDetailsSceneController = loader.getController();
-        userCheckInDetailsSceneController.displayName(customerName);
+        userCheckInDetailsSceneController.displayName(customerFullName);
         userCheckInDetailsSceneController.displayNumGuests(Integer.toString(currentGuestValue));
-        userCheckInDetailsSceneController.displayRoomType(RoomTypeChoice.getValue());
-        userCheckInDetailsSceneController.displayNumDays(Integer.toString(currentDaysValue));
-        userCheckInDetailsSceneController.displayPrice(Integer.toString(price));
+        //userCheckInDetailsSceneController.displayRoomType(RoomTypeChoice.getValue());
+        //userCheckInDetailsSceneController.displayNumDays(Integer.toString(currentDaysValue));
+        //userCheckInDetailsSceneController.displayPrice(Integer.toString(price));
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -190,7 +195,7 @@ public class CheckInController implements Initializable {
         stage.show();
 
         //prints info on console
-        System.out.printf("\n\nName: " + name.getText() + "\nNumber of Guests: " + currentGuestValue + "\nRoom Type: " + RoomTypeChoice.getValue() + "\n# of Days: " + numDaysSpinner.getValue() + "\nTotal Rate: " + getTotalRate());
+        System.out.printf("\n\nName: " + customerFullName + "\nNumber of Guests: " + currentGuestValue);
         System.out.print("\napiKey: " + System.getenv("apiKey"));
         System.out.print(customer);
     }

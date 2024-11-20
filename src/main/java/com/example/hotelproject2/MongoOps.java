@@ -20,6 +20,11 @@ import static com.mongodb.client.model.Filters.eq;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
+/**
+ * Class that handles all CRUD operations on MongoDB database.
+ * It imports all the necessary packages for handling Java POJOs and connecting to the MongoDB database.
+ */
+
 public class MongoOps {
     private static final ConnectionString connectionString = new ConnectionString(System.getenv("apiKey"));
     private static final CodecRegistry pojoCodecRegistry = fromProviders(PojoCodecProvider.builder().automatic(true).build());

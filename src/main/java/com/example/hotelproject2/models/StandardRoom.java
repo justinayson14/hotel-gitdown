@@ -10,7 +10,7 @@ public class StandardRoom implements Room{
     private String roomType = "StandardRoom";
     private int roomNum;
     private String desc = "A cozy and comfortable room perfect for solo travelers or couples," +
-            "\nfeaturing a single bed and a private bathroom.";
+            "featuring a single bed and a private bathroom.";
     private double price = 1500.00;
     private int numBeds = 1;
     private int numBaths = 1;

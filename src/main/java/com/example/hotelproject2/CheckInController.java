@@ -182,9 +182,9 @@ public class CheckInController implements Initializable {
         root = loader.load();
 
         //displays input from Scene2 to UserCheckInDetailsScene
-        UserCheckInDetailsSceneController userCheckInDetailsSceneController = loader.getController();
-        userCheckInDetailsSceneController.displayName(customerFullName);
-        userCheckInDetailsSceneController.displayNumGuests(Integer.toString(currentGuestValue));
+        // UserCheckInDetailsSceneController userCheckInDetailsSceneController = loader.getController();
+       // userCheckInDetailsSceneController.displayName(customerFullName);
+        //userCheckInDetailsSceneController.displayNumGuests(Integer.toString(currentGuestValue));
         //userCheckInDetailsSceneController.displayRoomType(RoomTypeChoice.getValue());
         //userCheckInDetailsSceneController.displayNumDays(Integer.toString(currentDaysValue));
         //userCheckInDetailsSceneController.displayPrice(Integer.toString(price));

@@ -32,7 +32,8 @@ public class RoomDetailsController implements Initializable {
      Choice Box Variable for Room type*
      */
     @FXML
-    private ChoiceBox<String> roomTypeChoiceBox;
+    public ChoiceBox<String> roomTypeChoiceBox;
+
     /**
      Room Type String Array*
      */
@@ -71,7 +72,7 @@ public class RoomDetailsController implements Initializable {
     } */
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL arg0, ResourceBundle arg1) {
         roomTypeChoiceBox.getItems().addAll(roomTypes);
         roomTypeChoiceBox.setOnAction(this::getRoomType);
 

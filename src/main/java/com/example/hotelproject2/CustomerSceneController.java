@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Scene2Controller {
+public class CustomerSceneController {
   private Stage stage;
   private Scene scene;
   private Parent root;

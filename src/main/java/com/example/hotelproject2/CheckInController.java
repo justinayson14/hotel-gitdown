@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 import com.example.hotelproject2.models.Customers;
 
 
-//Controller Class for the Check In Scene (Scene2.fxml)
+//Controller Class for the Check In Scene (CustomerScene.fxml)
 public class CheckInController implements Initializable {
 
     //Create new customer object that will dynamically change as the user inputs information

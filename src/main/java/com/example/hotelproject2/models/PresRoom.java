@@ -6,23 +6,18 @@ import java.util.UUID;
 
 public class PresRoom implements Room{
     @BsonProperty(value = "_id")
-    private String id;
-    private String roomType;
+    private String id = UUID.randomUUID().toString();
+    private String roomType = "PresRoom";
     private int roomNum;
-    private String desc;
-    private double price;
-    private int numBeds;
-    private int numBaths;
+    private String desc = "The epitome of luxury, this spacious suite boasts two separate rooms, each with its own bed and bathroom, " +
+            "\nproviding the ultimate indulgence for families or groups.";
+    private double price = 5000.00;
+    private int numBeds = 2;
+    private int numBaths = 2;
     private boolean isOccupied;
 
-    public PresRoom () { this.id = UUID.randomUUID().toString(); };
+    public PresRoom () {};
     public PresRoom (int roomNum) {
-        this.id = UUID.randomUUID().toString();
-        this.roomType = "PresRoom";
-        this.desc = "The epitome of luxury, this spacious suite boasts two separate rooms, each with its own bed and bathroom, providing the ultimate indulgence for families or groups.";
-        this.price = 5000.00;
-        this.numBeds = 2;
-        this.numBaths = 2;
         this.isOccupied = false;
         this.roomNum = roomNum;
     }

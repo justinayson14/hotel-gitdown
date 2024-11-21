@@ -6,14 +6,13 @@ import java.util.UUID;
 
 public class Customers {
     @BsonProperty(value = "_id")
-    private String id;
+    private String id = UUID.randomUUID().toString();
     private String name;
     private int partyCount;
 
     // public  empty constructor needed for retrieving POJO
-    public Customers() {this.id = UUID.randomUUID().toString();}
+    public Customers() {}
     public Customers(String name, int partyCount) {
-        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.partyCount = partyCount;
     }

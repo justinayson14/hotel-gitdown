@@ -19,8 +19,11 @@ import java.util.ResourceBundle;
 import com.example.hotelproject2.models.Customers;
 
 
-//Controller Class for the Check In Scene (Scene2.fxml)
+//Controller Class for the Check In Scene (CustomerScene.fxml)
 public class CheckInController implements Initializable {
+
+    //Create new customer object that will dynamically change as the user inputs information
+    public Customers customer = new Customers("", -1);
 
     //Scene switch variables
     private Stage stage;
@@ -31,7 +34,8 @@ public class CheckInController implements Initializable {
     private int customerID;
 
     //Customer Name
-    @FXML TextField name;
+    @FXML TextField firstName;
+    @FXML TextField lastName;
 
     //Guests Number Spinner variables
     @FXML
@@ -41,26 +45,26 @@ public class CheckInController implements Initializable {
     int currentGuestValue;
 
     //Room Type Choice box variables
-    @FXML
+
+   /* @FXML
     private Label RoomTypeLabel;
     @FXML
     private ChoiceBox<String> RoomTypeChoice;
     private String[] roomTypes = {"Standard", "Deluxe", "Presidential"}; // Set the names of each roomType
     private int[] roomCosts = {150000, 300000, 1000000}; // Set the costs for each roomType
     String roomChoice;
-
+*/
     //# of Day Spinner Variables
     @FXML
     private Spinner<Integer> numDaysSpinner;
     @FXML
-    private Label totalRateLabel;
+    //private Label totalRateLabel;
     int currentDaysValue;
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         //Code for setting up both Guest Number Label and Guest Spinner
         SpinnerValueFactory<Integer> numGuestsFactory =
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10);
@@ -79,13 +83,14 @@ public class CheckInController implements Initializable {
             public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
                 currentGuestValue = guestAmtSpinner.getValue();
                 numGuestsLabel.setText(Integer.toString(currentGuestValue));
+                customer.setPartyCount(currentGuestValue);
             }
         });
 
 
         //Code for New Spinner
         //Code for setting up both Guest Number Label and Guest Spinner
-        SpinnerValueFactory<Integer> numDaysFactory =
+    /*    SpinnerValueFactory<Integer> numDaysFactory =
             new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10);
         //Sets initial value of Spinner
         numDaysFactory.setValue(1);
@@ -95,12 +100,12 @@ public class CheckInController implements Initializable {
         currentDaysValue = numDaysSpinner.getValue();
 
         //Total Rate
-        roomChoice = RoomTypeChoice.getValue();
+        //roomChoice = RoomTypeChoice.getValue();
 
         numDaysSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
             @Override
-            public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
-                updateTotalRateLabel();
+          public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
+               updateTotalRateLabel();
             }
         });
 
@@ -108,9 +113,10 @@ public class CheckInController implements Initializable {
 
 
 
+
         //Choice Box for Roomtype Commands
-        RoomTypeChoice.getItems().addAll(roomTypes);
-        RoomTypeChoice.setOnAction(this::getRoomType);
+       // RoomTypeChoice.getItems().addAll(roomTypes);
+        //RoomTypeChoice.setOnAction(this::getRoomType);
     }
 
     // Gets the cost for each room type
@@ -128,7 +134,7 @@ public class CheckInController implements Initializable {
         return 0;
 
     }
-
+*
     // Gets the total rate amount
     public int getTotalRate() {
         roomChoice = RoomTypeChoice.getValue();
@@ -147,6 +153,8 @@ public class CheckInController implements Initializable {
         String myRoomTypes = RoomTypeChoice.getValue();
         RoomTypeLabel.setText(myRoomTypes);
         updateTotalRateLabel();
+
+     */
     }
 
     //Cancel Button Method - Switches back to Homepage (Scene 1)
@@ -157,22 +165,38 @@ public class CheckInController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
+
     //Book Room
     public void bookRoom(ActionEvent event) throws IOException {
+
+        //sets the customer name
+        String customerFirstName = firstName.getText();
+        String customerLastName = lastName.getText();
+        String customerFullName = customerFirstName + " " + customerLastName;
+        customer.setName(customerFullName);
+
+        //int price = getTotalRate();
+
         //switches scene to UserCheckInDetailsScene
         FXMLLoader loader = new FXMLLoader(getClass().getResource("UserCheckInDetailsScene.fxml"));
         root = loader.load();
+
+        //displays input from Scene2 to UserCheckInDetailsScene
+        UserCheckInDetailsSceneController userCheckInDetailsSceneController = loader.getController();
+        userCheckInDetailsSceneController.displayName(customerFullName);
+        userCheckInDetailsSceneController.displayNumGuests(Integer.toString(currentGuestValue));
+        //userCheckInDetailsSceneController.displayRoomType(RoomTypeChoice.getValue());
+        //userCheckInDetailsSceneController.displayNumDays(Integer.toString(currentDaysValue));
+        //userCheckInDetailsSceneController.displayPrice(Integer.toString(price));
+
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
 
         //prints info on console
-        System.out.printf("\n\nName: " + name.getText() + "\nNumber of Guests: " + currentGuestValue + "\nRoom Type: " + RoomTypeChoice.getValue() + "\n# of Days: " + numDaysSpinner.getValue() + "\nTotal Rate: " + getTotalRate());
+        System.out.printf("\n\nName: " + customerFullName + "\nNumber of Guests: " + currentGuestValue);
         System.out.print("\napiKey: " + System.getenv("apiKey"));
-        Customers customer = new Customers(name.getText(), currentGuestValue);
-        MongoOps.insertSingle(customer);
-        System.out.printf("\n\nName: " + name.getText() + "\nNumber of Guests: " + numGuestsLabel.getText() + "\nRoom Type: " + RoomTypeChoice.getValue() + "\n# of Days: " + numDaysSpinner.getValue() + "\nTotal Rate: " + getTotalRate());
+        System.out.print(customer);
     }
 }

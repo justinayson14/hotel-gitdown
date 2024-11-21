@@ -7,47 +7,62 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="336.0" prefWidth="408.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelproject2.RoomDetailsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="404.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelproject2.RoomDetailsController">
    <children>
-      <Label layoutX="155.0" layoutY="14.0" prefHeight="46.0" prefWidth="98.0" text="Room Details">
+      <Label layoutX="252.0" layoutY="14.0" text="Room Details" textAlignment="CENTER" textOverrun="CLIP">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="60.0" prefHeight="29.0" prefWidth="81.0" text="Room Type:">
+      <Label layoutX="26.0" layoutY="61.0" prefHeight="29.0" prefWidth="81.0" text="Room Type:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="89.0" prefHeight="29.0" prefWidth="116.0" text="Room Description:">
+      <Label layoutX="27.0" layoutY="111.0" text="Room Description:" textOverrun="CLIP" wrapText="true">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="123.0" prefHeight="29.0" prefWidth="72.0" text="# of Beds:">
+      <Label layoutX="26.0" layoutY="178.0" text="Number of Beds:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="153.0" prefHeight="29.0" prefWidth="104.0" text="# of Bathrooms:">
+      <Label layoutX="27.0" layoutY="218.0" text="Number of Bathrooms:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="17.0" layoutY="182.0" prefHeight="29.0" prefWidth="104.0" text="Check-In Date:">
+      <Label layoutX="26.0" layoutY="261.0" text="Check-In Date:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="17.0" layoutY="244.0" prefHeight="29.0" prefWidth="104.0" text="Check-Out Date:">
+      <Label layoutX="26.0" layoutY="305.0" text="Check-Out Date:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <DatePicker layoutX="130.0" layoutY="184.0" />
-      <DatePicker layoutX="130.0" layoutY="246.0" />
-      <Button layoutX="11.0" layoutY="296.0" mnemonicParsing="false" onAction="#switchToScene1" text="Cancel" />
-      <Button layoutX="323.0" layoutY="296.0" mnemonicParsing="false" text="Payment" />
-      <ChoiceBox fx:id="roomTypeChoice" layoutX="129.0" layoutY="62.0" prefWidth="150.0" />
+      <DatePicker fx:id="startDatePicker" layoutX="144.0" layoutY="258.0" />
+      <DatePicker fx:id="endDatePicker" layoutX="144.0" layoutY="302.0" />
+      <Button layoutX="14.0" layoutY="364.0" mnemonicParsing="false" text="Cancel" />
+      <Button layoutX="517.0" layoutY="364.0" mnemonicParsing="false" text="Payment" />
+      <ChoiceBox fx:id="roomTypeChoiceBox" layoutX="129.0" layoutY="62.0" prefWidth="150.0" />
+      <Label fx:id="roomDescText" alignment="TOP_LEFT" layoutX="158.0" layoutY="111.0" maxWidth="-Infinity" prefWidth="429.0" text="Please pick a room..." wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="bedNumText" layoutX="144.0" layoutY="178.0" text="Please pick a room..." wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="bathNumText" layoutX="188.0" layoutY="218.0" text="Please pick a room..." wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

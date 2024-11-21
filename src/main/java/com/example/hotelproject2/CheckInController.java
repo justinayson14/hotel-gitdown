@@ -161,7 +161,7 @@ public class CheckInController implements Initializable {
     //Book Room
     public void bookRoom(ActionEvent event) throws IOException {
         //switches scene to UserCheckInDetailsScene
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserCheckInDetailsScene.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("RoomDetailsScene.fxml"));
         root = loader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

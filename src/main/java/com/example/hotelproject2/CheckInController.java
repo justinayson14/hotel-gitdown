@@ -178,7 +178,7 @@ public class CheckInController implements Initializable {
         //int price = getTotalRate();
 
         //switches scene to UserCheckInDetailsScene
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserCheckInDetailsScene.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("RoomDetailsScene.fxml"));
         root = loader.load();
 
         //displays input from Scene2 to UserCheckInDetailsScene

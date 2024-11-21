@@ -158,7 +158,7 @@ public class CheckInController implements Initializable {
     }
 
     //Cancel Button Method - Switches back to Homepage (Scene 1)
-    public void switchToScene1(ActionEvent event) throws IOException {
+    public void switchToHomeScene(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("HomeScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -167,19 +167,20 @@ public class CheckInController implements Initializable {
     }
 
     //Book Room
-    public void bookRoom(ActionEvent event) throws IOException {
+    public void switchToRoomDetailsScene(ActionEvent event) throws IOException {
 
         //sets the customer name
-        String customerFirstName = firstName.getText();
-        String customerLastName = lastName.getText();
-        String customerFullName = customerFirstName + " " + customerLastName;
-        customer.setName(customerFullName);
+//        String customerFirstName = firstName.getText();
+//        String customerLastName = lastName.getText();
+//        String customerFullName = customerFirstName + " " + customerLastName;
+//        customer.setName(customerFullName);
 
         //int price = getTotalRate();
 
         //switches scene to UserCheckInDetailsScene
         FXMLLoader loader = new FXMLLoader(getClass().getResource("RoomDetailsScene.fxml"));
-        root = loader.load();
+        Parent root = loader.load();
+        RoomDetailsController controller = loader.getController();
 
         //displays input from Scene2 to UserCheckInDetailsScene
         // UserCheckInDetailsSceneController userCheckInDetailsSceneController = loader.getController();
@@ -195,8 +196,8 @@ public class CheckInController implements Initializable {
         stage.show();
 
         //prints info on console
-        System.out.printf("\n\nName: " + customerFullName + "\nNumber of Guests: " + currentGuestValue);
-        System.out.print("\napiKey: " + System.getenv("apiKey"));
-        System.out.print(customer);
+//        System.out.printf("\n\nName: " + customerFullName + "\nNumber of Guests: " + currentGuestValue);
+//        System.out.print("\napiKey: " + System.getenv("apiKey"));
+//        System.out.print(customer);
     }
 }

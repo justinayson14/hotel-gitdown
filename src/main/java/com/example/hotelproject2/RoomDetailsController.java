@@ -17,8 +17,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 
 /**
@@ -43,11 +41,11 @@ public class RoomDetailsController implements Initializable {
      Label variables for Room Description, Number of Beds, Number of Baths*
      */
     @FXML
-    private Label roomDescLabel;
+    private Label roomDescText;
     @FXML
-    private Label bedNumLabel;
+    private Label bedNumText;
     @FXML
-    private Label bathNumLabel;
+    private Label bathNumText;
 
     @FXML
     private DatePicker startDatePicker;
@@ -60,9 +58,9 @@ public class RoomDetailsController implements Initializable {
      *
      */
 
-    StandardRoom newStandard = new StandardRoom(1);
-    DeluxeRoom newDeluxe = new DeluxeRoom(1);
-    PresRoom newPres = new PresRoom(1);
+    StandardRoom newStandard = new StandardRoom();
+    DeluxeRoom newDeluxe = new DeluxeRoom();
+    PresRoom newPres = new PresRoom();
 
    /* private double calculateTotalCost(String startDatePicker, String endDatePicker, double cost) {
         LocalDate start = LocalDate.parse(startDatePicker);
@@ -75,9 +73,6 @@ public class RoomDetailsController implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         roomTypeChoiceBox.getItems().addAll(roomTypes);
         roomTypeChoiceBox.setOnAction(this::getRoomType);
-
-
-
     }
 
     /**
@@ -88,34 +83,25 @@ public class RoomDetailsController implements Initializable {
      * the user's choice.
      */
     private void getRoomType(ActionEvent event) {
-        String myRoomTypes = roomTypeChoiceBox.getValue();
-        if(roomTypeChoiceBox.getValue().equals("Standard")){
-            roomDescLabel.setText(newStandard.getDesc());
-            bedNumLabel.setText(Integer.toString(newStandard.getNumBeds()));
-            bathNumLabel.setText(Integer.toString(newStandard.getNumBaths()));
-
-        } else if(roomTypeChoiceBox.getValue().equals("Deluxe")){
-            roomDescLabel.setText(newDeluxe.getDesc());
-            bedNumLabel.setText(Integer.toString(newDeluxe.getNumBeds()));
-            bathNumLabel.setText(Integer.toString(newDeluxe.getNumBaths()));
-
-        } else if(roomTypeChoiceBox.getValue().equals("Presidential")){
-            roomDescLabel.setText(newPres.getDesc());
-            bedNumLabel.setText(Integer.toString(newPres.getNumBeds()));
-            bathNumLabel.setText(Integer.toString(newPres.getNumBaths()));
+        String pickedRoom = roomTypeChoiceBox.getValue();
+        switch (pickedRoom) {
+            case "Standard" -> {
+                roomDescText.setText(newStandard.getDesc());
+                bedNumText.setText(Integer.toString(newStandard.getNumBeds()));
+                bathNumText.setText(Integer.toString(newStandard.getNumBaths()));
+            }
+            case "Deluxe" -> {
+                roomDescText.setText(newDeluxe.getDesc());
+                bedNumText.setText(Integer.toString(newDeluxe.getNumBeds()));
+                bathNumText.setText(Integer.toString(newDeluxe.getNumBaths()));
+            }
+            case "Presidential" -> {
+                roomDescText.setText(newPres.getDesc());
+                bedNumText.setText(Integer.toString(newPres.getNumBeds()));
+                bathNumText.setText(Integer.toString(newPres.getNumBaths()));
+            }
         }
-
-
     }
-
-
-
-
-
-
-
-
-
 
     /**
      *
@@ -130,8 +116,5 @@ public class RoomDetailsController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
-
-
 
 }

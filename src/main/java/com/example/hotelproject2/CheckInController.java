@@ -157,7 +157,11 @@ public class CheckInController implements Initializable {
      */
     }
 
-    //Cancel Button Method - Switches back to Homepage (Scene 1)
+    /**
+     * Switches to HomeScene when "Cancel" button is clicked
+     * @param event
+     * @throws IOException
+     */
     public void switchToHomeScene(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("HomeScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -167,6 +171,12 @@ public class CheckInController implements Initializable {
     }
 
     //Book Room
+
+    /**
+     * Switches to RoomDetailsScene
+     * @param event
+     * @throws IOException
+     */
     public void switchToRoomDetailsScene(ActionEvent event) throws IOException {
 
         //sets the customer name

@@ -14,6 +14,11 @@ public class HomeSceneController {
     private Scene scene;
     private Parent root;
 
+    /**
+     * Switches to CustomerScene when "Check In" button is clicked
+     * @param event
+     * @throws IOException
+     */
     public void switchToScene2(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("CustomerScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -22,6 +27,11 @@ public class HomeSceneController {
         stage.show();
     }
 
+    /**
+     * Switches to ViewAmenitiesScene when "View Amenities" button is clicked
+     * @param event
+     * @throws IOException
+     */
     public void switchToAmenities(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("ViewAmenitiesScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

@@ -23,26 +23,52 @@ public class UserCheckInDetailsSceneController {
     @FXML private Label insertPriceLabel;
 
     //displays given String to corresponding Label
+
+    /**
+     * Displays name inputted from CustomerScene onto UserCheckInDetailsScene
+     * @param name
+     */
     public void displayName(String name){
         insertNameLabel.setText(name);
     }
 
+    /**
+     * Displays number of guests inputted from CustomerScene onto UserCheckInDetailsScene
+     * @param numGuests
+     */
     public void displayNumGuests(String numGuests){
         insertNumGuestsLabel.setText(numGuests);
     }
 
+    /**
+     * Displays room type inputted from CustomerScene onto UserCheckInDetailsScene
+     * @param roomType
+     */
     public void displayRoomType(String roomType){
         insertRoomTypeLabel.setText(roomType);
     }
 
+    /**
+     * Displays number of days reserved from CustomerScene to UserCheckInDetailsScene
+     * @param numDays
+     */
     public void displayNumDays(String numDays){
         insertNumDaysLabel.setText(numDays);
     }
 
+    /**
+     * Displays price of reservation from CustomerScene to UserCheckInDetailsScene
+     * @param price
+     */
     public void displayPrice(String price){
         insertPriceLabel.setText(price);
     }
-//switch to HomeScene
+
+    /**
+     * Switches to HomeScene when "Cancel" button is clicked
+     * @param event
+     * @throws IOException
+     */
     public void switchToScene1(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("HomeScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -50,7 +76,12 @@ public class UserCheckInDetailsSceneController {
         stage.setScene(scene);
         stage.show();
     }
-//switch to ThankYouScene
+
+    /**
+     * Switches to ThankYouScene when "Confirm Booking" button is pressed
+     * @param event
+     * @throws IOException
+     */
     public void switchToThankYou(ActionEvent event) throws IOException {
         // add the customer data to customer database - DOES NOT WORK AT THE MOMENT
         //CheckInController controller = new CheckInController();

@@ -24,7 +24,6 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
  * Class that handles all CRUD operations on MongoDB database.
  * It imports all the necessary packages for handling Java POJOs and connecting to the MongoDB database.
  */
-
 public class MongoOps {
     private static final ConnectionString connectionString = new ConnectionString(System.getenv("apiKey"));
     private static final CodecRegistry pojoCodecRegistry = fromProviders(PojoCodecProvider.builder().automatic(true).build());
@@ -42,8 +41,7 @@ public class MongoOps {
     /**
      * Takes in any type of Array List of objects and
      * inserts those objects into a collection named by its Class type in the MongoDB database
-     * @param list
-     * @param <T>
+     * @param list List of items to insert to database
      */
     public static <T> void insertMultiple(ArrayList<T> list) {
         MongoCollection<T> collection = (MongoCollection<T>) db.getCollection(list.get(0).getClass().getSimpleName(), list.get(0).getClass());
@@ -52,8 +50,7 @@ public class MongoOps {
 
     /**
      * Inserts an object of any type into a collection named by its Class type in the MongoDB database.
-     * @param item
-     * @param <T>
+     * @param item Item to insert to database
      */
     public static <T> void insertSingle(T item) {
         MongoCollection<T> collection = (MongoCollection<T>) db.getCollection(item.getClass().getSimpleName(), item.getClass());
@@ -63,8 +60,8 @@ public class MongoOps {
     /**
      * Gets the type of room and searches through the collection named by the room type and returns the first Room object
      * in that collection that is not occupied.
-     * @param roomType
-     * @return Room
+     * @param roomType Type of room to query
+     * @return Room object that is not occupied
      */
     public static Room queryAvailRoomByType(String roomType) {
         switch (roomType) {
@@ -85,10 +82,10 @@ public class MongoOps {
     }
 
     /**
-     * Gets the room type and room Id and searches through the collection by its room type using the room id
+     * Gets the room type and room ID and searches through the collection by its room type using the room id
      * and changes the value of occupied field to true
-     * @param roomType
-     * @param roomId
+     * @param roomType For identifying the which room collection to search
+     * @param roomId For identifying which room by id
      */
     public static void checkInRoom (String roomType, String roomId) {
         MongoCollection<Document> rooms = db.getCollection(roomType);
@@ -100,8 +97,8 @@ public class MongoOps {
 
     /**
      * Gets customer name and searches through Customers collection by the customer name and returns the customer id
-     * @param name
-     * @return String
+     * @param name The name of the customer
+     * @return String name of customer
      */
     public static String queryCustomerIdByName (String name) {
         MongoCollection<Customers> collection = db.getCollection("Customers", Customers.class);
@@ -114,7 +111,7 @@ public class MongoOps {
      * Gets the customer id and searches for their booking in Bookings collection to get their reserved room id
      * and room type which is used to search through respective room collection to change occupied field of that room
      * from true to false.
-     * @param customerId
+     * @param customerId To find which booking is associated to customer ID
      */
     public static void checkOutRoom (String customerId) {
         MongoCollection<Booking> bookings = db.getCollection("Booking", Booking.class);

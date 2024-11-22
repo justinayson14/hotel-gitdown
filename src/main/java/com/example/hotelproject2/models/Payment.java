@@ -1,5 +1,8 @@
 package com.example.hotelproject2.models;
 
+/**
+ * Holds the payment details of a customer
+ */
 public class Payment {
     private String name;
     private String cardNum;

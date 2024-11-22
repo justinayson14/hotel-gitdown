@@ -4,6 +4,9 @@ import org.bson.codecs.pojo.annotations.BsonProperty;
 
 import java.util.UUID;
 
+/**
+ * Outline of a room in Hotel GitDown
+ */
 public interface Room {
      String getId();
      void setId(String id);

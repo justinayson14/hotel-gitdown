@@ -4,6 +4,9 @@ import org.bson.codecs.pojo.annotations.BsonProperty;
 
 import java.util.UUID;
 
+/**
+ * Holds details of a customer's booking
+ */
 public class Booking {
     @BsonProperty(value = "_id")
     private String id = UUID.randomUUID().toString();

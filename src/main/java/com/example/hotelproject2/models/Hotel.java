@@ -2,6 +2,9 @@ package com.example.hotelproject2.models;
 
 import java.util.*;
 
+/**
+ * Holds the details of the overall hotel
+ */
 public class Hotel {
     private final String name;
     ArrayList <Room> roomList = new ArrayList<>();

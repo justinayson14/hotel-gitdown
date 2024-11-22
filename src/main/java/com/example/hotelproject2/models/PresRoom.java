@@ -4,6 +4,9 @@ import org.bson.codecs.pojo.annotations.BsonProperty;
 
 import java.util.UUID;
 
+/**
+ * Holds the details of a Presidential room
+ */
 public class PresRoom implements Room{
     @BsonProperty(value = "_id")
     private String id = UUID.randomUUID().toString();

@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.example.hotelproject2.models.Customers;
+
 /**
  Room Details Controller Class*
  */
@@ -26,6 +28,8 @@ public class RoomDetailsController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private Customers customer;
+
     /**
      Choice Box Variable for Room type*
      */
@@ -76,6 +80,16 @@ public class RoomDetailsController implements Initializable {
     }
 
     /**
+     * 
+     * @param event
+     * This method is used to pass the customer data
+     * from another scene to this scene for later use.
+     */
+    public void getCustomerData(Customers customer) {
+        this.customer = customer;
+    }
+
+    /**
      *
      * @param event
      * This method triggers in even where the user clicks on a option on the Choice Box
@@ -107,10 +121,16 @@ public class RoomDetailsController implements Initializable {
      *
      * @param event
      * @throws IOException
-     * switches back to 'Customer' Scene
+     * switches back to 'Customer' Scene and
+     * sends customer data to the database.
      */
     public void switchToCustomerInfo(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Scene2.fxml"));
+        //sending customer data to database
+        System.out.print("\nThe following customer data was recieved and added to the database: " + customer + "\n");
+        MongoOps.insertSingle(customer);
+        
+        //switching to 'Customer' Scene
+        Parent root = FXMLLoader.load(getClass().getResource("ThankYouScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

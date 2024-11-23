@@ -25,31 +25,29 @@ import com.example.hotelproject2.models.Customers;
  Room Details Controller Class*
  */
 public class RoomDetailsController implements Initializable {
+    /**
+     Initializing Variables*
+     */
     private Stage stage;
     private Scene scene;
     private Parent root;
     private Customers customer;
 
-    /**
-     Choice Box Variable for Room type*
-     */
+
     @FXML
     public ChoiceBox<String> roomTypeChoiceBox;
 
-    /**
-     Room Type String Array*
-     */
     private String[] roomTypes = {"Standard", "Deluxe", "Presidential"};
 
-    /**
-     Label variables for Room Description, Number of Beds, Number of Baths*
-     */
+
     @FXML
     private Label roomDescText;
     @FXML
     private Label bedNumText;
     @FXML
     private Label bathNumText;
+
+
 
     @FXML
     private DatePicker startDatePicker;
@@ -73,6 +71,12 @@ public class RoomDetailsController implements Initializable {
         return (double)diffInDays * cost;
     } */
 
+    /**
+     @param arg1
+     @param arg0
+     Creates the interaction for the Choice Box*
+     */
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         roomTypeChoiceBox.getItems().addAll(roomTypes);
@@ -81,7 +85,7 @@ public class RoomDetailsController implements Initializable {
 
     /**
      * 
-     * @param event
+     * @param customer
      * This method is used to pass the customer data
      * from another scene to this scene for later use.
      */

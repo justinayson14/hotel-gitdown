@@ -1,5 +1,10 @@
 package com.example.hotelproject2;
 
+import java.io.IOException;
+import java.util.ResourceBundle;
+
+import com.example.hotelproject2.models.Customers;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,12 +12,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-
-import com.example.hotelproject2.models.Customers;
 
 public class CustomerSceneController {
   private Stage stage;
@@ -20,9 +22,17 @@ public class CustomerSceneController {
   private Parent root;
   private Customers customer = new Customers();
 
-  @FXML TextField firstName;
-  @FXML TextField lastName;
-  @FXML Spinner guestAmtSpinner;
+  @FXML private TextField firstName;
+  @FXML private TextField lastName;
+  @FXML private Spinner<Integer> guestAmtSpinner;
+
+    /**
+     * Initialize the guestAmtSpinner to retrieve values from it later
+     */
+    @FXML
+    public void initialize() {
+        guestAmtSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 99999, 1));
+    }
 
     /**
      * Switches to HomeScene when "Cancel" button is clicked
@@ -54,9 +64,8 @@ public class CustomerSceneController {
         String customerFullName = firstName.getText() + " " + lastName.getText();
         customer.setName(customerFullName); // sets the customer's name
 
-        // PARTY COUNT IS NOT WORKING RIGHT NOW
-        //int customerPartyCount = (int)guestAmtSpinner.getValue();
-        //customer.setPartyCount(customerPartyCount); // sets the customer's party count
+        int customerPartyCount = guestAmtSpinner.getValue();
+        customer.setPartyCount(customerPartyCount); // sets the customer's party count
 
         controller.getCustomerData(customer); // sends the customer data
         System.out.print("\nAttempting to pass along the following customer data: " + customer + "\n"); // prints the customer to console for debugging

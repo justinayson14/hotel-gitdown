@@ -67,9 +67,8 @@ public class CustomerSceneController {
         int customerPartyCount = guestAmtSpinner.getValue();
         customer.setPartyCount(customerPartyCount); // sets the customer's party count
 
-        controller.getCustomerData(customer); // sends the customer data
         System.out.print("\nAttempting to pass along the following customer data: " + customer + "\n"); // prints the customer to console for debugging
-
+        controller.getCustomerData(customer); // sends the customer data
 
         // switch scene
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

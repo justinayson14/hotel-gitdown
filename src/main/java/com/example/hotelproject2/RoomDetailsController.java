@@ -24,7 +24,7 @@ import com.example.hotelproject2.models.Customers;
 /**
  Room Details Controller Class*
  */
-public class RoomDetailsController implements Initializable {
+public class RoomDetailsController {
     /**
      Initializing Variables*
      */
@@ -77,8 +77,8 @@ public class RoomDetailsController implements Initializable {
      Creates the interaction for the Choice Box*
      */
 
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
+    @FXML
+    public void initialize() {
         roomTypeChoiceBox.getItems().addAll(roomTypes);
         roomTypeChoiceBox.setOnAction(this::getRoomType);
     }
@@ -129,11 +129,11 @@ public class RoomDetailsController implements Initializable {
      * sends customer data to the database.
      */
     public void switchToCustomerInfo(ActionEvent event) throws IOException {
-        //sending customer data to database
+        // sends customer data to database
         System.out.print("\nThe following customer data was recieved and added to the database: " + customer + "\n");
-        MongoOps.insertSingle(customer);
+        //MongoOps.insertSingle(customer);
         
-        //switching to 'Customer' Scene
+        // switching to 'Customer' Scene
         Parent root = FXMLLoader.load(getClass().getResource("ThankYouScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

@@ -47,7 +47,7 @@
       <DatePicker fx:id="startDatePicker" layoutX="144.0" layoutY="258.0" />
       <DatePicker fx:id="endDatePicker" layoutX="144.0" layoutY="302.0" />
       <Button layoutX="14.0" layoutY="364.0" mnemonicParsing="false" onAction="#switchToCustomer" text="Cancel" />
-      <Button layoutX="443.0" layoutY="364.0" mnemonicParsing="false" onAction="#switchToPaymentMethod" text="Continute to Payment" />
+      <Button layoutX="443.0" layoutY="364.0" mnemonicParsing="false" onAction="#switchToPaymentMethod" text="Continue to Payment" />
       <ChoiceBox fx:id="roomTypeChoiceBox" layoutX="129.0" layoutY="62.0" prefWidth="150.0" />
       <Label fx:id="roomDescText" alignment="TOP_LEFT" layoutX="158.0" layoutY="111.0" maxWidth="-Infinity" prefWidth="429.0" text="Please pick a room..." wrapText="true">
          <font>

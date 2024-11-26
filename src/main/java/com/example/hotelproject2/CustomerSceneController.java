@@ -54,21 +54,23 @@ public class CustomerSceneController {
      * @throws IOException
      */
     public void switchToRoomDetails(ActionEvent event) throws IOException {
-
-        // prepare the loader
         FXMLLoader loader = new FXMLLoader(getClass().getResource("RoomDetailsScene.fxml"));
         Parent root = loader.load();
 
-        // create an instance of the scene's controller to pass customer data to
+        // creates an instance of the scene's controller to pass customer data to
         RoomDetailsController controller = loader.getController();
+
+        // sets the customer's name
         String customerFullName = firstName.getText() + " " + lastName.getText();
-        customer.setName(customerFullName); // sets the customer's name
+        customer.setName(customerFullName);
 
-        int customerPartyCount = guestAmtSpinner.getValue();
-        customer.setPartyCount(customerPartyCount); // sets the customer's party count
-
-        System.out.print("\nAttempting to pass along the following customer data: " + customer + "\n"); // prints the customer to console for debugging
-        controller.getCustomerData(customer); // sends the customer data
+        // sets the customer's party count
+        int customerGuestAmt = guestAmtSpinner.getValue();
+        customer.setPartyCount(customerGuestAmt);
+        
+        // prints the customer data to console and passes it along
+        System.out.println("\n---\nPassing along the following customer data: " + customer + "\n---"); // prints to console
+        controller.getCustomerData(customer); // passes it along
 
         // switch scene
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

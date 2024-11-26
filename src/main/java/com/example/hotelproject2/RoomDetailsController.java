@@ -122,26 +122,14 @@ public class RoomDetailsController {
     }
 
     /**
-     *
+     * switches back to 'Customer' Scene and sends customer data to the database
      * @param event
      * @throws IOException
-     * switches back to 'Customer' Scene and
-     * sends customer data to the database.
      */
-    public void switchToCustomerInfo(ActionEvent event) throws IOException {
-        // sends customer data to database
-        System.out.print("\nThe following customer data was recieved and added to the database: " + customer + "\n");
-        //MongoOps.insertSingle(customer);
-        
-        // switching to 'Customer' Scene
-        Parent root = FXMLLoader.load(getClass().getResource("ThankYouScene.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
     public void switchToCustomer(ActionEvent event) throws IOException {
+        // sends customer data to database
+        System.out.print("\nThe following customer data was received and added to the database: " + customer + "\n");
+        //MongoOps.insertSingle(customer);
         Parent root = FXMLLoader.load(getClass().getResource("CustomerScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -149,6 +137,11 @@ public class RoomDetailsController {
         stage.show();
     }
 
+    /**
+     * switches to PaymentMethodScene
+     * @param event
+     * @throws IOException
+     */
     public void switchToPaymentMethod(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("PaymentMethodScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

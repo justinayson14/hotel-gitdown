@@ -72,8 +72,7 @@ public class RoomDetailsController {
     } */
 
     /**
-     @param arg1
-     @param arg0
+
      Creates the interaction for the Choice Box*
      */
 

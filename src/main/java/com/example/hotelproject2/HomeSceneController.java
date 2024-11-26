@@ -26,6 +26,19 @@ public class HomeSceneController {
         stage.setScene(scene);
         stage.show();
     }
+    /**
+     * Switches to CheckOutScene.fxml when "Check Out" button is clicked
+     * @param event
+     * @throws IOException
+     */
+    public void switchToCheckOut(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("CheckOutScene.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
     /**
      * Switches to ViewAmenitiesScene when "View Amenities" button is clicked

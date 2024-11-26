@@ -25,7 +25,7 @@ public class CheckOutController {
 
 
     /**
-     * Switches to HomeScene when "Back" button is clicked
+     * Switches to HomeScene when "Back" button is clicked.
      * @param event
      * @throws IOException
      */

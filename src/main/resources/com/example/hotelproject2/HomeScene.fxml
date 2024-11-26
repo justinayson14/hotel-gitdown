@@ -7,9 +7,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="419.0" style="-fx-background-color: #87CEEB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelproject2.HomeSceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="419.0" style="-fx-background-color: #87CEEB;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelproject2.HomeSceneController">
    <children>
-      <Button layoutX="114.0" layoutY="261.0" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="76.0" prefWidth="73.0" text="Check In" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true" />
+      <Button layoutX="114.0" layoutY="261.0" mnemonicParsing="false" onAction="#switchToCustomer" prefHeight="76.0" prefWidth="73.0" text="Check In" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true" />
       <Text fill="WHITE" fontSmoothingType="LCD" layoutX="104.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hotel GitDown" textAlignment="CENTER" wrappingWidth="212.13672637939453">
          <font>
             <Font name="Bauhaus 93" size="30.0" />

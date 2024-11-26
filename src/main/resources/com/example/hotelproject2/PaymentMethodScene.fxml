@@ -7,8 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #87CEEB;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelproject2.PaymentMethodScene">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #87CEEB;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelproject2.PaymentMethodSceneController">
    <children>
       <Text layoutX="250.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment">
          <font>
@@ -30,7 +29,7 @@
       <TextField fx:id="monthCardExpPaymentTextField" alignment="CENTER" layoutX="166.0" layoutY="250.0" prefHeight="25.0" prefWidth="43.0" promptText="MM" />
       <TextField fx:id="yearCardExpPaymentTextField" layoutX="228.0" layoutY="250.0" prefHeight="25.0" prefWidth="43.0" promptText="YYYY" />
       <TextField fx:id="cardCVCPaymentTextField" alignment="CENTER" layoutX="166.0" layoutY="293.0" prefHeight="25.0" prefWidth="54.0" promptText="XXX" />
-      <Button layoutX="27.0" layoutY="344.0" mnemonicParsing="false" text="Change Room" />
-      <Button layoutX="490.0" layoutY="344.0" mnemonicParsing="false" text="Pay for Room" />
+      <Button layoutX="27.0" layoutY="344.0" mnemonicParsing="false" onAction="#switchToRoomDetails" text="Change Room" />
+      <Button layoutX="490.0" layoutY="344.0" mnemonicParsing="false" onAction="#switchToConfirmation" text="Pay for Room" />
    </children>
 </AnchorPane>

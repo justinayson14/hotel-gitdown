@@ -141,4 +141,21 @@ public class RoomDetailsController {
         stage.show();
     }
 
+    public void switchToCustomer(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("CustomerScene.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToPaymentMethod(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("PaymentMethodScene.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
 }

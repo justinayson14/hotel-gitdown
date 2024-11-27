@@ -45,12 +45,12 @@
       </Text>
       <Button layoutX="376.0" layoutY="316.0" mnemonicParsing="false" onAction="#switchToThankYou" text="Confirm Reservation" />
       <Button layoutX="95.0" layoutY="316.0" mnemonicParsing="false" onAction="#switchToPayment" text="Cancel " />
-      <Label layoutX="231.0" layoutY="84.0" text="insert Name" />
-      <Label layoutX="231.0" layoutY="127.0" text="insert roomChoice" />
-      <Label layoutX="231.0" layoutY="172.0" text="insert startDate" />
-      <Label layoutX="233.0" layoutY="213.0" text="insert endDate" />
-      <Label layoutX="233.0" layoutY="257.0" text="insert phoneNumber" />
-      <Label layoutX="378.0" layoutY="199.0" text="insert Price">
+      <Label fx:id="custNameText" layoutX="231.0" layoutY="84.0" text="insert Name" />
+      <Label fx:id="roomChoiceText" layoutX="231.0" layoutY="127.0" text="insert roomChoice" />
+      <Label fx:id="startDateText" layoutX="231.0" layoutY="172.0" text="insert startDate" />
+      <Label fx:id="endDateText" layoutX="233.0" layoutY="213.0" text="insert endDate" />
+      <Label fx:id="phoneText" layoutX="233.0" layoutY="257.0" text="insert phoneNumber" />
+      <Label fx:id="totalText" layoutX="378.0" layoutY="199.0" text="insert Price">
          <font>
             <Font size="18.0" />
          </font>

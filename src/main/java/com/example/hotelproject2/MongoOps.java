@@ -105,6 +105,11 @@ public class MongoOps {
         return Objects.requireNonNull(collection.find(eq("name", name)).first()).getId();
     }
 
+    public static int queryRoomNumById(String roomId, String roomType) {
+        MongoCollection<DeluxeRoom> collection = db.getCollection(roomType, DeluxeRoom.class);
+        return collection.find(eq("_id", roomId)).first().getRoomNum();
+    }
+
     // finds booking by customerId, then finds room by roomId in booking to update room occupancy to false
 
     /**

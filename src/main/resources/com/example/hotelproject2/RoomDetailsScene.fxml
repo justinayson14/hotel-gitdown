@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="404.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelproject2.RoomDetailsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="495.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelproject2.RoomDetailsController">
    <children>
       <Label layoutX="252.0" layoutY="14.0" text="Room Details" textAlignment="CENTER" textOverrun="CLIP">
          <font>
@@ -24,42 +24,62 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="26.0" layoutY="178.0" text="Number of Beds:">
+      <Label layoutX="26.0" layoutY="178.0" text="Beds:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="27.0" layoutY="218.0" text="Number of Bathrooms:">
+      <Label layoutX="27.0" layoutY="218.0" text="Bathrooms:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="26.0" layoutY="261.0" text="Check-In Date:">
+      <Label layoutX="27.0" layoutY="297.0" text="Check-In Date:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="26.0" layoutY="305.0" text="Check-Out Date:">
+      <Label layoutX="27.0" layoutY="341.0" text="Check-Out Date:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <DatePicker fx:id="startDatePicker" layoutX="144.0" layoutY="258.0" />
-      <DatePicker fx:id="endDatePicker" layoutX="144.0" layoutY="302.0" />
-      <Button layoutX="14.0" layoutY="364.0" mnemonicParsing="false" onAction="#switchToCustomer" text="Cancel" />
-      <Button layoutX="443.0" layoutY="364.0" mnemonicParsing="false" onAction="#switchToPaymentMethod" text="Continue to Payment" />
+      <DatePicker fx:id="startDatePicker" layoutX="145.0" layoutY="294.0" onAction="#getStartDate" />
+      <DatePicker fx:id="endDatePicker" layoutX="145.0" layoutY="338.0" onAction="#calculateTotalCost" />
+      <Button layoutX="26.0" layoutY="454.0" mnemonicParsing="false" onAction="#switchToCustomer" text="Go Back" />
+      <Button layoutX="513.0" layoutY="454.0" mnemonicParsing="false" onAction="#switchToPaymentMethod" text="Continue" />
       <ChoiceBox fx:id="roomTypeChoiceBox" layoutX="129.0" layoutY="62.0" prefWidth="150.0" />
       <Label fx:id="roomDescText" alignment="TOP_LEFT" layoutX="158.0" layoutY="111.0" maxWidth="-Infinity" prefWidth="429.0" text="Please pick a room..." wrapText="true">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="bedNumText" layoutX="144.0" layoutY="178.0" text="Please pick a room..." wrapText="true">
+      <Label fx:id="bedNumText" layoutX="158.0" layoutY="178.0" text="Please pick a room..." wrapText="true">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="bathNumText" layoutX="188.0" layoutY="218.0" text="Please pick a room..." wrapText="true">
+      <Label fx:id="bathNumText" layoutX="158.0" layoutY="218.0" text="Please pick a room..." wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="27.0" layoutY="258.0" text="Room Cost:  ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="roomCostText" layoutX="158.0" layoutY="258.0" text="Please pick a room..." wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="27.0" layoutY="395.0" text="Total Cost:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="totalCostText" layoutX="149.0" layoutY="395.0" text="..." wrapText="true">
          <font>
             <Font size="14.0" />
          </font>

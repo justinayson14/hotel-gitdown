@@ -1,6 +1,7 @@
 package com.example.hotelproject2;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -27,7 +28,8 @@ public class ConfirmationSceneController {
         this.customer = customer;
     }
 
-    public void switchToHome(ActionEvent event) throws IOException {
+    @FXML
+    private void switchToPayment(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("HomeScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -35,7 +37,8 @@ public class ConfirmationSceneController {
         stage.show();
     }
 
-    public void switchToThankYou(ActionEvent event) throws IOException {
+    @FXML
+    private void switchToThankYou(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("ThankYouScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -43,8 +46,6 @@ public class ConfirmationSceneController {
         stage.show();
         
         System.out.print("\n---\nRecieved the following customer data");
-        /*MongoOps.insertSingle(customer);
-        System.out.print(" and sent it to the database");*/
         System.out.println(": " + customer + "\n---");
     }
 

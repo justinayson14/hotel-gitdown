@@ -44,7 +44,7 @@
          </font>
       </Text>
       <Button layoutX="376.0" layoutY="316.0" mnemonicParsing="false" onAction="#switchToThankYou" text="Confirm Reservation" />
-      <Button layoutX="95.0" layoutY="316.0" mnemonicParsing="false" onAction="#switchToHome" text="Cancel " />
+      <Button layoutX="95.0" layoutY="316.0" mnemonicParsing="false" onAction="#switchToPayment" text="Cancel " />
       <Label layoutX="231.0" layoutY="84.0" text="insert Name" />
       <Label layoutX="231.0" layoutY="127.0" text="insert roomChoice" />
       <Label layoutX="231.0" layoutY="172.0" text="insert startDate" />

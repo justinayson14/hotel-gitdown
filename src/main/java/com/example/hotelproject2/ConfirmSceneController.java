@@ -68,12 +68,17 @@ public class ConfirmSceneController {
 
     @FXML
     private void switchToThankYou(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("ThankYouScene.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ThankYouScene.fxml") );
+        Parent root = loader.load();
+
+        MongoOps.checkInRoom(booking.getRoomType(), booking.getRoomId());
+        ThankYouSceneController controller = loader.getController();
+        controller.setRoomNum(MongoOps.queryRoomNumById(booking.getRoomId(), booking.getRoomType()));
+
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        
         System.out.print("\n---\nRecieved the following customer data");
         System.out.println(": " + customer + "\n---");
     }

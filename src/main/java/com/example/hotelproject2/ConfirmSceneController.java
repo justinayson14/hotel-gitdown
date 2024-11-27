@@ -72,6 +72,8 @@ public class ConfirmSceneController {
         Parent root = loader.load();
 
         MongoOps.checkInRoom(booking.getRoomType(), booking.getRoomId());
+        MongoOps.insertSingle(customer);
+        MongoOps.insertSingle(booking);
         ThankYouSceneController controller = loader.getController();
         controller.setRoomNum(MongoOps.queryRoomNumById(booking.getRoomId(), booking.getRoomType()));
 

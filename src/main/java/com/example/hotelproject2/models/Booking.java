@@ -16,7 +16,7 @@ public class Booking {
     private String roomType;
     private String checkInDate;
     private String checkOutDate;
-    private double totalCost;
+    private Double totalCost;
 
     public Booking () {}
 
@@ -65,10 +65,10 @@ public class Booking {
         return checkOutDate;
     }
 
-    public void setTotalCost(double totalCost) {
+    public void setTotalCost(Double totalCost) {
         this.totalCost = totalCost;
     }
-    public double getTotalCost() {
+    public Double getTotalCost() {
         return totalCost;
     }
 }

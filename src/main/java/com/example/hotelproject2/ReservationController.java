@@ -37,7 +37,7 @@ public class ReservationController {
         room.setOccupied(true);
 
         MongoOps.insertSingle(booking);
-        MongoOps.checkInRoom(room.getRoomType(), room.getId());
+        MongoOps.checkInRoom(room.getClass().getSimpleName(), room.getId());
     }
 
     /**

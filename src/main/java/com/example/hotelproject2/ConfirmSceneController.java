@@ -42,7 +42,7 @@ public class ConfirmationSceneController {
         this.booking = booking;
     }
 
-    public void displayText() {
+    public void displayInfo() {
         custNameText.setText(customer.getName());
         roomChoiceText.setText(booking.getRoomType());
         startDateText.setText(booking.getCheckInDate());

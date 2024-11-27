@@ -1,6 +1,7 @@
 package com.example.hotelproject2;
 
 import com.example.hotelproject2.models.Booking;
+import com.example.hotelproject2.models.Payment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,25 +17,22 @@ import com.example.hotelproject2.models.Customers;
 
 public class PaymentMethodSceneController {
     @FXML
-    private TextField namePaymentTextField;
+    private TextField nameText;
     @FXML
-    private TextField addressPaymentTextField;
+    private TextField addressText;
     @FXML
-    private TextField zipCodePaymentTextField;
+    private TextField zipText;
     @FXML
-    private TextField phoneNumPaymentTextField;
+    private TextField phoneText;
     @FXML
-    private TextField cardNumPaymentTextField;
+    private TextField cardNumText;
     @FXML
-    private TextField monthCardExpPaymentTextField;
+    private TextField monthExpText;
     @FXML
-    private TextField yearCardExpPaymentTextField;
+    private TextField yearExpText;
     @FXML
-    private TextField cardCVCPaymentTextField;
+    private TextField cvcText;
 
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
     private Customers customer;
     private Booking booking;
 
@@ -49,7 +47,27 @@ public class PaymentMethodSceneController {
         this.booking = booking;
     }
 
-    public void switchToConfirmation(ActionEvent event) throws IOException {
+    private boolean checkIfFilled(TextField field) {
+        if(field.getText().isBlank()) {
+            field.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
+            return false;
+        } else {
+            field.setStyle(null);
+            return true;
+        }
+    }
+
+    @FXML
+    private void handleConfirmationButton(ActionEvent event) throws IOException {
+        boolean isAllFilled = checkIfFilled(nameText) && checkIfFilled(addressText) &&
+                checkIfFilled(zipText) && checkIfFilled(phoneText) && checkIfFilled(cardNumText) &&
+                checkIfFilled(monthExpText) && checkIfFilled(yearExpText) && checkIfFilled(cvcText);
+        if(isAllFilled) {
+            switchToConfirmation(event);
+        }
+    }
+
+    private void switchToConfirmation(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ConfirmationScene.fxml"));
         Parent root = loader.load();
 
@@ -57,17 +75,26 @@ public class PaymentMethodSceneController {
         ConfirmationSceneController controller = loader.getController();
 
         // prints the customer data to console and passes it along
-        System.out.println("\n---\nPassing along the following customer data: " + customer + "\n---"); // prints to console
-        controller.getCustomerData(customer); // passes it along
+        System.out.println("\n---\nPassing along the following customer data: " + customer + "\n---");
+        Payment payment = new Payment();
+        payment.setName(nameText.getText());
+        payment.setCardNum(cardNumText.getText());
+        payment.setCardExp(monthExpText.getText()+yearExpText.getText());
+        payment.setCardCVC(cvcText.getText());
+        payment.setPhoneNum(phoneText.getText());
+        booking.setPayment(payment);
+        controller.initData(customer, booking); // passes it along
+        controller.displayInfo();
 
         // switch scene
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void switchToRoomDetails(ActionEvent event) throws IOException {
+    @FXML
+    private void switchToRoomDetails(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("RoomDetailsScene.fxml"));
         Parent root = loader.load();
 
@@ -79,8 +106,8 @@ public class PaymentMethodSceneController {
         controller.getCustomer(customer); // passes it along
 
         // switch scene
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }

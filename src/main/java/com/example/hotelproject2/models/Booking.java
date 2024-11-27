@@ -19,15 +19,6 @@ public class Booking {
     private double totalCost;
 
     public Booking () {}
-    public Booking (String customerId, Payment payment, String roomId, String roomType, String checkInDate, String checkOutDate, double totalCost) {
-        this.customerId = customerId;
-        this.payment = payment;
-        this.roomId = roomId;
-        this.roomType = roomType;
-        this.checkInDate = checkInDate;
-        this.checkOutDate = checkOutDate;
-        this.totalCost = totalCost;
-    }
 
     public String getId() {
         return id;
@@ -53,28 +44,31 @@ public class Booking {
     }
     public String getRoomId() { return roomId; }
 
-    public void setRoomType(String roomType) { this.roomType = roomType; }
-    public String getRoomType() { return roomType; }
+    public String getRoomType() {
+        return roomType;
+    }
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
+    }
 
-    public void setCheckInDate(String checkInDate) { this.checkInDate = checkInDate; }
-    public String getCheckInDate() { return checkInDate; }
+    public void setCheckInDate(String checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+    public String getCheckInDate() {
+        return checkInDate;
+    }
 
-    public void setCheckOutDate(String checkOutDate) { this.checkOutDate = checkOutDate; }
-    public String getCheckOutDate() { return checkOutDate; }
+    public void setCheckOutDate(String checkOutDate) {
+        this.checkOutDate = checkOutDate;
+    }
+    public String getCheckOutDate() {
+        return checkOutDate;
+    }
 
-    public void setTotalCost(double totalCost) { this.totalCost = totalCost; }
-    public double getTotalCost() { return totalCost; }
-
-    @Override
-    public String toString() {
-        return "Booking{" +
-                "id='" + id + '\'' +
-                ", customerId='" + customerId + '\'' +
-                ", payment=" + payment +
-                ", roomId='" + roomId + '\'' +
-                ", checkInDate=" + checkInDate +
-                ", checkOutDate=" + checkOutDate +
-                ", totalCost=" + totalCost +
-                '}';
+    public void setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
+    }
+    public double getTotalCost() {
+        return totalCost;
     }
 }

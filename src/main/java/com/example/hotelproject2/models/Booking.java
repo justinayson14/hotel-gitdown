@@ -13,7 +13,6 @@ public class Booking {
     private String customerId;
     private Payment payment;
     private String roomId;
-    private String roomNum;
     private String roomType;
     private String checkInDate;
     private String checkOutDate;
@@ -44,13 +43,6 @@ public class Booking {
         this.roomId = roomId;
     }
     public String getRoomId() { return roomId; }
-
-    public void setRoomNum(String roomNum) {
-        this.roomNum = roomNum;
-    }
-    public String getRoomNum() {
-        return roomNum;
-    }
 
     public String getRoomType() {
         return roomType;

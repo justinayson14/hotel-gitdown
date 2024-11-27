@@ -1,3 +1,7 @@
+/**
+ * BEING REMOVED
+ */
+
 package com.example.hotelproject2;
 
 import com.example.hotelproject2.models.DeluxeRoom;
@@ -18,13 +22,13 @@ public class HotelController {
         Room room;
         switch (roomType) {
             case "Standard":
-                room = new StandardRoom(roomNum);
+                room = new StandardRoom();
                 break;
             case "Deluxe":
-                room = new DeluxeRoom(roomNum);
+                room = new DeluxeRoom();
                 break;
             case "Presidential":
-                room = new PresRoom(roomNum);
+                room = new PresRoom();
                 break;
             default:
                 room = null;

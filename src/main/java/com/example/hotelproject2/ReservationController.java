@@ -1,3 +1,6 @@
+/**
+ * BEING REMOVED
+ */
 package com.example.hotelproject2;
 
 import com.example.hotelproject2.models.Booking;

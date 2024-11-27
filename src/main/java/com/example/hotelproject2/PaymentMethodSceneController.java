@@ -1,5 +1,6 @@
 package com.example.hotelproject2;
 
+import com.example.hotelproject2.models.Booking;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,27 +15,38 @@ import java.io.IOException;
 import com.example.hotelproject2.models.Customers;
 
 public class PaymentMethodSceneController {
+    @FXML
+    private TextField namePaymentTextField;
+    @FXML
+    private TextField addressPaymentTextField;
+    @FXML
+    private TextField zipCodePaymentTextField;
+    @FXML
+    private TextField phoneNumPaymentTextField;
+    @FXML
+    private TextField cardNumPaymentTextField;
+    @FXML
+    private TextField monthCardExpPaymentTextField;
+    @FXML
+    private TextField yearCardExpPaymentTextField;
+    @FXML
+    private TextField cardCVCPaymentTextField;
+
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private Customers customer = new Customers();
-
-    @FXML private TextField namePaymentTextField;
-    @FXML private TextField addressPaymentTextField;
-    @FXML private TextField zipCodePaymentTextField;
-    @FXML private TextField phoneNumPaymentTextField;
-    @FXML private TextField cardNumPaymentTextField;
-    @FXML private TextField monthCardExpPaymentTextField;
-    @FXML private TextField yearCardExpPaymentTextField;
-    @FXML private TextField cardCVCPaymentTextField;
+    private Customers customer;
+    private Booking booking;
 
     /**
      * This method is used to pass the customer data
      * from another controller to this controller for later use.
-     * @param customer
+     * @param customer Customer object from previous scene
+     * @param booking Booking object from previous scene
      */
-    public void getCustomerData(Customers customer) {
+    public void initData(Customers customer, Booking booking) {
         this.customer = customer;
+        this.booking = booking;
     }
 
     public void switchToConfirmation(ActionEvent event) throws IOException {
@@ -64,7 +76,7 @@ public class PaymentMethodSceneController {
 
         // prints the customer data to console and passes it along
         System.out.println("\n---\nPassing along the following customer data: " + customer + "\n---"); // prints to console
-        controller.getCustomerData(customer); // passes it along
+        controller.getCustomer(customer); // passes it along
 
         // switch scene
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

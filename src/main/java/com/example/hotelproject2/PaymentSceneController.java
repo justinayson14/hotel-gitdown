@@ -15,7 +15,7 @@ import java.io.IOException;
 
 import com.example.hotelproject2.models.Customers;
 
-public class PaymentMethodSceneController {
+public class PaymentSceneController {
     @FXML
     private TextField nameText;
     @FXML
@@ -68,11 +68,11 @@ public class PaymentMethodSceneController {
     }
 
     private void switchToConfirmation(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ConfirmationScene.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ConfirmScene.fxml"));
         Parent root = loader.load();
 
         // creates an instance of the scene's controller to pass customer data to
-        ConfirmationSceneController controller = loader.getController();
+        ConfirmSceneController controller = loader.getController();
 
         // prints the customer data to console and passes it along
         System.out.println("\n---\nPassing along the following customer data: " + customer + "\n---");

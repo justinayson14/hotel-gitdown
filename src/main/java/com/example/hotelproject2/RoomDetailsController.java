@@ -3,7 +3,6 @@ import com.example.hotelproject2.models.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,10 +13,8 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ResourceBundle;
 
 /**
  Room Details Controller Class*
@@ -46,7 +43,7 @@ public class RoomDetailsController {
     private String roomType;
     private LocalDate startDate;
     private LocalDate endDate;
-    private double totalCost;
+    private Double totalCost;
 
     /**
      * This method is used to pass the customer data
@@ -141,11 +138,11 @@ public class RoomDetailsController {
      * @throws IOException
      */
     @FXML
-    private void switchToPaymentMethod(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("PaymentMethodScene.fxml"));
+    private void switchToPayment(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("PaymentScene.fxml"));
         Parent root = loader.load();
         // creates an instance of the scene's controller to pass customer data to
-        PaymentMethodSceneController controller = loader.getController();
+        PaymentSceneController controller = loader.getController();
         // prints the customer data to console and passes it along
         System.out.println("\n---\nPassing along the following customer data: " + customer + "\n---"); // prints to console
         System.out.println(roomType);

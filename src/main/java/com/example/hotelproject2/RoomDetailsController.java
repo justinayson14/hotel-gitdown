@@ -134,6 +134,7 @@ public class RoomDetailsController {
         stage.show();
     }
 
+    // TODO: Add error when no room of that type is available
     /**
      * switches to PaymentMethodScene and passes customer data along.
      * @param event

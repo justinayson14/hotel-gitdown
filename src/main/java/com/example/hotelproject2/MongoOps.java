@@ -102,7 +102,10 @@ public class MongoOps {
      */
     public static String queryCustomerIdByName (String name) {
         MongoCollection<Customers> collection = db.getCollection("Customers", Customers.class);
-        return Objects.requireNonNull(collection.find(eq("name", name)).first()).getId();
+        Customers customer = collection.find(eq("name", name)).first();
+        if(customer == null)
+            return null;
+        return customer.getId();
     }
 
     public static int queryRoomNumById(String roomId, String roomType) {
@@ -118,10 +121,11 @@ public class MongoOps {
      * from true to false.
      * @param customerId To find which booking is associated to customer ID
      */
-    public static void checkOutRoom (String customerId) {
+    public static String checkOutRoom (String customerId) {
         MongoCollection<Booking> bookings = db.getCollection("Booking", Booking.class);
         Booking selBooking = bookings.find(eq("customerId", customerId)).first();
-        assert selBooking != null;
+        if(selBooking == null)
+            return null;
         String roomId = selBooking.getRoomId();
         String roomType = selBooking.getRoomType();
 
@@ -130,6 +134,6 @@ public class MongoOps {
                 Filters.eq("_id", roomId),
                 Updates.set("occupied", false)
         );
-
+        return Integer.toString(queryRoomNumById(roomId, roomType));
     }
 }

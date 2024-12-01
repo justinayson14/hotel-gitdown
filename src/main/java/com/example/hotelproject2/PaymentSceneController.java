@@ -11,9 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import com.example.hotelproject2.models.Customers;
 
@@ -50,7 +48,7 @@ public class PaymentSceneController {
     }
 
     @FXML
-    private void handleConfirmationButton(ActionEvent event) throws IOException {
+    private void handleSwitch(ActionEvent event) throws IOException {
         ReservationController r = new ReservationController();
         boolean isAllFilled = r.validateFields(nameText) && r.validateFields(addressText) &&
                 r.validateFields(zipText) && r.validateFields(phoneText) && r.validateFields(cardNumText) &&

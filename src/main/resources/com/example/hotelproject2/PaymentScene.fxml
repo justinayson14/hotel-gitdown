@@ -30,6 +30,6 @@
       <TextField fx:id="yearExpText" layoutX="178.0" layoutY="221.0" prefHeight="26.0" prefWidth="49.0" promptText="YYYY" />
       <TextField fx:id="cvcText" alignment="CENTER" layoutX="116.0" layoutY="264.0" prefHeight="25.0" prefWidth="54.0" promptText="XXX" />
       <Button layoutX="27.0" layoutY="309.0" mnemonicParsing="false" onAction="#switchToRoomDetails" text="Change Room" />
-      <Button layoutX="472.0" layoutY="309.0" mnemonicParsing="false" onAction="#handleConfirmationButton" text="Pay for Room" />
+      <Button layoutX="472.0" layoutY="309.0" mnemonicParsing="false" onAction="#handleSwitch" text="Pay for Room" />
    </children>
 </AnchorPane>

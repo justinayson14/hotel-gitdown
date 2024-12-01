@@ -6,9 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 
@@ -36,6 +34,14 @@ public class RoomDetailsController {
     private DatePicker endDatePicker;
     @FXML
     private Label totalCostText;
+    @FXML
+    private Label errorText;
+    @FXML
+    private Label roomTypeLabel;
+    @FXML
+    private Label checkInLabel;
+    @FXML
+    private Label checkOutLabel;
 
     private final String[] roomTypes = {"Standard", "Deluxe", "Presidential"};
     private Customers customer;
@@ -60,13 +66,37 @@ public class RoomDetailsController {
     @FXML
     public void initialize() {
         roomTypeChoiceBox.getItems().addAll(roomTypes);
+        roomTypeChoiceBox.setValue("Standard");
         roomTypeChoiceBox.setOnAction(this::getRoomType);
+        LocalDate minDate = LocalDate.now();
+        startDatePicker.setDayCellFactory(d ->
+                new DateCell() {
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if(item.isBefore(minDate)) {
+                            setDisable(true);
+                            setStyle("-fx-background-color: #ffc0cb;");
+                        }
+                    }
+                });
+        startDatePicker.setValue(minDate);
+        endDatePicker.setValue(minDate.plusDays(1));
     }
 
     @FXML
     private void getStartDate(ActionEvent event) {
-        if(startDatePicker.getValue() != null)
-            startDate = startDatePicker.getValue();
+        startDate = startDatePicker.getValue();
+        endDatePicker.setDayCellFactory(d ->
+                new DateCell() {
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if(item.isEqual(startDate) || item.isBefore(startDate)) {
+                            setDisable(true);
+                            setStyle("-fx-background-color: #ffc0cb;");
+                        }
+                    }
+                });
+        endDatePicker.setValue(startDate.plusDays(1));
     }
 
     @FXML
@@ -131,10 +161,8 @@ public class RoomDetailsController {
         stage.show();
     }
 
-    // TODO: Add error when no room of that type is available
     /**
      * switches to PaymentMethodScene and passes customer data along.
-     * @param event
      * @throws IOException
      */
     @FXML
@@ -147,20 +175,23 @@ public class RoomDetailsController {
         System.out.println("\n---\nPassing along the following customer data: " + customer + "\n---"); // prints to console
         System.out.println(roomType);
         Room room = MongoOps.queryAvailRoomByType(roomType);
-        System.out.println(room.getClass());
-        Booking booking = new Booking();
-        booking.setCustomerId(customer.getId());
-        booking.setCheckInDate(startDate.toString());
-        booking.setCheckOutDate(endDate.toString());
-        booking.setRoomType(room.getClass().getSimpleName());
-        booking.setRoomId(room.getId());
-        booking.setTotalCost(totalCost);
-        controller.initData(customer, booking); // passes it along
-        // switch scene
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        if(room != null) {
+            System.out.println(room.getClass());
+            Booking booking = new Booking();
+            booking.setCustomerId(customer.getId());
+            booking.setCheckInDate(startDate.toString());
+            booking.setCheckOutDate(endDate.toString());
+            booking.setRoomType(room.getClass().getSimpleName());
+            booking.setRoomId(room.getId());
+            booking.setTotalCost(totalCost);
+            controller.initData(customer, booking); // passes it along
+            // switch scene
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } else
+            errorText.setText("No "+roomType+" available.");
     }
 
 

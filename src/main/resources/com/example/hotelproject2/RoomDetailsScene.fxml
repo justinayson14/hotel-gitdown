@@ -14,7 +14,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="26.0" layoutY="61.0" prefHeight="29.0" prefWidth="81.0" text="Room Type:">
+      <Label fx:id="roomTypeLabel" layoutX="26.0" layoutY="61.0" prefHeight="29.0" prefWidth="81.0" text="Room Type:">
          <font>
             <Font size="14.0" />
          </font>
@@ -34,12 +34,12 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="27.0" layoutY="297.0" text="Check-In Date:">
+      <Label fx:id="checkInLabel" layoutX="27.0" layoutY="297.0" text="Check-In Date:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="27.0" layoutY="341.0" text="Check-Out Date:">
+      <Label fx:id="checkOutLabel" layoutX="27.0" layoutY="341.0" text="Check-Out Date:">
          <font>
             <Font size="14.0" />
          </font>
@@ -84,5 +84,6 @@
             <Font size="14.0" />
          </font>
       </Label>
+      <Label fx:id="errorText" layoutX="330.0" layoutY="66.0" textFill="RED" />
    </children>
 </AnchorPane>

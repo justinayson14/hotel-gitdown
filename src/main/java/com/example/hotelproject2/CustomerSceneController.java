@@ -67,7 +67,7 @@ public class CustomerSceneController {
         // creates an instance of the scene's controller to pass customer data to
         RoomDetailsController controller = loader.getController();
         // sets the customer's name
-        String customerFullName = firstName.getText() + " " + lastName.getText();
+        String customerFullName = firstName.getText().toLowerCase() + " " + lastName.getText().toLowerCase();
         Customers customer = new Customers();
         customer.setName(customerFullName);
         // sets the customer's party count

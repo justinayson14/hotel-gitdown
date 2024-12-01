@@ -6,6 +6,7 @@ package com.example.hotelproject2;
 import com.example.hotelproject2.models.Booking;
 import com.example.hotelproject2.models.Payment;
 import com.example.hotelproject2.models.Room;
+import javafx.scene.control.TextField;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -50,5 +51,15 @@ public class ReservationController {
     public static void endReservation(String customerName) {
         String customerId = MongoOps.queryCustomerIdByName(customerName);
         MongoOps.checkOutRoom(customerId);
+    }
+
+    public boolean validateFields(TextField field) {
+        if(field.getText().isBlank()) {
+            field.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
+            return false;
+        } else {
+            field.setStyle(null);
+            return true;
+        }
     }
 }

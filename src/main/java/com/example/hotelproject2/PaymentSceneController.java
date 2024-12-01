@@ -11,7 +11,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.example.hotelproject2.models.Customers;
 
@@ -47,21 +49,12 @@ public class PaymentSceneController {
         this.booking = booking;
     }
 
-    private boolean checkIfFilled(TextField field) {
-        if(field.getText().isBlank()) {
-            field.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
-            return false;
-        } else {
-            field.setStyle(null);
-            return true;
-        }
-    }
-
     @FXML
     private void handleConfirmationButton(ActionEvent event) throws IOException {
-        boolean isAllFilled = checkIfFilled(nameText) && checkIfFilled(addressText) &&
-                checkIfFilled(zipText) && checkIfFilled(phoneText) && checkIfFilled(cardNumText) &&
-                checkIfFilled(monthExpText) && checkIfFilled(yearExpText) && checkIfFilled(cvcText);
+        ReservationController r = new ReservationController();
+        boolean isAllFilled = r.validateFields(nameText) && r.validateFields(addressText) &&
+                r.validateFields(zipText) && r.validateFields(phoneText) && r.validateFields(cardNumText) &&
+                r.validateFields(monthExpText) && r.validateFields(yearExpText) && r.validateFields(cvcText);
         if(isAllFilled) {
             switchToConfirmation(event);
         }

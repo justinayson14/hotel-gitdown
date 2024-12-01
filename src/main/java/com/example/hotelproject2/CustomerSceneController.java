@@ -46,13 +46,21 @@ public class CustomerSceneController {
         stage.show();
     }
 
+    @FXML
+    private void handleSwitch(ActionEvent event) throws IOException {
+        ReservationController r = new ReservationController();
+        boolean isAllFilled = r.validateFields(firstName) && r.validateFields(lastName);
+
+        if(isAllFilled)
+            switchToRoomDetails(event);
+    }
+
     /**
      * Switches to RoomDetailsScene when "Book Room" button is clicked
      * and passes customer data along.
      * @param event
      * @throws IOException
      */
-    @FXML
     private void switchToRoomDetails(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("RoomDetailsScene.fxml"));
         Parent root = loader.load();

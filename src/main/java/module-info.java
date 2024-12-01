@@ -6,6 +6,7 @@ module com.example.hotelproject2 {
     requires org.mongodb.driver.sync.client;
     requires org.mongodb.bson;
     requires org.mongodb.driver.core;
+    requires java.desktop;
 
 
     opens com.example.hotelproject2 to javafx.fxml;

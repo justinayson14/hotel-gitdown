@@ -1,4 +1,4 @@
 package com.example.hotelproject2;
 
-public class AdminHomeScene {
+public class AdminHomeSceneController {
 }

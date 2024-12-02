@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -36,6 +37,31 @@ public class PaymentSceneController {
     private Customers customer;
     private Booking booking;
 
+    /**
+     * Sets character limits for all TextFields on PaymentScene
+     */
+    public void initialize() {
+        setCharLimit(nameText, 50);
+        setCharLimit(addressText, 50);
+        setCharLimit(zipText,5);
+        setCharLimit(phoneText, 10);
+        setCharLimit(cardNumText,16);
+        setCharLimit(monthExpText,2);
+        setCharLimit(yearExpText,4);
+        setCharLimit(cvcText,3);
+    }
+    /**
+     * Creates a max character limit for a given TextField
+     * @param textField
+     * @param maxChar
+     */
+    private void setCharLimit(TextField textField, int maxChar) {
+        textField.textProperty().addListener((_, _, newValue) -> {
+            if (newValue.length() > maxChar) {
+                textField.setText(newValue.substring(0, maxChar));
+            }
+        });
+    }
     /**
      * This method is used to pass the customer data
      * from another controller to this controller for later use.

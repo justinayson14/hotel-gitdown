@@ -26,12 +26,26 @@ public class CustomerSceneController {
 
     /**
      * Initialize the guestAmtSpinner to retrieve values from it later
+     * Sets character limit for first name & last name
      */
     @FXML
     public void initialize() {
         guestAmtSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 99999, 1));
+        setCharLimit(firstName, 25);
+        setCharLimit(lastName, 25);
     }
-
+    /**
+     * Creates a max character limit for a given TextField
+     * @param textField
+     * @param maxChar
+     */
+    private void setCharLimit(TextField textField, int maxChar) {
+        textField.textProperty().addListener((_, _, newValue) -> {
+            if (newValue.length() > maxChar) {
+                textField.setText(newValue.substring(0, maxChar));
+            }
+        });
+    }
     /**
      * Switches to HomeScene when "Cancel" button is clicked
      * @param event

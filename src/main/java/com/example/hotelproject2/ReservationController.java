@@ -53,6 +53,11 @@ public class ReservationController {
         MongoOps.checkOutRoom(customerId);
     }
 
+    /**
+     * Checks if the TextField is not blank and if blank, highlights it red.
+     * @param field The TextField being validated
+     * @return Boolean that is false if field is blank, else true
+     */
     public boolean validateFields(TextField field) {
         if(field.getText().isBlank()) {
             field.setStyle("-fx-border-color: red; -fx-border-width: 2px;");

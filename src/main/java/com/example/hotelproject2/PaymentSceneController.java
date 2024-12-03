@@ -49,6 +49,43 @@ public class PaymentSceneController {
         setCharLimit(monthExpText,2);
         setCharLimit(yearExpText,4);
         setCharLimit(cvcText,3);
+
+        setOnlyLetters(nameText);
+
+        setOnlyNumbers(zipText);
+        setOnlyNumbers(phoneText);
+        setOnlyNumbers(cardNumText);
+        setOnlyNumbers(monthExpText);
+        setOnlyNumbers(yearExpText);
+        setOnlyNumbers(cvcText);
+    }
+
+    /**
+     * Limits user input for a given TextField to only letter characters
+     * @param textfield
+     */
+    private void setOnlyLetters(TextField textfield){
+        textfield.setTextFormatter(new javafx.scene.control.TextFormatter<>(change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("[a-zA-Z]*")) { // Allow only letters
+                return change;
+            }
+            return null; // Reject change
+        }));
+    }
+
+    /**
+     * Limits user input for a given TextField to only number characters
+     * @param textfield
+     */
+    private void setOnlyNumbers(TextField textfield){
+        textfield.setTextFormatter(new javafx.scene.control.TextFormatter<>(change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("\\d*")) { // Allow only numbers
+                return change;
+            }
+            return null; // Reject change
+        }));
     }
     /**
      * Creates a max character limit for a given TextField

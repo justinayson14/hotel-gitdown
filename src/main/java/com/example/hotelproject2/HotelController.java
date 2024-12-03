@@ -18,27 +18,39 @@ public class HotelController {
      * @param roomType Type of room to create
      * @param roomNum The room number of room being created
      */
-    public void createRoom (String roomType, int roomNum) {
+    public Room createRoom (String roomType, int roomNum) {
         Room room;
-        switch (roomType) {
-            case "Standard":
-                room = new StandardRoom();
-                break;
-            case "Deluxe":
-                room = new DeluxeRoom();
-                break;
-            case "Presidential":
-                room = new PresRoom();
-                break;
-            default:
-                room = null;
-                System.out.println("INVALID Room type!!!");
-                System.exit(1);
+
+        if(roomType.equals("Deluxe")) {
+            System.out.println("Created Deluxe room");
+            room = new DeluxeRoom();
+        }
+        else if(roomType.equals("Presidential")) {
+            System.out.println("Created Presidential room");
+            room = new PresRoom();
+        }
+        else if(roomType.equals("Standard")) {
+            System.out.println("Created Standard room");
+            room = new StandardRoom();
+        }
+        else {
+            System.out.println("Invalid input!");
+            return null;
         }
 
-        // insert new room to database
-        MongoOps.insertSingle(room);
+        room.setRoomNum(roomNum);
+        return room;
     }
 
+    public String recRoomBySize(int groupSize) {
+        if(groupSize <= 2 && groupSize > 0)
+            return "The recommended room is a Standard Room";
+        else if(groupSize <= 4 && groupSize > 2)
+            return "The recommended room is a Deluxe Room";
+        else if(groupSize <= 6 && groupSize > 4)
+            return "The recommended room is a Presidential Room";
+        else
+            return "Please separate your group into separate rooms";
+    }
 
 }

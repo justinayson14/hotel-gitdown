@@ -37,12 +37,6 @@ public class RoomDetailsController {
     private Label totalCostText;
     @FXML
     private Label errorText;
-    @FXML
-    private Label roomTypeLabel;
-    @FXML
-    private Label checkInLabel;
-    @FXML
-    private Label checkOutLabel;
 
     private final String[] roomTypes = {"Standard", "Deluxe", "Presidential"};
     private Customers customer;

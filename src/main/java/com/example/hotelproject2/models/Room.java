@@ -8,6 +8,7 @@ import java.util.UUID;
  * Outline of a room in Hotel GitDown
  */
 public interface Room {
+
      String getId();
      void setId(String id);
 

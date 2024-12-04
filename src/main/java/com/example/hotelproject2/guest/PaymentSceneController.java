@@ -1,4 +1,4 @@
-package com.example.hotelproject2;
+package com.example.hotelproject2.guest;
 
 import com.example.hotelproject2.models.Booking;
 import com.example.hotelproject2.models.Payment;
@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 

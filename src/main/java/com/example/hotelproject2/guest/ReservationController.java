@@ -1,10 +1,10 @@
 /**
  * BEING REMOVED
  */
-package com.example.hotelproject2;
+package com.example.hotelproject2.guest;
 
+import com.example.hotelproject2.MongoOps;
 import com.example.hotelproject2.models.Booking;
-import com.example.hotelproject2.models.Payment;
 import com.example.hotelproject2.models.Room;
 import javafx.scene.control.TextField;
 

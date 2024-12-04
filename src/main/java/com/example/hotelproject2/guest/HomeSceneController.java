@@ -1,4 +1,4 @@
-package com.example.hotelproject2;
+package com.example.hotelproject2.guest;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

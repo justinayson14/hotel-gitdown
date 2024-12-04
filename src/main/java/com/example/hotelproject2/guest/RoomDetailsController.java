@@ -1,4 +1,5 @@
-package com.example.hotelproject2;
+package com.example.hotelproject2.guest;
+import com.example.hotelproject2.MongoOps;
 import com.example.hotelproject2.models.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -67,6 +68,7 @@ public class RoomDetailsController {
     public void initialize() {
         roomTypeChoiceBox.getItems().addAll(roomTypes);
         roomTypeChoiceBox.setValue("Standard");
+        getRoomType(null);
         roomTypeChoiceBox.setOnAction(this::getRoomType);
         LocalDate minDate = LocalDate.now();
         startDatePicker.setDayCellFactory(d ->
@@ -80,7 +82,8 @@ public class RoomDetailsController {
                     }
                 });
         startDatePicker.setValue(minDate);
-        endDatePicker.setValue(minDate.plusDays(1));
+        getStartDate(null);
+        calculateTotalCost(null);
     }
 
     @FXML
@@ -112,11 +115,10 @@ public class RoomDetailsController {
     }
 
     /**
-     *
-     * @param event
      * This method triggers in even where the user clicks on a option on the Choice Box
      * This will generate the Room Description, Number of beds and baths based on
      * the user's choice.
+     * @param event
      */
     private void getRoomType(ActionEvent event) {
         roomType = roomTypeChoiceBox.getValue();

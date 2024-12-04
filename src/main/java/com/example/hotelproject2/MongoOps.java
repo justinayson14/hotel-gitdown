@@ -3,10 +3,7 @@ package com.example.hotelproject2;
 import com.example.hotelproject2.models.*;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import org.bson.Document;
@@ -14,7 +11,7 @@ import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
@@ -90,7 +87,7 @@ public class MongoOps {
     public static void checkInRoom (String roomType, String roomId) {
         MongoCollection<Document> rooms = db.getCollection(roomType);
         rooms.updateOne(
-                Filters.eq("_id", roomId),
+                eq("_id", roomId),
                 Updates.set("occupied", true)
         );
     }
@@ -131,9 +128,30 @@ public class MongoOps {
 
         MongoCollection<Document> rooms = db.getCollection(roomType);
         rooms.updateOne(
-                Filters.eq("_id", roomId),
+                eq("_id", roomId),
                 Updates.set("occupied", false)
         );
         return Integer.toString(queryRoomNumById(roomId, roomType));
+    }
+
+    public static List<Room> queryAllRoomsByType(String roomType) {
+        switch(roomType) {
+            case "Standard" -> {
+                MongoCollection<StandardRoom> standard = db.getCollection("StandardRoom", StandardRoom.class);
+                return standard.find().into(new ArrayList<>());
+            }
+            case "Deluxe" -> {
+                MongoCollection<DeluxeRoom> deluxe = db.getCollection("DeluxeRoom", DeluxeRoom.class);
+                return deluxe.find().into(new ArrayList<>());
+            }
+            case "Presidential" -> {
+                MongoCollection<PresRoom> presRoom = db.getCollection("PresRoom", PresRoom.class);
+                return presRoom.find().into(new ArrayList<>());
+            }
+            default -> {
+                System.out.println("Invalid input!");
+                return null;
+            }
+        }
     }
 }

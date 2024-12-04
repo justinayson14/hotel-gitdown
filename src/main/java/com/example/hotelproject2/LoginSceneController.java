@@ -55,7 +55,7 @@ public class LoginSceneController {
     }
 
     @FXML
-    private void switchToLoginScene(ActionEvent event) throws IOException {
+    public void switchToLoginScene(ActionEvent event) throws IOException {
         loader = new FXMLLoader(getClass().getResource("LoginScene.fxml"));
         root = loader.load();
         LoginSceneController controller = loader.getController();

@@ -1,4 +1,5 @@
-package com.example.hotelproject2;
+package com.example.hotelproject2.guest;
+import com.example.hotelproject2.MongoOps;
 import com.example.hotelproject2.models.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -36,12 +38,6 @@ public class RoomDetailsController {
     private Label totalCostText;
     @FXML
     private Label errorText;
-    @FXML
-    private Label roomTypeLabel;
-    @FXML
-    private Label checkInLabel;
-    @FXML
-    private Label checkOutLabel;
 
     private final String[] roomTypes = {"Standard", "Deluxe", "Presidential"};
     private Customers customer;
@@ -67,6 +63,7 @@ public class RoomDetailsController {
     public void initialize() {
         roomTypeChoiceBox.getItems().addAll(roomTypes);
         roomTypeChoiceBox.setValue("Standard");
+        getRoomType(null);
         roomTypeChoiceBox.setOnAction(this::getRoomType);
         LocalDate minDate = LocalDate.now();
         startDatePicker.setDayCellFactory(d ->
@@ -80,7 +77,8 @@ public class RoomDetailsController {
                     }
                 });
         startDatePicker.setValue(minDate);
-        endDatePicker.setValue(minDate.plusDays(1));
+        getStartDate(null);
+        calculateTotalCost(null);
     }
 
     @FXML
@@ -101,22 +99,22 @@ public class RoomDetailsController {
 
     @FXML
     private void calculateTotalCost(ActionEvent event) {
+        DecimalFormat df = new DecimalFormat("0.00");
         endDate = endDatePicker.getValue();
         long diffInDays = ChronoUnit.DAYS.between(startDate, endDate);
         if (diffInDays <= 0 && startDatePicker != null)
             totalCostText.setText("Please pick end date after start date...");
         else {
             totalCost = diffInDays*roomCost;
-            totalCostText.setText("$"+totalCost);
+            totalCostText.setText("$"+df.format(totalCost));
         }
     }
 
     /**
-     *
-     * @param event
      * This method triggers in even where the user clicks on a option on the Choice Box
      * This will generate the Room Description, Number of beds and baths based on
      * the user's choice.
+     * @param event
      */
     private void getRoomType(ActionEvent event) {
         roomType = roomTypeChoiceBox.getValue();
@@ -178,9 +176,11 @@ public class RoomDetailsController {
         if(room != null) {
             System.out.println(room.getClass());
             Booking booking = new Booking();
+            booking.setCustomerName(customer.getName());
             booking.setCustomerId(customer.getId());
             booking.setCheckInDate(startDate.toString());
             booking.setCheckOutDate(endDate.toString());
+            booking.setRoomNum(room.getRoomNum());
             booking.setRoomType(room.getClass().getSimpleName());
             booking.setRoomId(room.getId());
             booking.setTotalCost(totalCost);

@@ -1,5 +1,6 @@
-package com.example.hotelproject2;
+package com.example.hotelproject2.guest;
 
+import com.example.hotelproject2.MongoOps;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

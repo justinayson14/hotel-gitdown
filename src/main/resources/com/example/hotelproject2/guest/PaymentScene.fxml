@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="361.0" prefWidth="600.0" style="-fx-background-color: #87CEEB;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelproject2.PaymentSceneController">
+<AnchorPane prefHeight="361.0" prefWidth="600.0" style="-fx-background-color: #87CEEB;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelproject2.guest.PaymentSceneController">
    <children>
       <Text layoutX="250.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment">
          <font>
@@ -38,19 +38,19 @@
          <font>
             <Font size="14.0" />
          </font></Text>
-      <TextField fx:id="nameText" alignment="CENTER" layoutX="116.0" layoutY="79.0" promptText="e.g. John Smith" />
-      <TextField fx:id="addressText" alignment="CENTER" layoutX="116.0" layoutY="112.0" promptText="e.g. 1234 Main Street" />
+      <TextField fx:id="nameText" alignment="CENTER" layoutX="116.0" layoutY="79.0" onAction="#handleSwitch" promptText="e.g. John Smith" />
+      <TextField fx:id="addressText" alignment="CENTER" layoutX="116.0" layoutY="112.0" onAction="#handleSwitch" promptText="e.g. 1234 Main Street" />
       <Label layoutX="345.0" layoutY="116.0" text="ZIP Code">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField fx:id="zipText" layoutX="411.0" layoutY="112.0" prefHeight="25.0" prefWidth="72.0" promptText="e.g. 98765" />
-      <TextField fx:id="phoneText" alignment="CENTER" layoutX="116.0" layoutY="150.0" promptText="e.g. 8189876543" />
-      <TextField fx:id="cardNumText" alignment="CENTER" layoutX="116.0" layoutY="184.0" promptText="XXXXXXXXXXXXXXXX" />
-      <TextField fx:id="monthExpText" alignment="CENTER" layoutX="116.0" layoutY="221.0" prefHeight="25.0" prefWidth="43.0" promptText="MM" />
-      <TextField fx:id="yearExpText" alignment="CENTER" layoutX="178.0" layoutY="221.0" prefHeight="26.0" prefWidth="49.0" promptText="YYYY" />
-      <TextField fx:id="cvcText" alignment="CENTER" layoutX="116.0" layoutY="264.0" prefHeight="25.0" prefWidth="48.0" promptText="XXX" />
-      <Button layoutX="27.0" layoutY="309.0" mnemonicParsing="false" onAction="#switchToRoomDetails" text="Change Room" />
+      <TextField fx:id="phoneText" alignment="CENTER" layoutX="116.0" layoutY="150.0" onAction="#handleSwitch" promptText="e.g. 8189876543" />
+      <TextField fx:id="cardNumText" alignment="CENTER" layoutX="116.0" layoutY="184.0" onAction="#handleSwitch" promptText="XXXXXXXXXXXXXXXX" />
+      <TextField fx:id="monthExpText" alignment="CENTER" layoutX="116.0" layoutY="221.0" onAction="#handleSwitch" prefHeight="25.0" prefWidth="43.0" promptText="MM" />
+      <TextField fx:id="yearExpText" alignment="CENTER" layoutX="178.0" layoutY="221.0" onAction="#handleSwitch" prefHeight="26.0" prefWidth="49.0" promptText="YYYY" />
+      <TextField fx:id="cvcText" alignment="CENTER" layoutX="116.0" layoutY="264.0" onAction="#handleSwitch" prefHeight="25.0" prefWidth="48.0" promptText="XXX" />
+      <TextField fx:id="zipText" layoutX="411.0" layoutY="112.0" onAction="#handleSwitch" prefHeight="26.0" prefWidth="87.0" promptText="e.g. 98765" />
       <Button layoutX="472.0" layoutY="309.0" mnemonicParsing="false" onAction="#handleSwitch" text="Pay for Room" />
+      <Button layoutX="27.0" layoutY="309.0" mnemonicParsing="false" onAction="#switchToRoomDetails" text="Change Room" />
    </children>
 </AnchorPane>

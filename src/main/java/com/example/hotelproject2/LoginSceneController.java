@@ -1,5 +1,7 @@
 package com.example.hotelproject2;
 
+import com.example.hotelproject2.admin.AdminHomeSceneController;
+import com.example.hotelproject2.guest.HomeSceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +35,7 @@ public class LoginSceneController {
 
     @FXML
     private void switchToHomeScene(ActionEvent event) throws IOException {
-        loader = new FXMLLoader(getClass().getResource("HomeScene.fxml"));
+        loader = new FXMLLoader(getClass().getResource("guest/HomeScene.fxml"));
         root = loader.load();
         HomeSceneController controller = loader.getController();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -43,7 +45,7 @@ public class LoginSceneController {
     }
 
     private void switchToAdminHomeScene(ActionEvent event) throws IOException {
-        loader = new FXMLLoader(getClass().getResource("AdminHomeScene.fxml"));
+        loader = new FXMLLoader(getClass().getResource("admin/AdminHomeScene.fxml"));
         root = loader.load();
         AdminHomeSceneController controller = loader.getController();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -53,7 +55,7 @@ public class LoginSceneController {
     }
 
     @FXML
-    private void switchToLoginScene(ActionEvent event) throws IOException {
+    public void switchToLoginScene(ActionEvent event) throws IOException {
         loader = new FXMLLoader(getClass().getResource("LoginScene.fxml"));
         root = loader.load();
         LoginSceneController controller = loader.getController();
@@ -65,7 +67,7 @@ public class LoginSceneController {
 
     @FXML
     private void switchToAdminLoginScene(ActionEvent event) throws IOException {
-        loader = new FXMLLoader(getClass().getResource("AdminLoginScene.fxml"));
+        loader = new FXMLLoader(getClass().getResource("admin/AdminLoginScene.fxml"));
         root = loader.load();
         LoginSceneController controller = loader.getController();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

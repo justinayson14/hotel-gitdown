@@ -3,18 +3,15 @@ package com.example.hotelproject2;
 import com.example.hotelproject2.models.*;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
+import com.mongodb.client.*;
+import com.mongodb.client.model.Projections;
 import com.mongodb.client.model.Updates;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
@@ -41,6 +38,7 @@ public class MongoOps {
     /**
      * Takes in any type of Array List of objects and
      * inserts those objects into a collection named by its Class type in the MongoDB database
+     *
      * @param list List of items to insert to database
      */
     public static <T> void insertMultiple(ArrayList<T> list) {
@@ -50,6 +48,7 @@ public class MongoOps {
 
     /**
      * Inserts an object of any type into a collection named by its Class type in the MongoDB database.
+     *
      * @param item Item to insert to database
      */
     public static <T> void insertSingle(T item) {
@@ -60,6 +59,7 @@ public class MongoOps {
     /**
      * Gets the type of room and searches through the collection named by the room type and returns the first Room object
      * in that collection that is not occupied.
+     *
      * @param roomType Type of room to query
      * @return Room object that is not occupied
      */
@@ -84,26 +84,28 @@ public class MongoOps {
     /**
      * Gets the room type and room ID and searches through the collection by its room type using the room id
      * and changes the value of occupied field to true
+     *
      * @param roomType For identifying the which room collection to search
-     * @param roomId For identifying which room by id
+     * @param roomId   For identifying which room by id
      */
-    public static void checkInRoom (String roomType, String roomId) {
+    public static void checkInRoom(String roomType, String roomId) {
         MongoCollection<Document> rooms = db.getCollection(roomType);
         rooms.updateOne(
-                Filters.eq("_id", roomId),
+                eq("_id", roomId),
                 Updates.set("occupied", true)
         );
     }
 
     /**
      * Gets customer name and searches through Customers collection by the customer name and returns the customer id
+     *
      * @param name The name of the customer
      * @return String name of customer
      */
-    public static String queryCustomerIdByName (String name) {
+    public static String queryCustomerIdByName(String name) {
         MongoCollection<Customers> collection = db.getCollection("Customers", Customers.class);
         Customers customer = collection.find(eq("name", name)).first();
-        if(customer == null)
+        if (customer == null)
             return null;
         return customer.getId();
     }
@@ -119,21 +121,51 @@ public class MongoOps {
      * Gets the customer id and searches for their booking in Bookings collection to get their reserved room id
      * and room type which is used to search through respective room collection to change occupied field of that room
      * from true to false.
+     *
      * @param customerId To find which booking is associated to customer ID
      */
-    public static String checkOutRoom (String customerId) {
+    public static String checkOutRoom(String customerId) {
         MongoCollection<Booking> bookings = db.getCollection("Booking", Booking.class);
         Booking selBooking = bookings.find(eq("customerId", customerId)).first();
-        if(selBooking == null)
+        if (selBooking == null)
             return null;
         String roomId = selBooking.getRoomId();
         String roomType = selBooking.getRoomType();
 
         MongoCollection<Document> rooms = db.getCollection(roomType);
         rooms.updateOne(
-                Filters.eq("_id", roomId),
+                eq("_id", roomId),
                 Updates.set("occupied", false)
         );
         return Integer.toString(queryRoomNumById(roomId, roomType));
+    }
+
+    public static <T> List<T> queryAllByType(String type) {
+        switch (type) {
+            case "Standard" -> {
+                MongoCollection<StandardRoom> standard = db.getCollection("StandardRoom", StandardRoom.class);
+                return (List<T>) standard.find().into(new ArrayList<>());
+            }
+            case "Deluxe" -> {
+                MongoCollection<DeluxeRoom> deluxe = db.getCollection("DeluxeRoom", DeluxeRoom.class);
+                return (List<T>) deluxe.find().into(new ArrayList<>());
+            }
+            case "Presidential" -> {
+                MongoCollection<PresRoom> presRoom = db.getCollection("PresRoom", PresRoom.class);
+                return (List<T>) presRoom.find().into(new ArrayList<>());
+            }
+            case "Customers" -> {
+                MongoCollection<Customers> customers = db.getCollection("Customers", Customers.class);
+                return (List<T>) customers.find().into(new ArrayList<>());
+            }
+            case "Bookings" -> {
+                MongoCollection<Booking> bookings = db.getCollection("Booking", Booking.class);
+                return (List<T>) bookings.find().projection(Projections.exclude("payment", "customerId", "roomId")).into(new ArrayList<>());
+            }
+            default -> {
+                System.out.println("Invalid input!");
+                return null;
+            }
+        }
     }
 }

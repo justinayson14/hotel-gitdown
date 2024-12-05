@@ -1,7 +1,6 @@
-package com.example.hotelproject2;
+package com.example.hotelproject2.guest;
 
 import java.io.IOException;
-import java.util.ResourceBundle;
 
 import com.example.hotelproject2.models.Customers;
 

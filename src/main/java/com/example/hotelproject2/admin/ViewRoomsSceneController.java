@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
-public class AdminRoomsSceneController {
+public class ViewRoomsSceneController {
 
     private FXMLLoader loader;
     private Parent root;
@@ -47,7 +47,6 @@ public class AdminRoomsSceneController {
     @FXML
     public void initialize() {
         rooms = MongoOps.queryAllByType("Standard");
-        assert rooms != null;
         ObservableList<Room> obList = FXCollections.observableArrayList(rooms);
         roomIdCol.setCellValueFactory(new PropertyValueFactory<Room, String>("id"));
         roomNumCol.setCellValueFactory(new PropertyValueFactory<Room, Integer>("roomNum"));

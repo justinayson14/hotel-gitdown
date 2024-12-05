@@ -10,12 +10,14 @@ import java.util.UUID;
 public class Booking {
     @BsonProperty(value = "_id")
     private String id = UUID.randomUUID().toString();
+    private String customerName;
     private String customerId;
-    private Payment payment;
+    private int roomNum;
     private String roomId;
     private String roomType;
     private String checkInDate;
     private String checkOutDate;
+    private Payment payment;
     private Double totalCost;
 
     public Booking () {}
@@ -27,6 +29,13 @@ public class Booking {
         this.id = id;
     }
 
+    public String getCustomerName() {
+        return customerName;
+    }
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
     public String getCustomerId() {
         return customerId;
     }
@@ -34,9 +43,18 @@ public class Booking {
         this.customerId = customerId;
     }
 
-    public Payment getPayment() { return payment; }
+    public Payment getPayment() {
+        return payment;
+    }
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+
+    public int getRoomNum() {
+        return roomNum;
+    }
+    public void setRoomNum(int roomNum) {
+        this.roomNum = roomNum;
     }
 
     public void setRoomId(String roomId) {

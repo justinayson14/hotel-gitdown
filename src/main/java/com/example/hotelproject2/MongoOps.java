@@ -4,6 +4,7 @@ import com.example.hotelproject2.models.*;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.*;
+import com.mongodb.client.model.Projections;
 import com.mongodb.client.model.Updates;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -159,7 +160,7 @@ public class MongoOps {
             }
             case "Bookings" -> {
                 MongoCollection<Booking> bookings = db.getCollection("Booking", Booking.class);
-                return (List<T>) bookings.find().into(new ArrayList<>());
+                return (List<T>) bookings.find().projection(Projections.exclude("payment", "customerId", "roomId")).into(new ArrayList<>());
             }
             default -> {
                 System.out.println("Invalid input!");

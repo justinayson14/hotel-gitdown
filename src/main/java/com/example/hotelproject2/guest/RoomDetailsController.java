@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -98,13 +99,14 @@ public class RoomDetailsController {
 
     @FXML
     private void calculateTotalCost(ActionEvent event) {
+        DecimalFormat df = new DecimalFormat("0.00");
         endDate = endDatePicker.getValue();
         long diffInDays = ChronoUnit.DAYS.between(startDate, endDate);
         if (diffInDays <= 0 && startDatePicker != null)
             totalCostText.setText("Please pick end date after start date...");
         else {
             totalCost = diffInDays*roomCost;
-            totalCostText.setText("$"+totalCost);
+            totalCostText.setText("$"+df.format(totalCost));
         }
     }
 
@@ -174,9 +176,11 @@ public class RoomDetailsController {
         if(room != null) {
             System.out.println(room.getClass());
             Booking booking = new Booking();
+            booking.setCustomerName(customer.getName());
             booking.setCustomerId(customer.getId());
             booking.setCheckInDate(startDate.toString());
             booking.setCheckOutDate(endDate.toString());
+            booking.setRoomNum(room.getRoomNum());
             booking.setRoomType(room.getClass().getSimpleName());
             booking.setRoomId(room.getId());
             booking.setTotalCost(totalCost);

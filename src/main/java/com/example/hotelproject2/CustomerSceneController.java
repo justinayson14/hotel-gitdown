@@ -44,7 +44,7 @@ public class CustomerSceneController {
     private void setOnlyLetters(TextField textfield){
         textfield.setTextFormatter(new javafx.scene.control.TextFormatter<>(change -> {
             String newText = change.getControlNewText();
-            if (newText.matches("[a-zA-Z]*")) { // Allow only letters
+            if (newText.matches("[a-zA-Z ]*")) { // Allow only letters
                 return change;
             }
             return null; // Reject change

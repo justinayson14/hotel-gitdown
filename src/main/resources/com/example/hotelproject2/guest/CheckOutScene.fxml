@@ -20,8 +20,8 @@
          </font>
       </Label>
       <TextField fx:id="lastNameText" layoutX="76.0" layoutY="164.0" prefHeight="25.0" prefWidth="171.0" promptText="Last Name" />
-      <Button layoutX="20.0" layoutY="267.0" mnemonicParsing="false" onAction="#switchToHomeScene" text="Back" />
       <Button layoutX="234.0" layoutY="267.0" mnemonicParsing="false" onAction="#handleSwitch" text="Check-Out" />
+      <Button layoutX="20.0" layoutY="267.0" mnemonicParsing="false" onAction="#switchToHomeScene" text="Back" />
       <Label fx:id="errorText" alignment="CENTER" layoutX="94.0" layoutY="216.0" textAlignment="CENTER" textFill="#ff3b3b" wrapText="true">
          <font>
             <Font size="14.0" />

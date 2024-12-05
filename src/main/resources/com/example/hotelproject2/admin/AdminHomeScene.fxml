@@ -17,13 +17,13 @@
   </rowConstraints>
    <children>
       <Button mnemonicParsing="false" onAction="#switchToViewRooms" prefHeight="50.0" text="View Rooms" GridPane.halignment="CENTER" />
+      <Button mnemonicParsing="false" onAction="#switchToViewCustomer" prefHeight="50.0" text="View Customers" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Button mnemonicParsing="false" onAction="#switchToViewBookings" prefHeight="50.0" text="View Bookings" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
       <Button mnemonicParsing="false" onAction="#switchToLogin" text="Go Back" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" onAction="#switchToViewCustomer" prefHeight="50.0" text="View Customers" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <Button mnemonicParsing="false" onAction="#switchToViewBookings" prefHeight="50.0" text="View Bookings" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

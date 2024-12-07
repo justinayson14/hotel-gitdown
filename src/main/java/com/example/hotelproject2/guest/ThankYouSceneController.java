@@ -29,7 +29,7 @@ public class ThankYouSceneController {
      * @throws IOException
      */
     public void switchToHome(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("HomeScene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GuestHomeScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

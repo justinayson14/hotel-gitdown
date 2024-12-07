@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HomeSceneController {
+public class GuestHomeSceneController {
     private Stage stage;
     private Scene scene;
     private Parent root;

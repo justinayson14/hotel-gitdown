@@ -1,7 +1,7 @@
 package com.example.hotelproject2;
 
 import com.example.hotelproject2.admin.AdminHomeSceneController;
-import com.example.hotelproject2.guest.HomeSceneController;
+import com.example.hotelproject2.guest.GuestHomeSceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,9 +35,9 @@ public class LoginSceneController {
 
     @FXML
     private void switchToHomeScene(ActionEvent event) throws IOException {
-        loader = new FXMLLoader(getClass().getResource("guest/HomeScene.fxml"));
+        loader = new FXMLLoader(getClass().getResource("guest/GuestHomeScene.fxml"));
         root = loader.load();
-        HomeSceneController controller = loader.getController();
+        GuestHomeSceneController controller = loader.getController();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

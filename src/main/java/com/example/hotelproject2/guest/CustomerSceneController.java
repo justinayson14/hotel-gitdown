@@ -69,7 +69,7 @@ public class CustomerSceneController {
      */
     @FXML
     private void switchToHome(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("HomeScene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GuestHomeScene.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

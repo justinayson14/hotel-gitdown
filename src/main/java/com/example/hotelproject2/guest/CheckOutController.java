@@ -35,7 +35,7 @@ public class CheckOutController {
      */
     @FXML
     private void switchToHomeScene(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("HomeScene.fxml"));
+        root = FXMLLoader.load(getClass().getResource("GuestHomeScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

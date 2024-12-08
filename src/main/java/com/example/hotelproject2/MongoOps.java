@@ -160,12 +160,45 @@ public class MongoOps {
             }
             case "Bookings" -> {
                 MongoCollection<Booking> bookings = db.getCollection("Booking", Booking.class);
-                return (List<T>) bookings.find().projection(Projections.exclude("payment", "customerId", "roomId")).into(new ArrayList<>());
+                return (List<T>) bookings.find().into(new ArrayList<>());
             }
             default -> {
                 System.out.println("Invalid input!");
                 return null;
             }
         }
+    }
+
+    public static boolean checkRoomNum(int roomNum) {
+        boolean doesExist = false;
+        if(db.getCollection("StandardRoom").countDocuments(eq("roomNum", roomNum)) > 0)
+            doesExist = true;
+        if(db.getCollection("DeluxeRoom").countDocuments(eq("roomNum", roomNum)) > 0)
+            doesExist = true;
+        if(db.getCollection("PresRoom").countDocuments(eq("roomNum", roomNum)) > 0)
+            doesExist = true;
+
+        return !doesExist;
+    }
+
+    public static void removeRoomByNum(Room room) {
+        if(room != null)
+            db.getCollection(room.getClass().getSimpleName()).deleteOne(eq("_id", room.getId()));
+        else
+            System.out.println("Please select a room to delete...");
+    }
+
+    public static void removeCustomer(Customers customer) {
+        if(customer != null)
+            db.getCollection("Customers").deleteOne(eq("_id", customer.getId()));
+        else
+            System.out.println("Please select a customer to delete...");
+    }
+
+    public static void removeBooking(Booking booking) {
+        if(booking != null)
+            db.getCollection("Booking").deleteOne(eq("_id", booking.getId()));
+        else
+            System.out.println("Please select a booking to delete...");
     }
 }

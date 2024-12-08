@@ -1,5 +1,6 @@
 package com.example.hotelproject2.guest;
 
+import com.example.hotelproject2.HotelController;
 import com.example.hotelproject2.MongoOps;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,7 +27,6 @@ public class CheckOutController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private final ReservationController r = new ReservationController();
 
     /**
      * Switches to HomeScene when "Back" button is clicked.
@@ -44,7 +44,8 @@ public class CheckOutController {
 
     @FXML
     private void handleSwitch(ActionEvent event) throws IOException {
-        boolean isAllFilled = r.validateFields(firstNameText) && r.validateFields(lastNameText);
+        HotelController r = new HotelController();
+        boolean isAllFilled = r.validateField(firstNameText) && r.validateField(lastNameText);
         if(isAllFilled)
             switchToCheckOutConfirm(event);
     }

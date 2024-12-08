@@ -1,5 +1,6 @@
 package com.example.hotelproject2.guest;
 
+import com.example.hotelproject2.HotelController;
 import com.example.hotelproject2.models.Booking;
 import com.example.hotelproject2.models.Payment;
 import javafx.event.ActionEvent;
@@ -111,10 +112,10 @@ public class PaymentSceneController {
 
     @FXML
     private void handleSwitch(ActionEvent event) throws IOException {
-        ReservationController r = new ReservationController();
-        boolean isAllFilled = r.validateFields(nameText) && r.validateFields(addressText) &&
-                r.validateFields(zipText) && r.validateFields(phoneText) && r.validateFields(cardNumText) &&
-                r.validateFields(monthExpText) && r.validateFields(yearExpText) && r.validateFields(cvcText);
+        HotelController r = new HotelController();
+        boolean isAllFilled = r.validateField(nameText) && r.validateField(addressText) &&
+                r.validateField(zipText) && r.validateField(phoneText) && r.validateField(cardNumText) &&
+                r.validateField(monthExpText) && r.validateField(yearExpText) && r.validateField(cvcText);
         if(isAllFilled) {
             switchToConfirmation(event);
         }

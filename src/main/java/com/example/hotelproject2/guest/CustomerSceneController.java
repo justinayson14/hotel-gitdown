@@ -2,6 +2,7 @@ package com.example.hotelproject2.guest;
 
 import java.io.IOException;
 
+import com.example.hotelproject2.HotelController;
 import com.example.hotelproject2.models.Customers;
 
 import javafx.event.ActionEvent;
@@ -78,9 +79,8 @@ public class CustomerSceneController {
 
     @FXML
     private void handleSwitch(ActionEvent event) throws IOException {
-        ReservationController r = new ReservationController();
-        boolean isAllFilled = r.validateFields(firstName) && r.validateFields(lastName);
-
+        HotelController r = new HotelController();
+        boolean isAllFilled = r.validateField(firstName) && r.validateField(lastName);
         if(isAllFilled)
             switchToRoomDetails(event);
     }
@@ -94,21 +94,13 @@ public class CustomerSceneController {
     private void switchToRoomDetails(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("RoomDetailsScene.fxml"));
         Parent root = loader.load();
-        // creates an instance of the scene's controller to pass customer data to
         RoomDetailsController controller = loader.getController();
-        // sets the customer's name
         String customerFullName = firstName.getText().toLowerCase() + " " + lastName.getText().toLowerCase();
         Customers customer = new Customers();
         customer.setName(customerFullName);
-        // sets the customer's party count
         int customerGuestAmt = guestAmtSpinner.getValue();
         customer.setPartyCount(customerGuestAmt);
-        
-        // prints the customer data to console and passes it along
-        System.out.println("\n---\nPassing along the following customer data: " + customer + "\n---"); // prints to console
-        controller.getCustomer(customer); // passes it along
-
-        // switch scene
+        controller.getCustomer(customer);
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

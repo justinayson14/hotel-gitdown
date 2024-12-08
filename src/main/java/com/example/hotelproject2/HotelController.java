@@ -8,6 +8,7 @@ import com.example.hotelproject2.models.DeluxeRoom;
 import com.example.hotelproject2.models.PresRoom;
 import com.example.hotelproject2.models.Room;
 import com.example.hotelproject2.models.StandardRoom;
+import javafx.scene.control.TextField;
 
 /**
  * Holds the methods used for hotel management such as room creation and room deletion
@@ -53,4 +54,18 @@ public class HotelController {
             return "Please separate your group into separate rooms";
     }
 
+    /**
+     * Checks if the TextField is not blank and if blank, highlights it red.
+     * @param field The TextField being validated
+     * @return Boolean that is false if field is blank, else true
+     */
+    public boolean validateField(TextField field) {
+        if(field.getText().isBlank()) {
+            field.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
+            return false;
+        } else {
+            field.setStyle(null);
+            return true;
+        }
+    }
 }

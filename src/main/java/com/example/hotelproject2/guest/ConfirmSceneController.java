@@ -2,6 +2,7 @@ package com.example.hotelproject2.guest;
 
 import com.example.hotelproject2.MongoOps;
 import com.example.hotelproject2.models.Booking;
+import com.example.hotelproject2.models.DeluxeRoom;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import com.example.hotelproject2.models.Customers;
 
@@ -44,12 +46,13 @@ public class ConfirmSceneController {
     }
 
     public void displayInfo() {
+        DecimalFormat df = new DecimalFormat("0.00");
         custNameText.setText(customer.getName());
         roomChoiceText.setText(booking.getRoomType());
         startDateText.setText(booking.getCheckInDate());
         endDateText.setText(booking.getCheckOutDate());
         phoneText.setText(booking.getPayment().getPhoneNum());
-        totalText.setText(booking.getTotalCost().toString());
+        totalText.setText(df.format(booking.getTotalCost()));
     }
 
     @FXML

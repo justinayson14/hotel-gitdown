@@ -2,6 +2,8 @@ package com.example.hotelproject2.guest;
 import com.example.hotelproject2.MongoOps;
 import com.example.hotelproject2.models.*;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -63,20 +65,20 @@ public class RoomDetailsController {
     public void initialize() {
         roomTypeChoiceBox.getItems().addAll(roomTypes);
         roomTypeChoiceBox.setValue("Standard");
-        getRoomType(null);
         roomTypeChoiceBox.setOnAction(this::getRoomType);
         LocalDate minDate = LocalDate.now();
         startDatePicker.setDayCellFactory(d ->
                 new DateCell() {
                     public void updateItem(LocalDate item, boolean empty) {
                         super.updateItem(item, empty);
-                        if(item.isBefore(minDate)) {
+                        if(item.isBefore(minDate.minusDays(1))) {
                             setDisable(true);
                             setStyle("-fx-background-color: #ffc0cb;");
                         }
                     }
                 });
         startDatePicker.setValue(minDate);
+        getRoomType(null);
         getStartDate(null);
         calculateTotalCost(null);
     }
@@ -95,6 +97,7 @@ public class RoomDetailsController {
                     }
                 });
         endDatePicker.setValue(startDate.plusDays(1));
+        calculateTotalCost(event);
     }
 
     @FXML
@@ -102,12 +105,8 @@ public class RoomDetailsController {
         DecimalFormat df = new DecimalFormat("0.00");
         endDate = endDatePicker.getValue();
         long diffInDays = ChronoUnit.DAYS.between(startDate, endDate);
-        if (diffInDays <= 0 && startDatePicker != null)
-            totalCostText.setText("Please pick end date after start date...");
-        else {
-            totalCost = diffInDays*roomCost;
-            totalCostText.setText("$"+df.format(totalCost));
-        }
+        totalCost = diffInDays*roomCost;
+        totalCostText.setText("$"+df.format(totalCost));
     }
 
     /**
@@ -118,29 +117,32 @@ public class RoomDetailsController {
      */
     private void getRoomType(ActionEvent event) {
         roomType = roomTypeChoiceBox.getValue();
+        DecimalFormat df = new DecimalFormat("0.00");
         switch (roomType) {
             case "Standard" -> {
                 roomDescText.setText(StandardRoom.getDesc());
                 bedNumText.setText(Integer.toString(StandardRoom.getNumBeds()));
                 bathNumText.setText(Integer.toString(StandardRoom.getNumBaths()));
-                roomCostText.setText("$"+StandardRoom.getPrice());
+                roomCostText.setText("$"+df.format(StandardRoom.getPrice()));
                 roomCost = StandardRoom.getPrice();
             }
             case "Deluxe" -> {
                 roomDescText.setText(DeluxeRoom.getDesc());
                 bedNumText.setText(Integer.toString(DeluxeRoom.getNumBeds()));
                 bathNumText.setText(Integer.toString(DeluxeRoom.getNumBaths()));
-                roomCostText.setText("$"+DeluxeRoom.getPrice());
+                roomCostText.setText("$"+df.format(DeluxeRoom.getPrice()));
                 roomCost = DeluxeRoom.getPrice();
             }
             case "Presidential" -> {
                 roomDescText.setText(PresRoom.getDesc());
                 bedNumText.setText(Integer.toString(PresRoom.getNumBeds()));
                 bathNumText.setText(Integer.toString(PresRoom.getNumBaths()));
-                roomCostText.setText("$"+PresRoom.getPrice());
+                roomCostText.setText("$"+df.format(PresRoom.getPrice()));
                 roomCost = PresRoom.getPrice();
             }
         }
+        getStartDate(event);
+        calculateTotalCost(event);
     }
 
     /**
@@ -167,11 +169,7 @@ public class RoomDetailsController {
     private void switchToPayment(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("PaymentScene.fxml"));
         Parent root = loader.load();
-        // creates an instance of the scene's controller to pass customer data to
         PaymentSceneController controller = loader.getController();
-        // prints the customer data to console and passes it along
-        System.out.println("\n---\nPassing along the following customer data: " + customer + "\n---"); // prints to console
-        System.out.println(roomType);
         Room room = MongoOps.queryAvailRoomByType(roomType);
         if(room != null) {
             System.out.println(room.getClass());

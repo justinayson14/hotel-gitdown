@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.List;
 
 public class AdminHomeSceneController {
     private FXMLLoader loader;
@@ -70,10 +71,30 @@ public class AdminHomeSceneController {
     }
 
     @FXML
+    private void deleteCustomer(ActionEvent event) {
+        MongoOps.removeCustomer(custTable.getSelectionModel().getSelectedItem());
+        List<Customers> allCustomer = MongoOps.queryAllByType("Customers");
+        custTable.getItems().setAll(allCustomer);
+        custCount.setText(Integer.toString(allCustomer.size()));
+    }
+
+    @FXML
     private void switchToViewRooms(ActionEvent event) throws IOException {
         loadScene("ViewRoomsScene.fxml", event);
         ViewRoomsSceneController controller = loader.getController();
+        controller.initTable();
         showScene(event);
+    }
+
+    @FXML
+    private void deleteBooking(ActionEvent event) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        MongoOps.removeBooking(bookTable.getSelectionModel().getSelectedItem());
+        List<Booking> allBooking = MongoOps.queryAllByType("Bookings");
+        bookTable.getItems().setAll(allBooking);
+        bookingCount.setText(Integer.toString(allBooking.size()));
+        double sum = allBooking.stream().mapToDouble(Booking::getTotalCost).sum();
+        bookingRev.setText(df.format(sum));
     }
 
     @FXML

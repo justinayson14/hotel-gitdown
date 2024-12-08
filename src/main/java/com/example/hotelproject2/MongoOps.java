@@ -4,7 +4,6 @@ import com.example.hotelproject2.models.*;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.*;
-import com.mongodb.client.model.Projections;
 import com.mongodb.client.model.Updates;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -181,7 +180,7 @@ public class MongoOps {
         return !doesExist;
     }
 
-    public static void removeRoomByNum(Room room) {
+    public static void removeRoom(Room room) {
         if(room != null)
             db.getCollection(room.getClass().getSimpleName()).deleteOne(eq("_id", room.getId()));
         else

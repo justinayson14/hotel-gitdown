@@ -14,7 +14,11 @@ public class DeluxeRoom implements Room{
     private int roomNum;
     private boolean isOccupied = false;
 
-    public DeluxeRoom () {};
+    public DeluxeRoom() {};
+
+    public DeluxeRoom(int roomNum) {
+        this.roomNum = roomNum;
+    }
 
     public void setId(String id) {
         this.id = id;

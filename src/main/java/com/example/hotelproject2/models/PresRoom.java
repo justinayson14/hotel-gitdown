@@ -13,7 +13,11 @@ public class PresRoom implements Room{
     private int roomNum;
     private boolean isOccupied = false;
 
-    public PresRoom () {};
+    public PresRoom() {};
+
+    public PresRoom(int roomNum) {
+        this.roomNum = roomNum;
+    }
 
     public void setId(String id) {
         this.id = id;

@@ -13,7 +13,11 @@ public class StandardRoom implements Room{
     private int roomNum;
     private boolean isOccupied = false;
 
-    public StandardRoom () {};
+    public StandardRoom() {};
+
+    public StandardRoom(int roomNum) {
+        this.roomNum = roomNum;
+    }
 
     public void setId(String id) {
         this.id = id;

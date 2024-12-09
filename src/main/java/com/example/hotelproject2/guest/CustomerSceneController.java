@@ -76,7 +76,14 @@ public class CustomerSceneController {
         stage.setScene(scene);
         stage.show();
     }
-
+     /**
+        *
+        * @param event
+     * @throws IOException
+     * Checks if User inputed their first name and last name on the textfields
+     * when "Book Room" button is clicked.
+     * Does not switch to RoomDetailsScene.fxml until fields are filled.
+     */
     @FXML
     private void handleSwitch(ActionEvent event) throws IOException {
         HotelController r = new HotelController();

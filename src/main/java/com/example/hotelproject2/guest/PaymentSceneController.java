@@ -110,6 +110,14 @@ public class PaymentSceneController {
         this.booking = booking;
     }
 
+    /**
+     *
+     * @param event
+     * @throws IOException
+     * Checks if User inputted name, address, phone and card info in textfields
+     * when "Pay for Room" button is clicked.
+     * Does not switch to ConfirmScene.fxml until fields are filled.
+     */
     @FXML
     private void handleSwitch(ActionEvent event) throws IOException {
         HotelController r = new HotelController();
@@ -120,6 +128,15 @@ public class PaymentSceneController {
             switchToConfirmation(event);
         }
     }
+
+    /**
+     *
+     * @param event
+     * @throws IOException
+     * Method Switches to ConfirmScene.fxml.
+     * Loads ConfirmSceneController object.
+     * Passes customer payment info into console.
+     */
 
     private void switchToConfirmation(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ConfirmScene.fxml"));
@@ -147,6 +164,12 @@ public class PaymentSceneController {
         stage.show();
     }
 
+    /**
+     *
+     * @param event
+     * @throws IOException
+     * Method switches to RoomDetailsScene.fxml when "Change Room" button is pressed
+     */
     @FXML
     private void switchToRoomDetails(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("RoomDetailsScene.fxml"));

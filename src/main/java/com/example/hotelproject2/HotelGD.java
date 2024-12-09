@@ -8,6 +8,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * HotelGD class starts the program by extending to application and
+ * showing the first scene, LoginScene.fxml
+ */
+
 public class HotelGD extends Application {
     public static Stage stage;
     @Override
@@ -19,6 +24,12 @@ public class HotelGD extends Application {
         stage.show();
         stage.setResizable(false);
     }
+
+    /**
+     *
+     * @param args
+     * Launches Program
+     */
 
     public static void main(String[] args) {
         launch();

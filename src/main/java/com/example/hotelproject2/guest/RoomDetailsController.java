@@ -83,6 +83,13 @@ public class RoomDetailsController {
         calculateTotalCost(null);
     }
 
+    /**
+     *
+     * @param event
+     * Gets the value of today's date or the start date and
+     * blocks out dates that have pasted.
+     */
+
     @FXML
     private void getStartDate(ActionEvent event) {
         startDate = startDatePicker.getValue();
@@ -99,6 +106,13 @@ public class RoomDetailsController {
         endDatePicker.setValue(startDate.plusDays(1));
         calculateTotalCost(event);
     }
+
+    /**
+     *
+     * @param event
+     * Calculates the cost of the room by the room type
+     * and the number of days a guest stays.
+     */
 
     @FXML
     private void calculateTotalCost(ActionEvent event) {

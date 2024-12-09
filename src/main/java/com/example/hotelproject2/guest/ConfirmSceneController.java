@@ -64,7 +64,7 @@ public class ConfirmSceneController {
      *
      * @param event
      * @throws IOException
-     * When "Payment" Button is pressed, program switches to PaymentScene.fxml
+     * When "Cancel" Button is pressed, program switches to PaymentScene.fxml
      * Load PaymentSceneController object.
      */
 

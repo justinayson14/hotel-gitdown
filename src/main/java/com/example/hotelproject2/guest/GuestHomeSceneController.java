@@ -55,7 +55,11 @@ public class GuestHomeSceneController {
         stage.setScene(scene);
         stage.show();
     }
-
+    /**
+     * Switches to LoginScene.fxml when "Log Out" button is clicked.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void switchToLoginScene(ActionEvent event) throws IOException {
         LoginSceneController controller = new LoginSceneController();

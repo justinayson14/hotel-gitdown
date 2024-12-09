@@ -22,6 +22,9 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 
 public class AdminHomeSceneController {
+    /**
+     * Initializing Variables...
+     */
     private FXMLLoader loader;
     private Parent root;
     private Scene scene;
@@ -44,11 +47,25 @@ public class AdminHomeSceneController {
     @FXML private Label bookingRev;
     @FXML private Label bookingCount;
 
+    /**
+     *
+     * @param fileName - Take fxml file by name
+     * @param event
+     * @throws IOException
+     * Method to load FXML files into the program
+     */
+
     private void loadScene(String fileName, ActionEvent event) throws IOException {
         loader = new FXMLLoader(getClass().getResource(fileName));
         root = loader.load();
     }
 
+    /**
+     *
+     * @param event
+     * @throws IOException
+     * Method to show fxml file on the program.
+     */
     private void showScene(ActionEvent event) throws IOException {
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -56,6 +73,14 @@ public class AdminHomeSceneController {
         stage.show();
     }
 
+    /**
+     *
+     * @param event
+     * @throws IOException
+     * When 'View Customer' button is clicked, switched to ViewCustomerScene.fxml.
+     * Opens up a chart with Customer information from reservation.
+     * Data documented from MongoOps database.
+     */
     @FXML
     private void switchToViewCustomer(ActionEvent event) throws IOException {
         loadScene("ViewCustomersScene.fxml", event);
@@ -68,7 +93,14 @@ public class AdminHomeSceneController {
         controller.custCount.setText(Integer.toString(customers.size()));
         showScene(event);
     }
-
+    /**
+     *
+     * @param event
+     * @throws IOException
+     * When 'View Rooms' button is clicked, switched to ViewRoomsScene.fxml.
+     * Opens up a chart with rooms and room status (Occupied/Not Occupied).
+     * Loads ViewRoomsSceneController object.
+     */
     @FXML
     private void switchToViewRooms(ActionEvent event) throws IOException {
         loadScene("ViewRoomsScene.fxml", event);
@@ -76,18 +108,41 @@ public class AdminHomeSceneController {
         showScene(event);
     }
 
+    /**
+     *
+     * @param event
+     * @throws IOException
+     * Method Switched to LoginScene.fxml.
+     * Loads LoginSceneController object.
+     */
     @FXML
     private void switchToLogin(ActionEvent event) throws IOException {
         LoginSceneController controller = new LoginSceneController();
         controller.switchToLoginScene(event);
     }
 
+    /**
+     *
+     * @param event
+     * @throws IOException
+     * Method switches to AdminHomeScene.fxml
+     */
     @FXML
     private void switchToAdminHome(ActionEvent event) throws IOException {
         loadScene("AdminHomeScene.fxml", event);
         showScene(event);
     }
 
+    /**
+     *
+     * @param event
+     * @throws IOException
+     * When user clicks "View Bookings" Button, it shows information on
+     * reservations made.
+     * Switches to "ViewBookingsScene.fxml.
+     * Loads AdminHomeSceneController object
+     * Pulls "Bookings" data from MongoOps database with Observablelist object
+     */
     @FXML
     private void switchToViewBookings(ActionEvent event) throws IOException {
         DecimalFormat df = new DecimalFormat("0.00");

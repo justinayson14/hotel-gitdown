@@ -2,8 +2,6 @@ package com.example.hotelproject2.guest;
 import com.example.hotelproject2.MongoOps;
 import com.example.hotelproject2.models.*;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,7 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -100,7 +97,7 @@ public class RoomDetailsController {
     /**
      * Calculates the cost of the room by the room type
      * and the number of days a guest stays.
-     * @param event
+     * @param event Action listener of pressing button
      */
     @FXML
     private void calculateTotalCost(ActionEvent event) {
@@ -112,7 +109,7 @@ public class RoomDetailsController {
     }
 
     /**
-     * This method triggers in even where the user clicks on a option on the Choice Box
+     * This method triggers in event where the user clicks on an option in the Choice Box
      * This will generate the Room Description, Number of beds and baths based on
      * the user's choice.
      * @param event Action listener for pressing button
@@ -154,8 +151,6 @@ public class RoomDetailsController {
      */
     @FXML
     private void switchToCustomer(ActionEvent event) throws IOException {
-        // sends customer data to database
-        System.out.print("\nThe following customer data was received and added to the database: " + customer + "\n");
         Parent root = FXMLLoader.load(getClass().getResource("CustomerScene.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -184,8 +179,8 @@ public class RoomDetailsController {
             booking.setRoomType(room.getClass().getSimpleName());
             booking.setRoomId(room.getId());
             booking.setTotalCost(totalCost);
-            controller.initData(customer, booking); // passes it along
-            // switch scene
+            controller.initData(customer, booking);
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

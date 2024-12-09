@@ -45,6 +45,11 @@ public class ConfirmSceneController {
         this.booking = booking;
     }
 
+    /**
+     * Method helps collect data from Booking and Customer objects.
+     * Sets labels to corresponding user information inputted in program.
+     */
+
     public void displayInfo() {
         DecimalFormat df = new DecimalFormat("0.00");
         custNameText.setText(customer.getName());
@@ -54,6 +59,14 @@ public class ConfirmSceneController {
         phoneText.setText(booking.getPayment().getPhoneNum());
         totalText.setText(df.format(booking.getTotalCost()));
     }
+
+    /**
+     *
+     * @param event
+     * @throws IOException
+     * When "Payment" Button is pressed, program switches to PaymentScene.fxml
+     * Load PaymentSceneController object.
+     */
 
     @FXML
     private void switchToPayment(ActionEvent event) throws IOException {
@@ -70,6 +83,14 @@ public class ConfirmSceneController {
         stage.show();
     }
 
+    /**
+     *
+     * @param event
+     * @throws IOException
+     * When "Confirm Reservation" Button is pressed, program switches to ThankYouScene.fxml.
+     * Collects User Inputs and passes it on to the MongoOps Database.
+     * Loads ThankYouSceneController object.
+     */
     @FXML
     private void switchToThankYou(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ThankYouScene.fxml") );

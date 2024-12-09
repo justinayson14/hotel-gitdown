@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ViewRoomsSceneController {
+    /**
+     * Initializing Variables...
+     */
 
     private FXMLLoader loader;
     private Parent root;
@@ -52,6 +55,10 @@ public class ViewRoomsSceneController {
     private ToggleGroup roomPicks;
     private String curRoomType;
 
+    /**
+     * Calls the MongoOps database for the "Standard" Room Type.
+     * Shows data on the rooms through a observable arraylist.
+     */
     @FXML
     public void initTable() {
         roomPicks = new ToggleGroup();
@@ -67,6 +74,12 @@ public class ViewRoomsSceneController {
         table.getItems().addAll(rooms);
     }
 
+    /**
+     *
+     * @param event
+     * @throws IOException
+     * Method switches to AddRoomScene.fxml.
+     */
     @FXML
     private void initDiag(TableView<Room> table, String curRoomType) {
         roomChoice.getItems().addAll("Standard", "Deluxe", "Presidential");
@@ -137,6 +150,13 @@ public class ViewRoomsSceneController {
         stage.setResizable(false);
     }
 
+    /**
+     *
+     * @param event
+     * @throws IOException
+     * Method switches to AdminHomeScene.fxml.
+     * Load AdminHomeSceneController object.
+     */
     @FXML
     private void switchToAdminHomeScene(ActionEvent event) throws IOException {
         loader = new FXMLLoader(getClass().getResource("AdminHomeScene.fxml"));

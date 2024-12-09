@@ -55,9 +55,10 @@ public class ViewRoomsSceneController {
     private ToggleGroup roomPicks;
     private String curRoomType;
 
+
     /**
-     * Calls the MongoOps database for the "Standard" Room Type.
-     * Shows data on the rooms through a observable arraylist.
+     * Table the displays list of rooms in all room type categories
+     * along with room status and ID.
      */
     @FXML
     public void initTable() {
@@ -74,11 +75,11 @@ public class ViewRoomsSceneController {
         table.getItems().addAll(rooms);
     }
 
+
     /**
      *
-     * @param event
-     * @throws IOException
-     * Method switches to AddRoomScene.fxml.
+     * @param table - table that displays room information.
+     * @param curRoomType - Room type chosen based on button clicked
      */
     @FXML
     private void initDiag(TableView<Room> table, String curRoomType) {
@@ -87,6 +88,12 @@ public class ViewRoomsSceneController {
         this.table = table;
     }
 
+    /**
+     *
+     * @param event
+     * Method allows admin user to input room details for a new room in to
+     * the database.
+     */
     @FXML
     private void addRoom(ActionEvent event) {
         HotelController r = new HotelController();
@@ -108,6 +115,11 @@ public class ViewRoomsSceneController {
         }
     }
 
+    /**
+     *
+     * @param event
+     * Method removes rooms from database
+     */
     @FXML
     private void removeRoom(ActionEvent event) {
         Room selRoom = table.getSelectionModel().getSelectedItem();
@@ -115,6 +127,12 @@ public class ViewRoomsSceneController {
         table.getItems().setAll(MongoOps.queryAllByType(curRoomType));
     }
 
+
+    /**
+     *
+     * @param event
+     * Loads rooms based on Room type button pressed
+     */
     @FXML
     private void loadRooms(ActionEvent event) {
         List<Room> room = new ArrayList<>();
@@ -137,6 +155,13 @@ public class ViewRoomsSceneController {
         table.getItems().setAll(rooms);
     }
 
+    /**
+     *
+     * @param event
+     * @throws IOException
+     * Method Switches to AddRoomScene.fxml
+     * Loads ViewRoomsController object.
+     */
     @FXML
     private void showAddDialogue(ActionEvent event) throws IOException {
         loader = new FXMLLoader(getClass().getResource("AddRoomScene.fxml"));

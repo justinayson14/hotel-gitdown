@@ -31,20 +31,6 @@ public class MongoOps {
     private static final MongoClient mongoClient = MongoClients.create(clientSettings);
     private static final MongoDatabase db = mongoClient.getDatabase("hotel-gitdown");
 
-    // make insertMultiple, insertSingle same name (insert)
-    // inserts given data into database in their collection by their class
-
-    /**
-     * Takes in any type of Array List of objects and
-     * inserts those objects into a collection named by its Class type in the MongoDB database
-     *
-     * @param list List of items to insert to database
-     */
-    public static <T> void insertMultiple(ArrayList<T> list) {
-        MongoCollection<T> collection = (MongoCollection<T>) db.getCollection(list.get(0).getClass().getSimpleName(), list.get(0).getClass());
-        collection.insertMany(list);
-    }
-
     /**
      * Inserts an object of any type into a collection named by its Class type in the MongoDB database.
      *
@@ -58,7 +44,6 @@ public class MongoOps {
     /**
      * Gets the type of room and searches through the collection named by the room type and returns the first Room object
      * in that collection that is not occupied.
-     *
      * @param roomType Type of room to query
      * @return Room object that is not occupied
      */
@@ -83,9 +68,8 @@ public class MongoOps {
     /**
      * Gets the room type and room ID and searches through the collection by its room type using the room id
      * and changes the value of occupied field to true
-     *
      * @param roomType For identifying the which room collection to search
-     * @param roomId   For identifying which room by id
+     * @param roomId  For identifying which room by id
      */
     public static void checkInRoom(String roomType, String roomId) {
         MongoCollection<Document> rooms = db.getCollection(roomType);
@@ -97,7 +81,6 @@ public class MongoOps {
 
     /**
      * Gets customer name and searches through Customers collection by the customer name and returns the customer id
-     *
      * @param name The name of the customer
      * @return String name of customer
      */
@@ -114,13 +97,10 @@ public class MongoOps {
         return collection.find(eq("_id", roomId)).first().getRoomNum();
     }
 
-    // finds booking by customerId, then finds room by roomId in booking to update room occupancy to false
-
     /**
      * Gets the customer id and searches for their booking in Bookings collection to get their reserved room id
      * and room type which is used to search through respective room collection to change occupied field of that room
      * from true to false.
-     *
      * @param customerId To find which booking is associated to customer ID
      */
     public static String checkOutRoom(String customerId) {
@@ -139,6 +119,12 @@ public class MongoOps {
         return Integer.toString(queryRoomNumById(roomId, roomType));
     }
 
+    /**
+     * Query all documents within a collection specified by the type
+     * @param type Name of collection to query
+     * @return ArrayList of documents within collection
+     * @param <T> Generic type for different classes
+     */
     public static <T> List<T> queryAllByType(String type) {
         switch (type) {
             case "Standard" -> {
@@ -168,6 +154,11 @@ public class MongoOps {
         }
     }
 
+    /**
+     * Checks if the room number is already taken
+     * @param roomNum Room number to check if taken
+     * @return True if the room number does not exist, else false
+     */
     public static boolean checkRoomNum(int roomNum) {
         boolean doesExist = false;
         if(db.getCollection("StandardRoom").countDocuments(eq("roomNum", roomNum)) > 0)
@@ -180,6 +171,10 @@ public class MongoOps {
         return !doesExist;
     }
 
+    /**
+     * Remove the room from the database
+     * @param room Room object from table to be removed in database
+     */
     public static void removeRoom(Room room) {
         if(room != null)
             db.getCollection(room.getClass().getSimpleName()).deleteOne(eq("_id", room.getId()));
@@ -187,6 +182,10 @@ public class MongoOps {
             System.out.println("Please select a room to delete...");
     }
 
+    /**
+     * Remove customer from the database
+     * @param customer Customer object from table to be removed from database
+     */
     public static void removeCustomer(Customers customer) {
         if(customer != null)
             db.getCollection("Customers").deleteOne(eq("_id", customer.getId()));
@@ -194,6 +193,10 @@ public class MongoOps {
             System.out.println("Please select a customer to delete...");
     }
 
+    /**
+     * Remove booking from the database
+     * @param booking Booking object from table to be removed from database
+     */
     public static void removeBooking(Booking booking) {
         if(booking != null)
             db.getCollection("Booking").deleteOne(eq("_id", booking.getId()));

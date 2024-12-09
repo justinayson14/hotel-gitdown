@@ -20,45 +20,34 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller for handling switching scenes, displaying text,
+ * and adding/removing rooms in View Rooms button of Admin scene
+ */
 public class ViewRoomsSceneController {
-    /**
-     * Initializing Variables...
-     */
+
+    @FXML private TableColumn<Room, String> roomIdCol;
+    @FXML private TableColumn<Room, Integer> roomNumCol;
+    @FXML private TableColumn<Room, Boolean> roomOccCol;
+    @FXML private TableView<Room> table;
+    @FXML private ToggleButton stdBtn;
+    @FXML private ToggleButton deluxeBtn;
+    @FXML private ToggleButton presBtn;
+    @FXML private ChoiceBox<String> roomChoice;
+    @FXML private TextField roomNum;
+    @FXML private Label errorText;
 
     private FXMLLoader loader;
     private Parent root;
     private Stage stage;
     private Scene scene;
     private List<Room> rooms;
-
-    @FXML
-    private TableColumn<Room, String> roomIdCol;
-    @FXML
-    private TableColumn<Room, Integer> roomNumCol;
-    @FXML
-    private TableColumn<Room, Boolean> roomOccCol;
-    @FXML
-    private TableView<Room> table;
-    @FXML
-    private ToggleButton stdBtn;
-    @FXML
-    private ToggleButton deluxeBtn;
-    @FXML
-    private ToggleButton presBtn;
-    @FXML
-    private ChoiceBox<String> roomChoice;
-    @FXML
-    private TextField roomNum;
-    @FXML
-    private Label errorText;
-
     private ToggleGroup roomPicks;
     private String curRoomType;
 
-
     /**
-     * Table the displays list of rooms in all room type categories
-     * along with room status and ID.
+     * Initialize the table with list of Standard Rooms
+     * from the database
      */
     @FXML
     public void initTable() {
@@ -71,15 +60,12 @@ public class ViewRoomsSceneController {
         roomIdCol.setCellValueFactory(new PropertyValueFactory<Room, String>("id"));
         roomNumCol.setCellValueFactory(new PropertyValueFactory<Room, Integer>("roomNum"));
         roomOccCol.setCellValueFactory(new PropertyValueFactory<Room, Boolean>("occupied"));
-
-        table.getItems().addAll(rooms);
     }
 
-
     /**
-     *
-     * @param table - table that displays room information.
-     * @param curRoomType - Room type chosen based on button clicked
+     * Initialize add rooms prompt
+     * @param table Table from the ViewRooms scene.
+     * @param curRoomType Initialize drop box with current room type displayed
      */
     @FXML
     private void initDiag(TableView<Room> table, String curRoomType) {
@@ -116,9 +102,8 @@ public class ViewRoomsSceneController {
     }
 
     /**
-     *
-     * @param event
-     * Method removes rooms from database
+     * Remove selected room in table
+     * @param event Action listener for button click
      */
     @FXML
     private void removeRoom(ActionEvent event) {
@@ -129,9 +114,9 @@ public class ViewRoomsSceneController {
 
 
     /**
-     *
-     * @param event
-     * Loads rooms based on Room type button pressed
+     * Load rooms into table based on button toggled.
+     * Only oen room type can be displayed at a time.
+     * @param event Action listener for button click
      */
     @FXML
     private void loadRooms(ActionEvent event) {
@@ -156,11 +141,9 @@ public class ViewRoomsSceneController {
     }
 
     /**
-     *
-     * @param event
-     * @throws IOException
-     * Method Switches to AddRoomScene.fxml
-     * Loads ViewRoomsController object.
+     * Show adding room dialogue over current ViewRooms scene
+     * @param event Action listener of pressing button
+     * @throws IOException Failure to find fxml file of scene
      */
     @FXML
     private void showAddDialogue(ActionEvent event) throws IOException {
@@ -176,11 +159,9 @@ public class ViewRoomsSceneController {
     }
 
     /**
-     *
-     * @param event
-     * @throws IOException
-     * Method switches to AdminHomeScene.fxml.
-     * Load AdminHomeSceneController object.
+     * Switch back to Admin Home Scene
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to locate fxml file
      */
     @FXML
     private void switchToAdminHomeScene(ActionEvent event) throws IOException {

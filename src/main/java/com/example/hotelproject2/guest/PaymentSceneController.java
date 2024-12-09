@@ -16,23 +16,19 @@ import java.io.IOException;
 
 import com.example.hotelproject2.models.Customers;
 
+/**
+ * Controller for handling all inputs in Payment scene and
+ * passing them to the next scene
+ */
 public class PaymentSceneController {
-    @FXML
-    private TextField nameText;
-    @FXML
-    private TextField addressText;
-    @FXML
-    private TextField zipText;
-    @FXML
-    private TextField phoneText;
-    @FXML
-    private TextField cardNumText;
-    @FXML
-    private TextField monthExpText;
-    @FXML
-    private TextField yearExpText;
-    @FXML
-    private TextField cvcText;
+    @FXML private TextField nameText;
+    @FXML private TextField addressText;
+    @FXML private TextField zipText;
+    @FXML private TextField phoneText;
+    @FXML private TextField cardNumText;
+    @FXML private TextField monthExpText;
+    @FXML private TextField yearExpText;
+    @FXML private TextField cvcText;
 
     private Customers customer;
     private Booking booking;
@@ -62,7 +58,7 @@ public class PaymentSceneController {
 
     /**
      * Limits user input for a given TextField to only letter characters
-     * @param textfield
+     * @param textfield Field for inputting address and card name
      */
     private void setOnlyLetters(TextField textfield){
         textfield.setTextFormatter(new javafx.scene.control.TextFormatter<>(change -> {
@@ -76,7 +72,7 @@ public class PaymentSceneController {
 
     /**
      * Limits user input for a given TextField to only number characters
-     * @param textfield
+     * @param textfield Field for inputting card info and zip code
      */
     private void setOnlyNumbers(TextField textfield){
         textfield.setTextFormatter(new javafx.scene.control.TextFormatter<>(change -> {
@@ -87,18 +83,20 @@ public class PaymentSceneController {
             return null; // Reject change
         }));
     }
+
     /**
      * Creates a max character limit for a given TextField
-     * @param textField
-     * @param maxChar
+     * @param textField Fields for inputting payment info
+     * @param maxChar Number of characters allowed
      */
     private void setCharLimit(TextField textField, int maxChar) {
         textField.textProperty().addListener((_, _, newValue) -> {
-            if (newValue.length() > maxChar) {
+            if(newValue.length() > maxChar) {
                 textField.setText(newValue.substring(0, maxChar));
             }
         });
     }
+
     /**
      * This method is used to pass the customer data
      * from another controller to this controller for later use.
@@ -111,12 +109,11 @@ public class PaymentSceneController {
     }
 
     /**
-     *
-     * @param event
-     * @throws IOException
      * Checks if User inputted name, address, phone and card info in textfields
      * when "Pay for Room" button is clicked.
      * Does not switch to ConfirmScene.fxml until fields are filled.
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to load fxml file
      */
     @FXML
     private void handleSwitch(ActionEvent event) throws IOException {
@@ -130,23 +127,17 @@ public class PaymentSceneController {
     }
 
     /**
-     *
-     * @param event
-     * @throws IOException
      * Method Switches to ConfirmScene.fxml.
      * Loads ConfirmSceneController object.
      * Passes customer payment info into console.
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to load fxml file
      */
-
     private void switchToConfirmation(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ConfirmScene.fxml"));
         Parent root = loader.load();
 
-        // creates an instance of the scene's controller to pass customer data to
         ConfirmSceneController controller = loader.getController();
-
-        // prints the customer data to console and passes it along
-        System.out.println("\n---\nPassing along the following customer data: " + customer + "\n---");
         Payment payment = new Payment();
         payment.setName(nameText.getText());
         payment.setCardNum(cardNumText.getText());
@@ -154,10 +145,9 @@ public class PaymentSceneController {
         payment.setCardCVC(cvcText.getText());
         payment.setPhoneNum(phoneText.getText());
         booking.setPayment(payment);
-        controller.initData(customer, booking); // passes it along
+        controller.initData(customer, booking);
         controller.displayInfo();
 
-        // switch scene
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -165,24 +155,18 @@ public class PaymentSceneController {
     }
 
     /**
-     *
-     * @param event
-     * @throws IOException
      * Method switches to RoomDetailsScene.fxml when "Change Room" button is pressed
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to load fxml file
      */
     @FXML
     private void switchToRoomDetails(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("RoomDetailsScene.fxml"));
         Parent root = loader.load();
 
-        // creates an instance of the scene's controller to pass customer data to
         RoomDetailsController controller = loader.getController();
+        controller.getCustomer(customer);
 
-        // prints the customer data to console and passes it along
-        System.out.println("\n---\nPassing along the following customer data: " + customer + "\n---"); // prints to console
-        controller.getCustomer(customer); // passes it along
-
-        // switch scene
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

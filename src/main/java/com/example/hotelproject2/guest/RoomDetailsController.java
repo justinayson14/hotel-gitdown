@@ -19,27 +19,19 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 /**
- Room Details Controller Class*
+ * Controller for handling switching scenes and
+ * processing user choice for room type in RoomDetails scene.
  */
 public class RoomDetailsController {
-    @FXML
-    public ChoiceBox<String> roomTypeChoiceBox;
-    @FXML
-    private Label roomDescText;
-    @FXML
-    private Label bedNumText;
-    @FXML
-    private Label bathNumText;
-    @FXML
-    private Label roomCostText;
-    @FXML
-    private DatePicker startDatePicker;
-    @FXML
-    private DatePicker endDatePicker;
-    @FXML
-    private Label totalCostText;
-    @FXML
-    private Label errorText;
+    @FXML public ChoiceBox<String> roomTypeChoiceBox;
+    @FXML private Label roomDescText;
+    @FXML private Label bedNumText;
+    @FXML private Label bathNumText;
+    @FXML private Label roomCostText;
+    @FXML private DatePicker startDatePicker;
+    @FXML private DatePicker endDatePicker;
+    @FXML private Label totalCostText;
+    @FXML private Label errorText;
 
     private final String[] roomTypes = {"Standard", "Deluxe", "Presidential"};
     private Customers customer;
@@ -59,7 +51,7 @@ public class RoomDetailsController {
     }
 
     /**
-     Creates the interaction for the Choice Box*
+     * Creates the interaction for the Choice Box
      */
     @FXML
     public void initialize() {
@@ -84,12 +76,10 @@ public class RoomDetailsController {
     }
 
     /**
-     *
-     * @param event
      * Gets the value of today's date or the start date and
      * blocks out dates that have pasted.
+     * @param event Action listener for pressing button
      */
-
     @FXML
     private void getStartDate(ActionEvent event) {
         startDate = startDatePicker.getValue();
@@ -108,12 +98,10 @@ public class RoomDetailsController {
     }
 
     /**
-     *
-     * @param event
      * Calculates the cost of the room by the room type
      * and the number of days a guest stays.
+     * @param event
      */
-
     @FXML
     private void calculateTotalCost(ActionEvent event) {
         DecimalFormat df = new DecimalFormat("0.00");
@@ -127,7 +115,7 @@ public class RoomDetailsController {
      * This method triggers in even where the user clicks on a option on the Choice Box
      * This will generate the Room Description, Number of beds and baths based on
      * the user's choice.
-     * @param event
+     * @param event Action listener for pressing button
      */
     private void getRoomType(ActionEvent event) {
         roomType = roomTypeChoiceBox.getValue();
@@ -160,9 +148,9 @@ public class RoomDetailsController {
     }
 
     /**
-     * switches back to 'Customer' Scene and sends customer data to the database
-     * @param event
-     * @throws IOException
+     * Switches back to 'Customer' Scene and sends customer data to the database
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to locate fxml file
      */
     @FXML
     private void switchToCustomer(ActionEvent event) throws IOException {
@@ -176,8 +164,8 @@ public class RoomDetailsController {
     }
 
     /**
-     * switches to PaymentMethodScene and passes customer data along.
-     * @throws IOException
+     * Switches to PaymentMethodScene and passes customer data along.
+     * @throws IOException Failure to locate fxml file
      */
     @FXML
     private void switchToPayment(ActionEvent event) throws IOException {
@@ -205,6 +193,4 @@ public class RoomDetailsController {
         } else
             errorText.setText("No "+roomType+" available.");
     }
-
-
 }

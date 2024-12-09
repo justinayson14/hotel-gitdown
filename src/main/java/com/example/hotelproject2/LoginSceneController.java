@@ -14,26 +14,24 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller for handling logging in Admin scene and
+ * accessing program as a Guests
+ */
 public class LoginSceneController {
-    /**
-     * Initializing Variables...
-     */
+    @FXML private PasswordField password;
+    @FXML private Label errorText;
+
     private Stage stage;
     private Scene scene;
     private Parent root;
     private FXMLLoader loader;
 
-    @FXML
-    private PasswordField password;
-    @FXML
-    private Label errorText;
-
     /**
-     *
-     * @param event
-     * @throws IOException
      * Gets text input from the user and checks the correct password
      * before switching to the AdminHomeScene.fxml
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to locate fxml file
      */
     @FXML
     private void checkPassword(ActionEvent event) throws IOException {
@@ -44,11 +42,10 @@ public class LoginSceneController {
     }
 
     /**
-     *
-     * @param event
-     * @throws IOException
      * When user presses the "Guest" Button, it switches to GuestHomeScene.fxml.
      * Loads GuestHomeSceneController object.
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to locate fxml file
      */
     @FXML
     private void switchToHomeScene(ActionEvent event) throws IOException {
@@ -61,11 +58,10 @@ public class LoginSceneController {
         stage.show();
     }
     /**
-     *
-     * @param event
-     * @throws IOException
      * Method switches to AdminHomeScene.fxml.
      * Loads AdminHomeSceneController object.
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to locate fxml file
      */
     private void switchToAdminHomeScene(ActionEvent event) throws IOException {
         loader = new FXMLLoader(getClass().getResource("admin/AdminHomeScene.fxml"));
@@ -77,11 +73,10 @@ public class LoginSceneController {
         stage.show();
     }
     /**
-     *
-     * @param event
-     * @throws IOException
      * Method switches to LoginScene.fxml.
      * Loads LoginSceneController object.
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to locate fxml file
      */
     @FXML
     public void switchToLoginScene(ActionEvent event) throws IOException {
@@ -94,11 +89,10 @@ public class LoginSceneController {
         stage.show();
     }
     /**
-     *
-     * @param event
-     * @throws IOException
      * Method switches to AdminLoginScene.fxml.
      * Loads LoginSceneController object.
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to locate fxml file
      */
     @FXML
     private void switchToAdminLoginScene(ActionEvent event) throws IOException {

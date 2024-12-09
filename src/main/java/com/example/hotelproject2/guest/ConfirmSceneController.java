@@ -52,7 +52,10 @@ public class ConfirmSceneController {
 
     public void displayInfo() {
         DecimalFormat df = new DecimalFormat("0.00");
-        custNameText.setText(customer.getName());
+        String[] name = customer.getName().split("[\\s]");
+        name[0] = name[0].substring(0,1).toUpperCase() + name[0].substring(1).toLowerCase();
+        name[1] = name[1].substring(0,1).toUpperCase() + name[1].substring(1).toLowerCase();
+        custNameText.setText(name[0] + " " + name[1]);
         roomChoiceText.setText(booking.getRoomType());
         startDateText.setText(booking.getCheckInDate());
         endDateText.setText(booking.getCheckOutDate());

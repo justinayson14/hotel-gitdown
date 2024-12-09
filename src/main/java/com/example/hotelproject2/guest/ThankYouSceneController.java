@@ -11,25 +11,33 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller for showing customer their room number
+ * for their booked room and pushing booking data
+ * to database
+ */
 public class ThankYouSceneController {
-    @FXML
-    private Text roomNumText;
+    @FXML private Text roomNumText;
 
     private Stage stage;
     private Scene scene;
     private Parent root;
 
+    /**
+     * Set room num to be displayed in this scene
+     * @param roomNum Room number passed to be displayed
+     */
     public void setRoomNum(int roomNum) {
         roomNumText.setText(Integer.toString(roomNum));
     }
 
     /**
      * Switches to HomeScene when "Home" button is clicked
-     * @param event
-     * @throws IOException
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to locate fxml file
      */
     public void switchToHome(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("GuestHomeScene.fxml"));
+        root = FXMLLoader.load(getClass().getResource("GuestHomeScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -38,11 +46,11 @@ public class ThankYouSceneController {
 
     /**
      * Switches to ViewAmenitiesScene when "View Amenities" button is clicked
-     * @param event
-     * @throws IOException
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to locate fxml file
      */
     public void switchToAmenities(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("ViewAmenitiesScene.fxml"));
+        root = FXMLLoader.load(getClass().getResource("ViewAmenitiesScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

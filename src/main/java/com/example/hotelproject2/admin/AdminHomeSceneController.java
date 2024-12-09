@@ -22,21 +22,16 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
 
+/**
+ * Controller for handling switching scenes from Admin Home scene
+ * and with handling loading data in customer & booking table.
+ */
 public class AdminHomeSceneController {
-    /**
-     * Initializing Variables...
-     */
-    private FXMLLoader loader;
-    private Parent root;
-    private Scene scene;
-    private Stage stage;
-
     @FXML private TableView<Customers> custTable;
     @FXML private TableColumn<Customers, String> custIdCol;
     @FXML private TableColumn<Customers, String> custNameCol;
     @FXML private TableColumn<Customers, Integer> custPartyCol;
     @FXML private Label custCount;
-
     @FXML private TableView<Booking> bookTable;
     @FXML private TableColumn<Booking, String> bookIdCol;
     @FXML private TableColumn<Booking, String> bookInCol;
@@ -48,12 +43,16 @@ public class AdminHomeSceneController {
     @FXML private Label bookingRev;
     @FXML private Label bookingCount;
 
+    private FXMLLoader loader;
+    private Parent root;
+    private Scene scene;
+    private Stage stage;
+
     /**
-     *
-     * @param fileName - Take fxml file by name
-     * @param event
-     * @throws IOException
-     * Method to load FXML files into the program
+     * Load the fxml file and set as the Parent
+     * @param fileName Name of fxml file
+     * @param event Action listener of pressing button
+     * @throws IOException Failure to locate fxml file
      */
 
     private void loadScene(String fileName, ActionEvent event) throws IOException {
@@ -62,10 +61,9 @@ public class AdminHomeSceneController {
     }
 
     /**
-     *
-     * @param event
-     * @throws IOException
-     * Method to show fxml file on the program.
+     * Show the loaded fxml to the stage
+     * @param event Action listener for pressing button
+     * @throws IOException Scene is null
      */
     private void showScene(ActionEvent event) throws IOException {
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -75,12 +73,9 @@ public class AdminHomeSceneController {
     }
 
     /**
-     *
-     * @param event
-     * @throws IOException
-     * When 'View Customer' button is clicked, switched to ViewCustomerScene.fxml.
-     * Opens up a chart with Customer information from reservation.
-     * Data documented from MongoOps database.
+     * Switch to customer scene to show table of all customers in database
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to load fxml file
      */
     @FXML
     private void switchToViewCustomer(ActionEvent event) throws IOException {
@@ -95,12 +90,9 @@ public class AdminHomeSceneController {
         showScene(event);
     }
     /**
-     *
-     * @param event
-     * @throws IOException
-     * When 'View Rooms' button is clicked, switched to ViewRoomsScene.fxml.
-     * Opens up a chart with rooms and room status (Occupied/Not Occupied).
-     * Loads ViewRoomsSceneController object.
+     * Remove selected customer in database and reload
+     * customer into table
+     * @param event Action listener for pressing button
      */
     @FXML
     private void deleteCustomer(ActionEvent event) {
@@ -110,6 +102,12 @@ public class AdminHomeSceneController {
         custCount.setText(Integer.toString(allCustomer.size()));
     }
 
+    /**
+     * Switch to viewing table of rooms by room type and
+     * initialized data in table
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to load fxml file
+     */
     @FXML
     private void switchToViewRooms(ActionEvent event) throws IOException {
         loadScene("ViewRoomsScene.fxml", event);
@@ -119,11 +117,8 @@ public class AdminHomeSceneController {
     }
 
     /**
-     *
-     * @param event
-     * @throws IOException
-     * Method Switched to LoginScene.fxml.
-     * Loads LoginSceneController object.
+     * Delete selected booking in table
+     * @param event Action listener for pressing button
      */
     @FXML
     private void deleteBooking(ActionEvent event) {
@@ -136,6 +131,11 @@ public class AdminHomeSceneController {
         bookingRev.setText(df.format(sum));
     }
 
+    /**
+     * Logout of admin access
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to locate fxml file
+     */
     @FXML
     private void switchToLogin(ActionEvent event) throws IOException {
         LoginSceneController controller = new LoginSceneController();
@@ -143,10 +143,9 @@ public class AdminHomeSceneController {
     }
 
     /**
-     *
-     * @param event
-     * @throws IOException
-     * Method switches to AdminHomeScene.fxml
+     * Switch back to admin home scene
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to locate fxml file
      */
     @FXML
     private void switchToAdminHome(ActionEvent event) throws IOException {
@@ -155,14 +154,10 @@ public class AdminHomeSceneController {
     }
 
     /**
-     *
+     * Switch to booking scene and initialized table
+     * with all bookings in database.
      * @param event
      * @throws IOException
-     * When user clicks "View Bookings" Button, it shows information on
-     * reservations made.
-     * Switches to "ViewBookingsScene.fxml.
-     * Loads AdminHomeSceneController object
-     * Pulls "Bookings" data from MongoOps database with Observablelist object
      */
     @FXML
     private void switchToViewBookings(ActionEvent event) throws IOException {

@@ -60,7 +60,7 @@ public class RoomDetailsController {
                 new DateCell() {
                     public void updateItem(LocalDate item, boolean empty) {
                         super.updateItem(item, empty);
-                        if(item.isBefore(minDate.minusDays(1))) {
+                        if(item.isBefore(minDate)) {
                             setDisable(true);
                             setStyle("-fx-background-color: #ffc0cb;");
                         }

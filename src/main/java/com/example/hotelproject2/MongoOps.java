@@ -21,7 +21,8 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
  * It imports all the necessary packages for handling Java POJOs and connecting to the MongoDB database.
  */
 public class MongoOps {
-    private static final ConnectionString connectionString = new ConnectionString(System.getenv("apiKey"));
+    private static final String key = "mongodb+srv://hotelgitdown:"+System.getenv("apiKey")+"@gitdown.cas4u.mongodb.net/?retryWrites=true&w=majority&appName=gitdown";
+    private static final ConnectionString connectionString = new ConnectionString(key);
     private static final CodecRegistry pojoCodecRegistry = fromProviders(PojoCodecProvider.builder().automatic(true).build());
     private static final CodecRegistry codecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(), pojoCodecRegistry);
     private static final MongoClientSettings clientSettings = MongoClientSettings.builder()
@@ -30,10 +31,6 @@ public class MongoOps {
             .build();
     private static final MongoClient mongoClient = MongoClients.create(clientSettings);
     private static final MongoDatabase db = mongoClient.getDatabase("hotel-gitdown");
-
-    // make insertMultiple, insertSingle same name (insert)
-    // inserts given data into database in their collection by their class
-
     /**
      * Takes in any type of Array List of objects and
      * inserts those objects into a collection named by its Class type in the MongoDB database

@@ -21,6 +21,7 @@ public class HotelGD extends Application {
     }
 
     public static void main(String[] args) {
+        System.out.println(System.getenv("apiKey"));
         launch();
     }
 }

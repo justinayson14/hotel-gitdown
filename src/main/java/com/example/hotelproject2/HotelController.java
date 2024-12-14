@@ -43,6 +43,11 @@ public class HotelController {
         return room;
     }
 
+    /**
+     * Recommend room to pick based on size of group
+     * @param groupSize Size of customer's party
+     * @return String that states the recommended room type
+     */
     public String recRoomBySize(int groupSize) {
         if(groupSize <= 2 && groupSize > 0)
             return "The recommended room is a Standard Room";

@@ -14,15 +14,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller for handling checking out customer and
+ * switching scenes from customer checkout scene.
+ */
 public class CheckOutController {
-    @FXML
-    private TextField firstNameText;
-    @FXML
-    private TextField lastNameText;
-    @FXML
-    private Label errorText;
-    @FXML
-    private Label roomIdText;
+    @FXML private TextField firstNameText;
+    @FXML private TextField lastNameText;
+    @FXML private Label errorText;
+    @FXML private Label roomIdText;
 
     private Stage stage;
     private Scene scene;
@@ -30,8 +30,8 @@ public class CheckOutController {
 
     /**
      * Switches to HomeScene when "Back" button is clicked.
-     * @param event
-     * @throws IOException
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to load fxml file
      */
     @FXML
     private void switchToHomeScene(ActionEvent event) throws IOException {
@@ -42,6 +42,13 @@ public class CheckOutController {
         stage.show();
     }
 
+    /**
+     * Checks if User inputted their first name and last name on the text fields
+     * when confirm button is clicked.
+     * Does not switch to CheckOutConfirmScene.fxml until fields are filled.
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to load fxml file
+     */
     @FXML
     private void handleSwitch(ActionEvent event) throws IOException {
         HotelController r = new HotelController();
@@ -50,24 +57,11 @@ public class CheckOutController {
             switchToCheckOutConfirm(event);
     }
 
-    private boolean checkIfFound(String custId, String roomId) throws IOException {
-        if(custId == null || roomId == null) {
-            errorText.setStyle("-fx-text-fill: red;");
-            if(custId == null)
-                errorText.setText("Customer not found");
-            else
-                errorText.setText("No booking found");
-            return false;
-        }
-        errorText.setText(null);
-        errorText.setStyle(null);
-        return true;
-    }
-
     /**
-     * Switches to HomeScene when "Back" button is clicked
-     * @param event
-     * @throws IOException
+     * Checks if Booking within MongoOps database,
+     * Checks out customer's booking and switches to CheckOutConfirmScene.fxml
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to load fxml file
      */
     private void switchToCheckOutConfirm(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CheckOutConfirmScene.fxml"));

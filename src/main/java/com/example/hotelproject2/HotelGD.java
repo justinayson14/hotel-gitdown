@@ -8,11 +8,20 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * HotelGD class starts the program by extending to application and
+ * showing the first scene, LoginScene.fxml
+ */
 public class HotelGD extends Application {
-    public static Stage stage;
-    @Override
+    /**
+     * Start of the program
+     * @param stage the primary stage for this application, onto which
+     * the application scene can be set.
+     * Applications may create other stages, if needed, but they will not be
+     * primary stages.
+     * @throws IOException Failure to locate fxml file
+     */
     public void start(Stage stage) throws IOException {
-        this.stage = stage;
         Parent root = FXMLLoader.load(getClass().getResource("LoginScene.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -20,8 +29,11 @@ public class HotelGD extends Application {
         stage.setResizable(false);
     }
 
+    /**
+     * Launches Program
+     * @param args Arguments from terminal
+     */
     public static void main(String[] args) {
-        System.out.println(System.getenv("apiKey"));
         launch();
     }
 }

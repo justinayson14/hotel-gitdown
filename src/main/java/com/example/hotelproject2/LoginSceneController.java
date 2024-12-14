@@ -14,17 +14,25 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller for handling logging in Admin scene and
+ * accessing program as a Guests
+ */
 public class LoginSceneController {
+    @FXML private PasswordField password;
+    @FXML private Label errorText;
+
     private Stage stage;
     private Scene scene;
     private Parent root;
     private FXMLLoader loader;
 
-    @FXML
-    private PasswordField password;
-    @FXML
-    private Label errorText;
-
+    /**
+     * Gets text input from the user and checks the correct password
+     * before switching to the AdminHomeScene.fxml
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to locate fxml file
+     */
     @FXML
     private void checkPassword(ActionEvent event) throws IOException {
         if(password.getText().equals("gitdown"))
@@ -33,6 +41,12 @@ public class LoginSceneController {
             errorText.setText("Invalid login!");
     }
 
+    /**
+     * When user presses the "Guest" Button, it switches to GuestHomeScene.fxml.
+     * Loads GuestHomeSceneController object.
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to locate fxml file
+     */
     @FXML
     private void switchToHomeScene(ActionEvent event) throws IOException {
         loader = new FXMLLoader(getClass().getResource("guest/GuestHomeScene.fxml"));
@@ -43,7 +57,12 @@ public class LoginSceneController {
         stage.setScene(scene);
         stage.show();
     }
-
+    /**
+     * Method switches to AdminHomeScene.fxml.
+     * Loads AdminHomeSceneController object.
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to locate fxml file
+     */
     private void switchToAdminHomeScene(ActionEvent event) throws IOException {
         loader = new FXMLLoader(getClass().getResource("admin/AdminHomeScene.fxml"));
         root = loader.load();
@@ -53,7 +72,12 @@ public class LoginSceneController {
         stage.setScene(scene);
         stage.show();
     }
-
+    /**
+     * Method switches to LoginScene.fxml.
+     * Loads LoginSceneController object.
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to locate fxml file
+     */
     @FXML
     public void switchToLoginScene(ActionEvent event) throws IOException {
         loader = new FXMLLoader(getClass().getResource("LoginScene.fxml"));
@@ -64,7 +88,12 @@ public class LoginSceneController {
         stage.setScene(scene);
         stage.show();
     }
-
+    /**
+     * Method switches to AdminLoginScene.fxml.
+     * Loads LoginSceneController object.
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to locate fxml file
+     */
     @FXML
     private void switchToAdminLoginScene(ActionEvent event) throws IOException {
         loader = new FXMLLoader(getClass().getResource("admin/AdminLoginScene.fxml"));

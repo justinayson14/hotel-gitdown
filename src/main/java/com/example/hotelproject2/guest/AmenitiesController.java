@@ -9,20 +9,20 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller for handling switching back to home scene
+ * from amenities scene
+ */
 public class AmenitiesController {
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-
     /**
      * Switches to HomeScene when "Home" button is clicked
-     * @param event
-     * @throws IOException
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to locate
      */
     public void switchToHome(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("GuestHomeScene.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }

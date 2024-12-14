@@ -16,17 +16,19 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Controller for creating Customers object and
+ * switching from customers scene to the next scene and back
+ * to home scene.
+ */
 public class CustomerSceneController {
-    @FXML
-    private TextField firstName;
-    @FXML
-    private TextField lastName;
-    @FXML
-    private Spinner<Integer> guestAmtSpinner;
+    @FXML private TextField firstName;
+    @FXML private TextField lastName;
+    @FXML private Spinner<Integer> guestAmtSpinner;
 
     /**
-     * Initialize the guestAmtSpinner to retrieve values from it later
-     * Sets character limit for first name & last name
+     * Initialize the guestAmtSpinner to retrieve values from it later.
+     * Sets character limit for first name & last name.
      */
     @FXML
     public void initialize() {
@@ -39,7 +41,7 @@ public class CustomerSceneController {
 
     /**
      * Limits user input for a given TextField to only letter characters
-     * @param textfield
+     * @param textfield Field for inputting first and last name
      */
     private void setOnlyLetters(TextField textfield){
         textfield.setTextFormatter(new javafx.scene.control.TextFormatter<>(change -> {
@@ -53,8 +55,8 @@ public class CustomerSceneController {
 
     /**
      * Creates a max character limit for a given TextField
-     * @param textField
-     * @param maxChar
+     * @param textField Field for inputting first and last name
+     * @param maxChar Number of characters allowed
      */
     private void setCharLimit(TextField textField, int maxChar) {
         textField.textProperty().addListener((_, _, newValue) -> {
@@ -63,10 +65,11 @@ public class CustomerSceneController {
             }
         });
     }
+
     /**
      * Switches to HomeScene when "Cancel" button is clicked
-     * @param event
-     * @throws IOException
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to load fxml file
      */
     @FXML
     private void switchToHome(ActionEvent event) throws IOException {
@@ -77,6 +80,13 @@ public class CustomerSceneController {
         stage.show();
     }
 
+    /**
+     * Checks if User inputted their first name and last name on the textfields
+     * when "Book Room" button is clicked.
+     * Does not switch to RoomDetailsScene.fxml until fields are filled.
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to load fxml file
+     */
     @FXML
     private void handleSwitch(ActionEvent event) throws IOException {
         HotelController r = new HotelController();
@@ -88,8 +98,8 @@ public class CustomerSceneController {
     /**
      * Switches to RoomDetailsScene when "Book Room" button is clicked
      * and passes customer data along.
-     * @param event
-     * @throws IOException
+     * @param event Action listener for pressing button
+     * @throws IOException Failure to load fxml file
      */
     private void switchToRoomDetails(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("RoomDetailsScene.fxml"));

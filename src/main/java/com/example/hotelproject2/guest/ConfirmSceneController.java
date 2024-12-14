@@ -45,15 +45,31 @@ public class ConfirmSceneController {
         this.booking = booking;
     }
 
+    /**
+     * Method helps collect data from Booking and Customer objects.
+     * Sets labels to corresponding user information inputted in program.
+     */
+
     public void displayInfo() {
         DecimalFormat df = new DecimalFormat("0.00");
-        custNameText.setText(customer.getName());
+        String[] name = customer.getName().split("[\\s]");
+        name[0] = name[0].substring(0,1).toUpperCase() + name[0].substring(1).toLowerCase();
+        name[1] = name[1].substring(0,1).toUpperCase() + name[1].substring(1).toLowerCase();
+        custNameText.setText(name[0] + " " + name[1]);
         roomChoiceText.setText(booking.getRoomType());
         startDateText.setText(booking.getCheckInDate());
         endDateText.setText(booking.getCheckOutDate());
         phoneText.setText(booking.getPayment().getPhoneNum());
         totalText.setText(df.format(booking.getTotalCost()));
     }
+
+    /**
+     *
+     * @param event
+     * @throws IOException
+     * When "Cancel" Button is pressed, program switches to PaymentScene.fxml
+     * Load PaymentSceneController object.
+     */
 
     @FXML
     private void switchToPayment(ActionEvent event) throws IOException {
@@ -70,6 +86,14 @@ public class ConfirmSceneController {
         stage.show();
     }
 
+    /**
+     *
+     * @param event
+     * @throws IOException
+     * When "Confirm Reservation" Button is pressed, program switches to ThankYouScene.fxml.
+     * Collects User Inputs and passes it on to the MongoOps Database.
+     * Loads ThankYouSceneController object.
+     */
     @FXML
     private void switchToThankYou(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ThankYouScene.fxml") );
